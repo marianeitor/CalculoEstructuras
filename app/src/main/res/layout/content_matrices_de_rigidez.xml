@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c3d7df">
+
+    <ListView
+        android:layout_below="@+id/titulo_nudos"
+        android:id="@+id/listaopc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:longClickable="true"
+        >
+
+    </ListView>
+    <TextView
+        android:id="@+id/titulo_nudos"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/title_matrices_rigidez"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="#0b103a"
+        android:textColor="#FFFFFF"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.nico.calculoestructuras" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/edit_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.MatricesElementalesActivity"
+            android:label="@string/title_activity_matrices_elemtales"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.MatrizSFFActivity"
+            android:label="@string/title_activity_matriz_sff"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.MatricesDeRigidezActivity"
+            android:label="@string/title_activity_matrices_de_rigidez"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.MatrizGlobalActivity"
+            android:label="@string/title_activity_matriz_global"
+            android:parentActivityName=".Activities.MatricesDeRigidezActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.MatricesDeRigidezActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.MatrizAFActivity"
+            android:label="@string/title_activity_matriz_af"
+            android:parentActivityName=".Activities.MatricesDeRigidezActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.MatricesDeRigidezActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.OpcionesMetodoActivity"
+            android:label="@string/title_activity_opcoines_metodo"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.PorticosPlanosActivity"
+            android:label="@string/title_activity_porticos_planos"
+            android:parentActivityName=".Activities.OpcionesMetodoActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.OpcionesMetodoActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.AnalizarResultadosActivity"
+            android:label="@string/title_activity_analizar_resultados"
+            android:parentActivityName=".Activities.PorticosPlanosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.PorticosPlanosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.NudosCreadosActivity"
+            android:label="@string/title_activity_nudos_creados"
+            android:parentActivityName=".Activities.PorticosPlanosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.PorticosPlanosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.BarrasCreadasActivity"
+            android:label="@string/title_activity_barras_creadas"
+            android:parentActivityName=".Activities.PorticosPlanosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.PorticosPlanosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.AgregarNudoActivity"
+            android:label="@string/title_activity_agregar_nudo"
+            android:parentActivityName=".Activities.NudosCreadosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.NudosCreadosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.AgregarBarraActivity"
+            android:label="@string/title_activity_agregar_barra"
+            android:parentActivityName=".Activities.BarrasCreadasActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.BarrasCreadasActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.ConectividadesCreadasActivity"
+            android:label="@string/title_activity_conectividades_creadas"
+            android:parentActivityName=".Activities.PorticosPlanosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.PorticosPlanosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.AgregarConectividadActivity"
+            android:label="@string/title_activity_agregar_conectividad"
+            android:parentActivityName=".Activities.ConectividadesCreadasActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.ConectividadesCreadasActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.VinculosCreadosActivity"
+            android:label="@string/title_activity_vinculos_creados"
+            android:parentActivityName=".Activities.PorticosPlanosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.PorticosPlanosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.AgregarVinculoActivity"
+            android:label="@string/title_activity_agregar_vinculo"
+            android:parentActivityName=".Activities.VinculosCreadosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.VinculosCreadosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.CargasActivity"
+            android:label="@string/title_activity_cargas"
+            android:parentActivityName=".Activities.PorticosPlanosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.PorticosPlanosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.CargasEnNudosActivity"
+            android:label="@string/title_activity_cargas_en_nudos"
+            android:parentActivityName=".Activities.CargasActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.CargasActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.AgregarCargaEnNudoActivity"
+            android:label="@string/title_activity_agregar_carga_en_nudo"
+            android:parentActivityName=".Activities.CargasEnNudosActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.CargasEnNudosActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.CargasEnBarrasActivity"
+            android:label="@string/title_activity_cargas_en_barras"
+            android:parentActivityName=".Activities.CargasActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.CargasActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.AgregarCargaEnBarraActivity"
+            android:label="@string/title_activity_agregar_carga_en_barra"
+            android:parentActivityName=".Activities.CargasEnBarrasActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.CargasEnBarrasActivity" />
+        </activity>
+    </application>
+
+</manifest>

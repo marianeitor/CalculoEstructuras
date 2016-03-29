@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
+
+    <TextView
+        android:id="@+id/titulo_barras"
+        android:text="@string/barra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="25dp"
+        android:background="#003050"
+        android:textColor="#FFFFFF"
+        />
+
+    <TextView
+        android:layout_below="@id/titulo_barras"
+        android:id="@+id/elasticidad"
+        android:text="SM: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <TextView
+        android:layout_below="@id/titulo_barras"
+        android:layout_toRightOf="@id/elasticidad"
+        android:id="@+id/sm"
+        android:text="SM: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="10dp"
+        />
+
+
+
+
+
+</RelativeLayout>
