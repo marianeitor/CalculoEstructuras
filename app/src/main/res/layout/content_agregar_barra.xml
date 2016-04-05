@@ -13,40 +13,106 @@
         android:id="@+id/titulo_barras"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="@string/barras_cargados_por_usuario"
+        android:text="@string/barra_properties"
         android:background="#003050"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         />
-    <ListView
+    <LinearLayout
+        android:id="@+id/renglon_elasticidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/titulo_barras"
-        android:id="@+id/lista_barras"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:longClickable="true"
-        android:layout_marginBottom="60dp">
-    </ListView>
+        android:layout_marginLeft="20dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/elasticidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Elasticidad: "
+            android:textSize="20dp"
+            />
+
+        <EditText
+            android:id="@+id/elasticidad_ingresada"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:background="#ffffff"
+            android:cursorVisible="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/renglon_area"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/renglon_elasticidad"
+        android:layout_marginLeft="20dp">
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Área: "
+            android:textSize="20dp"
+            />
+
+        <EditText
+            android:id="@+id/area_ingresada"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:background="#ffffff"
+            android:cursorVisible="true"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/renglon_inercia"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/renglon_area"
+        android:layout_marginLeft="20dp">
+        <TextView
+            android:id="@+id/inercia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Inercia: "
+            android:textSize="20dp"
+            />
+
+        <EditText
+            android:id="@+id/inercia_ingresada"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:background="#ffffff"
+            android:cursorVisible="true"/>
+    </LinearLayout>
+
     <ImageView
+        android:src="@drawable/tick"
+        android:layout_below="@+id/renglon_inercia"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/plus"
+        android:layout_marginRight="100dp"
         android:layout_alignParentRight="true"
-        android:onClick="actionCargarOtraBarra"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
+        android:onClick="guardarBarra"
         />
     <ImageView
-        android:id="@+id/left"
+        android:src="@drawable/cross"
+        android:layout_below="@+id/renglon_inercia"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/left"
-        android:layout_alignParentLeft="true"
-        android:onClick="volverAMenu"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        android:onClick="descartarBarra"
         />
 </RelativeLayout>

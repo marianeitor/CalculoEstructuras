@@ -41,4 +41,5 @@
     <string name="title_activity_agregar_carga_en_nudo">Agregar Carga En Nudo</string>
     <string name="title_activity_cargas_en_barras">Cargas En Barras</string>
     <string name="title_activity_agregar_carga_en_barra">Agregar Carga En Barra</string>
+    <string name="barra_properties">Propiedades Mecánicas de la Barra:</string>
 </resources>

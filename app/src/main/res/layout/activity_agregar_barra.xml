@@ -15,7 +15,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_agregar_barra" />
+    <include layout="@layout/content_agregar_barra"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

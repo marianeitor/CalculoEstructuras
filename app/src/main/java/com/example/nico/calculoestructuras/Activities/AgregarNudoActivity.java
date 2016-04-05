@@ -37,7 +37,7 @@ public class AgregarNudoActivity extends AppCompatActivity {
     public void guardarNudo(View view)
     {
         String sx = x.getText().toString();
-        String sy=y.getText().toString();
+        String sy = y.getText().toString();
         if (sx.matches("") || sy.matches(""))
         {
             Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
