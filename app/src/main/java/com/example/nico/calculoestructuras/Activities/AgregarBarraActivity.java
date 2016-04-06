@@ -25,11 +25,6 @@ public class AgregarBarraActivity extends AppCompatActivity {
     EditText inercia;
 
 
-    ListView List;
-    ListAdapterBarras adapter;
-    ArrayList<Barra> listaBarras;
-    private final int RESULT_BARRA=1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

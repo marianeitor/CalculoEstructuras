@@ -36,7 +36,7 @@ public class BarrasCreadasActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void actionCargarOtraBarra (View view)
+    public void actionCargarOtraBarra (View v)
     {
         Intent i = new Intent(this,AgregarBarraActivity.class);
         startActivityForResult(i, RESULT_BARRA);
