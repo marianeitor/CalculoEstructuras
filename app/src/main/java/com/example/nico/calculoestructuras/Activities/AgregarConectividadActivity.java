@@ -1,5 +1,7 @@
 package com.example.nico.calculoestructuras.Activities;
 
+import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,15 +16,16 @@ import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.Negocio.Barra;
+import com.example.nico.calculoestructuras.Negocio.Conectividad;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.R;
 
 import java.util.ArrayList;
 
 public class AgregarConectividadActivity extends AppCompatActivity {
-    int nudoInicial;
-    int nudoFinal;
-    int numBarra;
+    int nudoInicial = -1;
+    int nudoFinal = -1;
+    int numBarra = -1;
     Barra b;
 
     @Override
@@ -83,5 +86,21 @@ public class AgregarConectividadActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    public void guardarConectividad(View view){
+        if(nudoFinal == -1 || nudoInicial == -1 || numBarra == -1){
+            Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            Conectividad conectividad = new Conectividad(numBarra,nudoInicial,nudoFinal);
+            Intent in = new Intent();
+            in.putExtra("conectividad", conectividad);
+            setResult(RESULT_OK, in);
+            this.finish();
+        }
+    }
+
+    public void descartarConectividad(View view){ this.finish(); }
 
 }

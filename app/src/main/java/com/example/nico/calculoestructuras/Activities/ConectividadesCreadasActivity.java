@@ -1,7 +1,10 @@
 package com.example.nico.calculoestructuras.Activities;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +26,8 @@ public class ConectividadesCreadasActivity extends AppCompatActivity {
     ListAdapterBarrasCon adapter2;
     ArrayList<Barra> listaBarras;
     ArrayList<Conectividad> listaConectividad;
-    private final int REQUEST_CONEC=1;
+    private final int UPDATE_CONEC = 0;
+    private final int NEW_CONEC = 1;
     Barra b;
     Conectividad c;
 
@@ -35,8 +39,8 @@ public class ConectividadesCreadasActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         List=(ListView) findViewById(R.id.lista_barras_conect);
-        listaBarras= DataBaseHelper.getDatabaseInstance(this).getBarrasFromDB();
-        listaConectividad=DataBaseHelper.getDatabaseInstance(this).getConecFromDB();
+        listaBarras = DataBaseHelper.getDatabaseInstance(this).getBarrasFromDB();
+        listaConectividad = DataBaseHelper.getDatabaseInstance(this).getConecFromDB();
         adapter2 = new ListAdapterBarrasCon(this,listaBarras,listaConectividad);
         //adapter = new ListAdapterBarras(this,listaBarras);
         List.setAdapter(adapter2);
@@ -45,16 +49,22 @@ public class ConectividadesCreadasActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(CargaConectividadesActivity.this, "probando bd", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ConectividadesCreadasActivity.this, AgregarConectividadActivity.class);
-                int in = position + 1;
+                //int in = position + 1;
                 b = (Barra) adapter2.getItem(position);
-                if (listaConectividad.size() > position) {
+                // Compara la posicion del item seleccionado con el tamaño de listaConectividad para saber si hay alguna
+                // conectividad que se corresponda con esa barra
+                if (listaConectividad.size() > position) { //En caso de haber, busca esa conectividad
                     c = (Conectividad) adapter2.getConect(position);
-                } else {
+                    i.putExtra("barra", b);
+                    startActivityForResult(i, UPDATE_CONEC);
+                } else { // De lo contrario crea una nueva
                     c = new Conectividad(position + 1, 0, 0);
+                    i.putExtra("barra", b);
+                    startActivityForResult(i, NEW_CONEC);
                 }
-                i.putExtra("barra", b);
+               // i.putExtra("barra", b);
                 // i.putExtra("numero",in);
-                startActivityForResult(i, REQUEST_CONEC);
+               // startActivityForResult(i, NEW_CONEC);
             }
         });
 
@@ -76,17 +86,31 @@ public class ConectividadesCreadasActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==RESULT_OK)
         {
+            Conectividad con = (Conectividad)data.getSerializableExtra("conectividad");
+            c.setNumNudoFinal(con.getNumNudoFinal());
+            c.setNumNudoInicial(con.getNumNudoInicial());
+            ContentValues values = new ContentValues();
+            values.put("barraconectada", con.getNumBarra());
+            values.put("niconec", con.getNumNudoInicial());
+            values.put("nfconec", con.getNumNudoFinal());
+
             switch (requestCode)
             {
-                case REQUEST_CONEC:
-                {
-                    Conectividad con = (Conectividad)data.getSerializableExtra("conectividad");
-                    c.setNumNudoFinal(con.getNumNudoFinal());
-                    c.setNumNudoInicial(con.getNumNudoInicial());
-                    adapter2.notifyDataSetChanged();
-                }break;
+
+                case NEW_CONEC:
+                {  // En caso de ser una nueva conectividad la crea en la bd y la agrega a la listaConectividades del adapter
+                    DataBaseHelper.getDatabaseInstance(this).insertConec(values);
+                    adapter2.addConec(c);
+                } break;
+
+                case UPDATE_CONEC:
+                { // En caso de una conectividad existente la actualiza en la bd
+                    DataBaseHelper.getDatabaseInstance(this).updateConec(values,con.getNumBarra());
+                } break;
 
             }
+
+            adapter2.notifyDataSetChanged();
         }
     }
 

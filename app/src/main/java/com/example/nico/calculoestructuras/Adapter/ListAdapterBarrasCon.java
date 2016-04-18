@@ -46,6 +46,7 @@ public class ListAdapterBarrasCon extends BaseAdapter {
     public Object getItem(int position) {
         return array.get(position);
     }
+
     public Conectividad getConect(int position){
         return arrayConect.get(position);
     }
@@ -84,21 +85,39 @@ public class ListAdapterBarrasCon extends BaseAdapter {
     }
 
 
-    public ArrayList<Barra> addItem(Barra b)
+    public ArrayList<Barra> addBarra(Barra b)
     {
         array.add(b);
         return array;
     }
 
-    public ArrayList<Barra> removeItem(Barra b)
+    public ArrayList<Barra> removeBarra(Barra b)
     {
         array.remove(b.getNumOrden());
         return array;
     }
 
-    public ArrayList<Barra> removeItemByIndex(int index)
+    public ArrayList<Barra> removeBarraByIndex(int index)
     {
         array.remove(index);
         return array;
+    }
+
+    public ArrayList<Conectividad> addConec(Conectividad c)
+    {
+        arrayConect.add(c);
+        return arrayConect;
+    }
+
+    public ArrayList<Conectividad> removeConec(Conectividad c)
+    {
+        arrayConect.remove(c.getNumBarra());
+        return arrayConect;
+    }
+
+    public ArrayList<Conectividad> removeConecByIndex(int index)
+    {
+        arrayConect.remove(index);
+        return arrayConect;
     }
 }

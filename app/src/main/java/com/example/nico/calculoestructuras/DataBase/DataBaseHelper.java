@@ -327,6 +327,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         getWritableDatabase().insert(DATABASE_NAME_CONECTIV_TABLE, null, values);
         this.close();
     }
+
+    public void updateConec(ContentValues values, int nroConec){
+        getWritableDatabase().update(DATABASE_NAME_CONECTIV_TABLE, values,"idconectividad = ?", new String[]{String.valueOf(nroConec)} );
+    }
+
     public void insertVinculo(ContentValues values){
 
         getWritableDatabase().insert(DATABASE_NAME_VINCULOS_TABLE, null, values);
