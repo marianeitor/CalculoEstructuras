@@ -9,6 +9,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_vinculos_creados"
     tools:context="com.example.nico.calculoestructuras.Activities.VinculosCreadosActivity">
+
     <TextView
         android:id="@+id/titulo_vinculos"
         android:layout_width="match_parent"
@@ -19,8 +20,8 @@
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-
         />
+
     <ListView
         android:layout_below="@+id/titulo_vinculos"
         android:id="@+id/lista_nudos_vinc"
@@ -28,9 +29,7 @@
         android:layout_height="match_parent"
         android:longClickable="true"
         android:layout_marginBottom="60dp">
-
     </ListView>
-
 
     <ImageView
         android:id="@+id/left"

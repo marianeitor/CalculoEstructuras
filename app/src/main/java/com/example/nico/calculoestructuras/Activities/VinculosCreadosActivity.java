@@ -1,5 +1,6 @@
 package com.example.nico.calculoestructuras.Activities;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -23,8 +24,10 @@ public class VinculosCreadosActivity extends AppCompatActivity {
     ListAdapterNodosVinc adapter;
     ArrayList<Nudo> listaNudos;
     ArrayList<Vinculo> listaVinculos;
-    Nudo n;
-    private final int REQUEST_VINC=1;
+    Nudo nudo;
+    Vinculo vinculo;
+    private final int UPDATE_VINC = 0;
+    private final int NEW_VINC = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,26 +47,64 @@ public class VinculosCreadosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(CargaConectividadesActivity.this, "probando bd", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(VinculosCreadosActivity.this, AgregarVinculoActivity.class);
-                int in = position +1;
-                n = (Nudo)adapter.getItem(position);
-                i.putExtra("nudo",n);
-                startActivityForResult(i, REQUEST_VINC);
+                //int in = position +1;
+                nudo = (Nudo) adapter.getItem(position);
+                // Compara la posicion del item seleccionado con el tamaño de listaVinculos para saber si hay algun
+                // vinculo que se corresponda con ese nudo
+                if(listaVinculos.size() > position){ //En caso de haber, busca ese vinculo
+                    vinculo = (Vinculo)adapter.getVinculo(position);
+                    i.putExtra("nudo", nudo);
+                    startActivityForResult(i, UPDATE_VINC);
+                } else{ //De lo contrario, crea una nueva
+                    vinculo = new Vinculo(position+1);
+                    i.putExtra("nudo", nudo);
+                    startActivityForResult(i, NEW_VINC);
+                }
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    public void volverAMenu(View view){
+        this.finish();
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==RESULT_OK) {
+        if(resultCode == RESULT_OK) {
+            Vinculo v = (Vinculo)data.getSerializableExtra("vinc");
+           // vinculo.setNumNudo(v.getNumNudo());
+            //vinculo.setRestX(v.getRestX());
+            //vinculo.setRestY(v.getRestY());
+           // vinculo.setRestGiro(v.getRestGiro());
+
+            ContentValues vincValues = new ContentValues();
+            vincValues.put("nudovinculado",v.getNumNudo());
+            vincValues.put("restx", v.getRestX());
+            vincValues.put("resty", v.getRestY());
+            vincValues.put("restgiro", v.getRestGiro());
+
+            //Nudo n = (Nudo)data.getExtras().getSerializable("nudo");
+
+            //ContentValues nudoValues = new ContentValues();
+
             switch (requestCode)
             {
-                case REQUEST_VINC:
-                {
-                    Nudo nudo = (Nudo)data.getSerializableExtra("nudo");
-                    n.setRestricciones(nudo.isRestriccionX(),nudo.isRestriccionY(),nudo.isRestriccionGiro());
-                    adapter.notifyDataSetChanged();
+                case NEW_VINC:
+                {// En caso de ser un nuevo vinculo lo crea en la bd y lo agrega a la listaVinculos del adapter
+                    DataBaseHelper.getDatabaseInstance(this).insertVinculo(vincValues);
+                    adapter.addVinc(v);
+                }break;
 
+                case UPDATE_VINC:
+                {// En caso de un vinculo existente la actualiza en la bd
+                    DataBaseHelper.getDatabaseInstance(this).updateVinc(vincValues,v.getNumNudo());
                 }break;
 
             }
+            nudo.setRestricciones((v.getRestX() != 0), (v.getRestY() != 0), (v.getRestGiro() != 0));
+            adapter.notifyDataSetChanged();
+
         }
 
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -74,7 +115,6 @@ public class VinculosCreadosActivity extends AppCompatActivity {
          //               .setAction("Action", null).show();
          //   }
         //});
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

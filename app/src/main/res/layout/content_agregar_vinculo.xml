@@ -9,6 +9,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_agregar_vinculo"
     tools:context="com.example.nico.calculoestructuras.Activities.AgregarVinculoActivity">
+
     <TextView
         android:id="@+id/vinculo_titulo"
         android:layout_width="match_parent"
@@ -32,7 +33,6 @@
         android:textSize="25dp"
         android:background="#885159"/>
 
-
     <TextView
         android:id="@+id/restX"
         android:layout_below="@id/nudo"
@@ -53,6 +53,18 @@
         android:textSize="20dp">
     </Spinner>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/spi_rest_x"
+        android:layout_below="@+id/nudo"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextX"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"/>
+
+
     <TextView
         android:id="@+id/restY"
         android:layout_below="@id/spi_rest_x"
@@ -72,6 +84,18 @@
         android:layout_marginLeft="10dp"
         android:textSize="20dp" >
     </Spinner>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/spi_rest_y"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextY"
+        android:layout_below="@+id/spi_rest_x"
+        android:layout_alignLeft="@+id/editTextX"
+        android:layout_alignStart="@+id/editTextX" />
+
     <TextView
         android:id="@+id/rest_rot"
         android:layout_below="@id/spi_rest_y"
@@ -92,6 +116,17 @@
         android:textSize="20dp">
     </Spinner>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/spi_rest_rot"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextGiro"
+        android:layout_below="@+id/spi_rest_y"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" />
+
     <ImageView
         android:src="@drawable/tick"
         android:layout_below="@id/spi_rest_rot"
@@ -101,6 +136,7 @@
         android:layout_alignParentRight="true"
         android:onClick="guardarVinculo"
         android:id="@+id/imageView" />
+
     <ImageView
         android:src="@drawable/cross"
         android:layout_below="@id/spi_rest_rot"
@@ -111,33 +147,4 @@
         android:onClick="descartarVinculo"
         />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/editTextX"
-        android:layout_below="@+id/nudo"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextY"
-        android:layout_below="@+id/spi_rest_x"
-        android:layout_alignLeft="@+id/editTextX"
-        android:layout_alignStart="@+id/editTextX" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextGiro"
-        android:layout_below="@+id/spi_rest_y"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
 </RelativeLayout>

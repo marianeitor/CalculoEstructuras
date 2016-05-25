@@ -22,14 +22,19 @@ import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.Negocio.Vinculo;
 import com.example.nico.calculoestructuras.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class AgregarVinculoActivity extends AppCompatActivity {
     Nudo n;
+    Vinculo v;
     int numNudo;
-    double restX;
-    double restY;
-    double restRot;
+    double restX = 0;
+    double restY = 0;
+    double restRot = 0;
+    EditText valX;
+    EditText valY;
+    EditText valGiro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +45,8 @@ public class AgregarVinculoActivity extends AppCompatActivity {
 
         TextView nb = (TextView) findViewById(R.id.nudo);
         CharSequence c = nb.getText();
-        n =(Nudo) getIntent().getSerializableExtra("nudo");
-        numNudo=n.getnOrden();
+        n = (Nudo) getIntent().getSerializableExtra("nudo");
+        numNudo = n.getnOrden();
         nb.setText(c + " " + numNudo + " : ");
         Spinner spinnerRestX = (Spinner) findViewById(R.id.spi_rest_x);
         Spinner spinnerRestY = (Spinner) findViewById(R.id.spi_rest_y);
@@ -49,56 +54,62 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         ArrayList<String> arrayStrings = new ArrayList<>();
         arrayStrings.add("NO" );
         arrayStrings.add("SI");
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,arrayStrings);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayStrings);
         spinnerRestX.setAdapter(adapter);
         spinnerRestY.setAdapter(adapter);
         spinnerRestRot.setAdapter(adapter);
-        final EditText valX= (EditText) findViewById(R.id.editTextX);
-        final EditText valY= (EditText) findViewById(R.id.editTextY);
-        final EditText valGiro= (EditText) findViewById(R.id.editTextGiro);
+        valX= (EditText) findViewById(R.id.editTextX);
+        valY= (EditText) findViewById(R.id.editTextY);
+        valGiro= (EditText) findViewById(R.id.editTextGiro);
         valX.setFocusable(false);
         valX.setEnabled(false);
         valY.setFocusable(false);
         valY.setEnabled(false);
         valGiro.setFocusable(false);
         valGiro.setEnabled(false);
+        /* Esto es para que al volver a seleccionar un nodo que ya tiene restricciones
+            los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO"
+        if(n.isRestriccionX()){
+            spinnerRestX.setSelection(1);
+        }
+        if(n.isRestriccionY()){
+            spinnerRestY.setSelection(1);
+        }
+        if(n.isRestriccionGiro()){
+            spinnerRestRot.setSelection(1);
+        }
+        */
         spinnerRestX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String rest = (String) parent.getSelectedItem();
-                if (rest.equals("NO")) {
-                    restX = 0;
+                if (position == 0) {
                     valX.setText("");
                     valX.setEnabled(false);
                 }
-                if (rest.equals("SI")) {
+                if (position == 1) {
                     valX.setEnabled(true);
                     valX.setFocusableInTouchMode(true);
-                    String text=valX.toString();
-                    restX=new Double(text).doubleValue();
                 }
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
                 Toast.makeText(AgregarVinculoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
+
         spinnerRestY.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String rest = (String) parent.getSelectedItem();
-                if(rest.equals("NO")){
-                    restY= 0;
+                if(position == 0){
                     valY.setText("");
                     valY.setEnabled(false);
-                }if(rest.equals("SI")){
+                }
+                if(position == 1){
                     valY.setEnabled(true);
                     valY.setFocusableInTouchMode(true);
-                    String text=valY.toString();
-                    restY=new Double(text).doubleValue();
                 }
             }
 
@@ -107,19 +118,18 @@ public class AgregarVinculoActivity extends AppCompatActivity {
                 Toast.makeText(AgregarVinculoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
+
         spinnerRestRot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String rest = (String) parent.getSelectedItem();
-                if(rest.equals("NO")){
-                    restRot= 0;
+                if(position == 0){
                     valGiro.setText("");
                     valGiro.setEnabled(false);
-                }if(rest.equals("SI")){
+                }
+                if(position == 1){
                     valGiro.setEnabled(true);
                     valGiro.setFocusableInTouchMode(true);
-                    String text=valGiro.toString();
-                    restRot=new Double(text).doubleValue();
                 }
             }
 
@@ -128,7 +138,6 @@ public class AgregarVinculoActivity extends AppCompatActivity {
                 Toast.makeText(AgregarVinculoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -150,27 +159,34 @@ public class AgregarVinculoActivity extends AppCompatActivity {
 
     public void guardarVinculo (View view)
     {
-        ContentValues values = new ContentValues();
+        if(valX.isEnabled())
+            restX = Double.parseDouble(valX.getText().toString());
+        if(valY.isEnabled())
+            restY = Double.parseDouble(valY.getText().toString());
+        if(valGiro.isEnabled())
+            restRot = Double.parseDouble(valGiro.getText().toString());
+
+        /*ContentValues values = new ContentValues();
         values.put("nudovinc",numNudo);
         values.put("restx", restX);
         values.put("resty", restY);
-        values.put("restgiro", restRot);
+        values.put("restgiro", restRot);*/
 
-        Vinculo v = new Vinculo(numNudo);
-        if(restX!=0){
-            v.setRestX(restX);
-        }
-        if(restY!=0){
-            v.setRestY(restY);
-        }
-        if(restRot!=0){
-            v.setRestGiro(restRot);
-        }
+        v = new Vinculo(numNudo);
+        v.setRestX(restX);
+        v.setRestY(restY);
+        v.setRestGiro(restRot);
 
-        Log.d("vinculo creada", v.toString());
-        DataBaseHelper.getDatabaseInstance(this).insertVinculo(values);
+        //n.setRestricciones((restX != 0),(restY != 0),(restRot != 0));
+
+        //Log.d("vinculo creada", v.toString());
+        //DataBaseHelper.getDatabaseInstance(this).insertVinculo(values);
         Intent in = new Intent();
-        in.putExtra("nudo", n);
+        /*Bundle bundle = new Bundle();
+        bundle.putSerializable("vinc", (Serializable) v);
+        bundle.putSerializable("nudo",n);*/
+        in.putExtra("vinc", v);
+        //in.putExtras(bundle);
         setResult(RESULT_OK, in);
         this.finish();
     }

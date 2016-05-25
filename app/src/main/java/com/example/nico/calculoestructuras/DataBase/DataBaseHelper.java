@@ -323,7 +323,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     public void insertConec(ContentValues values)
     {
-
         getWritableDatabase().insert(DATABASE_NAME_CONECTIV_TABLE, null, values);
         this.close();
     }
@@ -332,8 +331,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         getWritableDatabase().update(DATABASE_NAME_CONECTIV_TABLE, values,"idconectividad = ?", new String[]{String.valueOf(nroConec)} );
     }
 
-    public void insertVinculo(ContentValues values){
+    public void updateVinc(ContentValues values, int nroVinc){
+        getWritableDatabase().update(DATABASE_NAME_VINCULOS_TABLE, values, "idvinculo = ?", new String[]{String.valueOf(nroVinc)});
+    }
 
+    public void insertVinculo(ContentValues values){
         getWritableDatabase().insert(DATABASE_NAME_VINCULOS_TABLE, null, values);
         this.close();
     }

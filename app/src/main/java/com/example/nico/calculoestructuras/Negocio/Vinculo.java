@@ -1,9 +1,11 @@
 package com.example.nico.calculoestructuras.Negocio;
 
+import java.io.Serializable;
+
 /**
  * Created by Nico on 9/11/2015.
  */
-public class Vinculo {
+public class Vinculo implements Serializable{
     private int numNudo;
     private double restX=0;
     private double restY=0;
@@ -11,7 +13,6 @@ public class Vinculo {
 
     public Vinculo(int numNudo) {
         this.numNudo = numNudo;
-
     }
 
     public int getNumNudo() {
