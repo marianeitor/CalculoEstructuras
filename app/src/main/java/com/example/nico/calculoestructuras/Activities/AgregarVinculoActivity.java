@@ -159,12 +159,20 @@ public class AgregarVinculoActivity extends AppCompatActivity {
 
     public void guardarVinculo (View view)
     {
-        if(valX.isEnabled())
-            restX = Double.parseDouble(valX.getText().toString());
-        if(valY.isEnabled())
-            restY = Double.parseDouble(valY.getText().toString());
-        if(valGiro.isEnabled())
-            restRot = Double.parseDouble(valGiro.getText().toString());
+        /**/
+        if(valX.isEnabled() && (valX.getText().toString().equals(""))||
+                valY.isEnabled() && (valY.getText().toString().equals(""))||
+                valGiro.isEnabled() && (valGiro.getText().toString().equals(""))){
+            Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else {
+            if(valX.isEnabled())
+                restX = Double.parseDouble(valX.getText().toString());
+            if(valY.isEnabled())
+                restY = Double.parseDouble(valY.getText().toString());
+            if(valGiro.isEnabled())
+                restRot = Double.parseDouble(valGiro.getText().toString());
 
         /*ContentValues values = new ContentValues();
         values.put("nudovinc",numNudo);
@@ -172,23 +180,24 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         values.put("resty", restY);
         values.put("restgiro", restRot);*/
 
-        v = new Vinculo(numNudo);
-        v.setRestX(restX);
-        v.setRestY(restY);
-        v.setRestGiro(restRot);
+            v = new Vinculo(numNudo);
+            v.setRestX(restX);
+            v.setRestY(restY);
+            v.setRestGiro(restRot);
 
-        //n.setRestricciones((restX != 0),(restY != 0),(restRot != 0));
+            //n.setRestricciones((restX != 0),(restY != 0),(restRot != 0));
 
-        //Log.d("vinculo creada", v.toString());
-        //DataBaseHelper.getDatabaseInstance(this).insertVinculo(values);
-        Intent in = new Intent();
+            //Log.d("vinculo creada", v.toString());
+            //DataBaseHelper.getDatabaseInstance(this).insertVinculo(values);
+            Intent in = new Intent();
         /*Bundle bundle = new Bundle();
         bundle.putSerializable("vinc", (Serializable) v);
         bundle.putSerializable("nudo",n);*/
-        in.putExtra("vinc", v);
-        //in.putExtras(bundle);
-        setResult(RESULT_OK, in);
-        this.finish();
+            in.putExtra("vinc", v);
+            //in.putExtras(bundle);
+            setResult(RESULT_OK, in);
+            this.finish();
+        }
     }
 
     public void descartarVinculo(View view)

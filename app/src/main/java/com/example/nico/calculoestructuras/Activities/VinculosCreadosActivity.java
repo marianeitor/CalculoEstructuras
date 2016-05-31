@@ -99,6 +99,7 @@ public class VinculosCreadosActivity extends AppCompatActivity {
                 case UPDATE_VINC:
                 {// En caso de un vinculo existente la actualiza en la bd
                     DataBaseHelper.getDatabaseInstance(this).updateVinc(vincValues,v.getNumNudo());
+                    adapter.updateVinc(v);
                 }break;
 
             }

@@ -115,4 +115,13 @@ public class ListAdapterNodosVinc extends BaseAdapter{
         array.add(n);
         return array;
     }
+
+    public void updateVinc(Vinculo v){
+        int position = v.getNumNudo()-1;
+        Vinculo vinculo = this.getVinculo(position);
+        vinculo.setRestX(v.getRestX());
+        vinculo.setRestY(v.getRestY());
+        vinculo.setRestGiro(v.getRestGiro());
+        array2.set(position,vinculo);
+    }
 }
