@@ -1,5 +1,6 @@
 package com.example.nico.calculoestructuras.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,17 +14,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nico.calculoestructuras.Negocio.CargaEnNudo;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
+import com.example.nico.calculoestructuras.Negocio.Vinculo;
 import com.example.nico.calculoestructuras.R;
 
 import java.util.ArrayList;
 
 public class AgregarCargaEnNudoActivity extends AppCompatActivity {
     Nudo n;
+    CargaEnNudo carga;
     int numNudo;
-    boolean restX;
-    boolean restY;
-    boolean restRot;
+    double cargaX = 0;
+    double cargaY = 0;
+    double cargaZ = 0;
+    EditText valX;
+    EditText valY;
+    EditText valZ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +43,6 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         CharSequence c = nb.getText();
         n =(Nudo) getIntent().getSerializableExtra("nudo");
         numNudo=n.getnOrden();
-        //numNudo=Integer.parseInt(getIntent().getStringExtra("numero"));
         nb.setText(c + " " + numNudo + " : ");
         Spinner spinnerCargaX = (Spinner) findViewById(R.id.spi_carga_x);
         Spinner spinnerCargaY = (Spinner) findViewById(R.id.spi_carga_y);
@@ -48,53 +54,48 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         spinnerCargaX.setAdapter(adapter);
         spinnerCargaY.setAdapter(adapter);
         spinnerCargaZ.setAdapter(adapter);
-        final EditText valX= (EditText) findViewById(R.id.editTextX);
-        final EditText valY= (EditText) findViewById(R.id.editTextY);
-        final EditText valGiro= (EditText) findViewById(R.id.editTextGiro);
+        valX = (EditText) findViewById(R.id.editTextX);
+        valY = (EditText) findViewById(R.id.editTextY);
+        valZ = (EditText) findViewById(R.id.editTextGiro);
         valX.setFocusable(false);
         valX.setEnabled(false);
         valY.setFocusable(false);
         valY.setEnabled(false);
-        valGiro.setFocusable(false);
-        valGiro.setEnabled(false);
+        valZ.setFocusable(false);
+        valZ.setEnabled(false);
+
         spinnerCargaX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String rest = (String) parent.getSelectedItem();
-                if (rest.equals("NO")) {
-                    restX = false;
+                //String rest = (String) parent.getSelectedItem();
+                if (position == 0) {
                     valX.setText("");
                     valX.setEnabled(false);
                 }
-                if (rest.equals("SI")) {
-                    restX = true;
+                if (position == 1) {
                     valX.setEnabled(true);
                     valX.setFocusableInTouchMode(true);
                 }
-                //Toast.makeText(VinculosActivity.this,"lala " + i, Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
                 Toast.makeText(AgregarCargaEnNudoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
+
         spinnerCargaY.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String rest = (String) parent.getSelectedItem();
-                if(rest.equals("NO")){
-                    restY= false;
+                //String rest = (String) parent.getSelectedItem();
+                if (position == 0) {
                     valY.setText("");
                     valY.setEnabled(false);
-                }if(rest.equals("SI")){
-                    restY=true;
+                }
+                if (position == 1) {
                     valY.setEnabled(true);
                     valY.setFocusableInTouchMode(true);
                 }
-                // Toast.makeText(VinculosActivity.this,"lala " + i, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -102,20 +103,19 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
                 Toast.makeText(AgregarCargaEnNudoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
+
         spinnerCargaZ.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String rest = (String) parent.getSelectedItem();
-                if(rest.equals("NO")){
-                    restRot= false;
-                    valGiro.setText("");
-                    valGiro.setEnabled(false);
-                }if(rest.equals("SI")){
-                    restRot=true;
-                    valGiro.setEnabled(true);
-                    valGiro.setFocusableInTouchMode(true);
+                //String rest = (String) parent.getSelectedItem();
+                if (position == 0) {
+                    valZ.setText("");
+                    valZ.setEnabled(false);
                 }
-                // Toast.makeText(VinculosActivity.this,"lala " + i, Toast.LENGTH_SHORT).show();
+                if (position == 1) {
+                    valZ.setEnabled(true);
+                    valZ.setFocusableInTouchMode(true);
+                }
             }
 
             @Override
@@ -124,8 +124,51 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
             }
         });
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    public void guardarCarga(View view){
+
+        if(valX.isEnabled() && (valX.getText().toString().equals(""))||
+                valY.isEnabled() && (valY.getText().toString().equals(""))||
+                valZ.isEnabled() && (valZ.getText().toString().equals(""))){
+            Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else {
+            if(valX.isEnabled())
+                cargaX = Double.parseDouble(valX.getText().toString());
+            if(valY.isEnabled())
+                cargaY = Double.parseDouble(valY.getText().toString());
+            if(valZ.isEnabled())
+                cargaZ = Double.parseDouble(valZ.getText().toString());
+
+        /*ContentValues values = new ContentValues();
+        values.put("nudovinc",numNudo);
+        values.put("restx", restX);
+        values.put("resty", restY);
+        values.put("restgiro", restRot);*/
+
+            carga = new CargaEnNudo(numNudo);
+            carga.setCargaEnX(cargaX);
+            carga.setCargaEnY(cargaY);
+            carga.setCargaEnZ(cargaZ);
+
+            //n.setRestricciones((restX != 0),(restY != 0),(restRot != 0));
+
+            //Log.d("vinculo creada", v.toString());
+            //DataBaseHelper.getDatabaseInstance(this).insertVinculo(values);
+            Intent in = new Intent();
+        /*Bundle bundle = new Bundle();
+        bundle.putSerializable("vinc", (Serializable) v);
+        bundle.putSerializable("nudo",n);*/
+            in.putExtra("carga", carga);
+            //in.putExtras(bundle);
+            setResult(RESULT_OK, in);
+            this.finish();
+        }
+    }
+
+    public void descartarCarga(View view){ this.finish();}
 
 }

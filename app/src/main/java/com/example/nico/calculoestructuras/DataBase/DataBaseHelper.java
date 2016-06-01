@@ -296,7 +296,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         while(cursor.moveToNext())
         {
 
-            CargaEnNudo v = new CargaEnNudo( cursor.getInt(cursor.getColumnIndex("nudocargado")));
+            CargaEnNudo v = new CargaEnNudo( cursor.getInt(cursor.getColumnIndex("nudoCargado")));
             if(cursor.getDouble(cursor.getColumnIndex("cargaenx")) != 0) {
                 v.setCargaEnX(cursor.getDouble(cursor.getColumnIndex("cargaenx")));
             }
@@ -333,6 +333,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void updateVinc(ContentValues values, int nroVinc){
         getWritableDatabase().update(DATABASE_NAME_VINCULOS_TABLE, values, "idvinculo = ?", new String[]{String.valueOf(nroVinc)});
+    }
+
+    public void updateCargaNudo(ContentValues values, int nroCarga){
+        getWritableDatabase().update(DATABASE_NAME_CARGAENNUDO_TABLE, values, "idcargaNudo = ?", new String[]{String.valueOf(nroCarga)});
     }
 
     public void insertVinculo(ContentValues values){

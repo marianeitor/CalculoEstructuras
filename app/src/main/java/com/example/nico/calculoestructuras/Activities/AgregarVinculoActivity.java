@@ -58,9 +58,9 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         spinnerRestX.setAdapter(adapter);
         spinnerRestY.setAdapter(adapter);
         spinnerRestRot.setAdapter(adapter);
-        valX= (EditText) findViewById(R.id.editTextX);
-        valY= (EditText) findViewById(R.id.editTextY);
-        valGiro= (EditText) findViewById(R.id.editTextGiro);
+        valX = (EditText) findViewById(R.id.editTextX);
+        valY = (EditText) findViewById(R.id.editTextY);
+        valGiro = (EditText) findViewById(R.id.editTextGiro);
         valX.setFocusable(false);
         valX.setEnabled(false);
         valY.setFocusable(false);
@@ -82,7 +82,7 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         spinnerRestX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String rest = (String) parent.getSelectedItem();
+                //String rest = (String) parent.getSelectedItem();
                 if (position == 0) {
                     valX.setText("");
                     valX.setEnabled(false);
@@ -102,7 +102,7 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         spinnerRestY.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String rest = (String) parent.getSelectedItem();
+                //String rest = (String) parent.getSelectedItem();
                 if(position == 0){
                     valY.setText("");
                     valY.setEnabled(false);
@@ -122,7 +122,7 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         spinnerRestRot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String rest = (String) parent.getSelectedItem();
+                //String rest = (String) parent.getSelectedItem();
                 if(position == 0){
                     valGiro.setText("");
                     valGiro.setEnabled(false);
@@ -159,7 +159,6 @@ public class AgregarVinculoActivity extends AppCompatActivity {
 
     public void guardarVinculo (View view)
     {
-        /**/
         if(valX.isEnabled() && (valX.getText().toString().equals(""))||
                 valY.isEnabled() && (valY.getText().toString().equals(""))||
                 valGiro.isEnabled() && (valGiro.getText().toString().equals(""))){

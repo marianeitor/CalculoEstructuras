@@ -1,13 +1,15 @@
 package com.example.nico.calculoestructuras.Negocio;
 
+import java.io.Serializable;
+
 /**
  * Created by Nico on 9/11/2015.
  */
-public class CargaEnNudo {
+public class CargaEnNudo implements Serializable{
     private int numNudo;
-    private double cargaEnX=0;
-    private double cargaEnY=0;
-    private double cargaEnZ=0;
+    private double cargaEnX = 0;
+    private double cargaEnY = 0;
+    private double cargaEnZ = 0;
 
     public CargaEnNudo(int numNudo) {
         this.numNudo = numNudo;
