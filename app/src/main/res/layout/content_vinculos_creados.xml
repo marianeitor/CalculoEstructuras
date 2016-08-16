@@ -14,7 +14,7 @@
         android:id="@+id/titulo_vinculos"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Vinculos"
+        android:text="@string/title_activity_asignacion_vinculos"
         android:background="#003050"
         android:textColor="#FFFFFF"
         android:textSize="20dp"

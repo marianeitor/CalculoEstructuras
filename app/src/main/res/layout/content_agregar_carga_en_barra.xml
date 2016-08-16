@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Carga Distibuida"
+        android:text="Carga Distibuida: "
         android:textSize="20dp" />
 
     <Spinner
@@ -40,13 +40,25 @@
         android:textSize="20dp">
     </Spinner>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextDist"
+        android:layout_below="@+id/barra"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp" />
+
     <TextView
         android:id="@+id/nf"
         android:layout_below="@id/spi_nudos_conec_inic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Carga Puntual"
+        android:text="Carga Puntual: "
         android:textSize="20dp" />
 
     <Spinner
@@ -60,6 +72,106 @@
         android:textSize="20dp" >
     </Spinner>
 
+    <TextView
+        android:id="@+id/txt_CX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Carga en X: "
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/editTextCX"
+        android:layout_below="@+id/spi_nudos_conec" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextCX"
+        android:layout_below="@+id/spi_nudos_conec"
+        android:layout_toRightOf="@+id/txt_CX"
+        android:layout_toEndOf="@+id/txt_CX" />
+
+    <TextView
+        android:id="@+id/txt_CY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Carga en Y: "
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/editTextCY"
+        android:layout_below="@+id/txt_CX"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextCY"
+        android:layout_below="@+id/editTextCX"
+        android:layout_toRightOf="@+id/txt_CY"
+        android:layout_toEndOf="@+id/txt_CY"/>
+
+    <TextView
+        android:id="@+id/txt_DistanciaXY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Distancia al nudo inicial: "
+        android:textSize="20dp"
+        android:layout_below="@+id/txt_CY"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editDistanciaXY"
+        android:layout_below="@+id/editTextCY"
+        android:layout_toRightOf="@+id/txt_DistanciaXY"
+        android:layout_toEndOf="@+id/txt_DistanciaXY"/>
+
+    <TextView
+        android:id="@+id/txt_CZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Carga en Z: "
+        android:textSize="20dp"
+        android:layout_below="@+id/editDistanciaXY"
+         />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextCZ"
+        android:layout_below="@+id/editDistanciaXY"
+        android:layout_toRightOf="@+id/txt_CZ"
+        android:layout_toEndOf="@+id/txt_CZ"/>
+
+    <TextView
+        android:id="@+id/txt_DistanciaZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Distancia al nudo inicial: "
+        android:textSize="20dp"
+        android:layout_below="@+id/editTextCZ"
+        android:layout_alignBottom="@+id/editDistanciaZ"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editDistanciaZ"
+        android:layout_below="@+id/editTextCZ"
+        android:layout_toRightOf="@+id/txt_DistanciaZ"
+        android:layout_toEndOf="@+id/txt_DistanciaZ"/>
+
+
     <ImageView
         android:src="@drawable/tick"
         android:layout_width="50dp"
@@ -69,6 +181,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="98dp" />
+
     <ImageView
         android:src="@drawable/cross"
         android:layout_width="50dp"
@@ -78,75 +191,64 @@
         android:layout_alignRight="@+id/editTextDist"
         android:layout_alignEnd="@+id/editTextDist" />
 
+    <!--
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
+        android:inputType="numberSigned"
         android:ems="10"
-        android:id="@+id/editTextDist"
-        android:layout_below="@+id/barra"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2"
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp" />
+        android:id="@+id/editTextCX"
+        android:layout_below="@+id/spi_nudos_conec"
+        android:layout_toRightOf="@+id/nf"
+        android:layout_toEndOf="@+id/nf" />
 
-    <!-- <EditText
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:inputType="numberSigned"
-         android:ems="10"
-         android:id="@+id/editTextCX"
-         android:layout_below="@+id/spi_nudos_conec"
-         android:layout_toRightOf="@+id/nf"
-         android:layout_toEndOf="@+id/nf" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextCY"
+        android:layout_below="@+id/editTextCX" />
 
-     <EditText
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:inputType="numberSigned"
-         android:ems="10"
-         android:id="@+id/editTextCY"
-         android:layout_below="@+id/editTextCX" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:id="@+id/editTextCZ"
+        android:layout_below="@+id/editTextCY" />
 
-     <EditText
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:inputType="numberSigned"
-         android:ems="10"
-         android:id="@+id/editTextCZ"
-         android:layout_below="@+id/editTextCY" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="X"
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/editTextCX"
+        android:layout_toStartOf="@+id/textView3"
+        android:layout_toLeftOf="@+id/textView3" />
 
-     <TextView
-         android:id="@+id/textView2"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_weight="2"
-         android:text="X"
-         android:textSize="20dp"
-         android:layout_alignBottom="@+id/editTextCX"
-         android:layout_toStartOf="@+id/textView3"
-         android:layout_toLeftOf="@+id/textView3" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Y"
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/editTextCY"
+        android:layout_toStartOf="@+id/textView4"
+        android:layout_toLeftOf="@+id/textView4" />
 
-     <TextView
-         android:id="@+id/textView3"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_weight="2"
-         android:text="Y"
-         android:textSize="20dp"
-         android:layout_alignBottom="@+id/editTextCY"
-         android:layout_toStartOf="@+id/textView4"
-         android:layout_toLeftOf="@+id/textView4" />
-
-     <TextView
-         android:id="@+id/textView4"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_weight="2"
-         android:text="Z"
-         android:textSize="20dp"
-         android:layout_alignBottom="@+id/editTextCZ"
-         android:layout_toStartOf="@+id/textView3"
-         android:layout_toLeftOf="@+id/textView3" />
- -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Z"
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/editTextCZ"
+        android:layout_toStartOf="@+id/textView3"
+        android:layout_toLeftOf="@+id/textView3" />
+    -->
 </RelativeLayout>

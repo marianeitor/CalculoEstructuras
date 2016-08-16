@@ -20,13 +20,13 @@
     <string name="title_activity_nudos_creados">Nudos Creados</string>
     <string name="nudo_cargado">Nudo: </string>
     <string name="title_activity_barras_creadas">Barras Creadas</string>
-    <string name="barras_cargados_por_usuario"> Barras Cargadas </string>
-    <string name="nudos_cargados_por_usuario">Nudos Cargados</string>
+    <string name="barras_cargados_por_usuario"> Barras Ingresadas</string>
+    <string name="nudos_cargados_por_usuario">Nudos Ingresados</string>
     <string name="title_activity_agregar_nudo">Agregar Nudo</string>
     <string name="nudo">Coordenadas de Nudo </string>
     <string name="title_activity_agregar_barra">Agregar Barra</string>
     <string name="title_activity_conectividades_creadas">Conectividades Creadas</string>
-    <string name="title_activity_activity_carga_conectividades">Conectividades</string>
+    <string name="title_activity_activity_carga_conectividades">Asignacion de Conectividades</string>
     <string name="iner">Inercia:</string>
     <string name="area">Area: </string>
     <string name="elast">Elasticidad: </string>
@@ -42,4 +42,5 @@
     <string name="title_activity_cargas_en_barras">Cargas En Barras</string>
     <string name="title_activity_agregar_carga_en_barra">Agregar Carga En Barra</string>
     <string name="barra_properties">Propiedades Mecánicas de la Barra:</string>
+    <string name="title_activity_asignacion_vinculos">Asignacion de Vinculos</string>
 </resources>

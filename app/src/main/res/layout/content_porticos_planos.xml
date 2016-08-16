@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_portico_plano"
+    tools:showIn="@layout/activity_porticos_planos"
     tools:context="com.example.nico.calculoestructuras.Activities.PorticosPlanosActivity">
 
     <ListView
@@ -20,6 +20,7 @@
 
     </ListView>
 
+    <!-- SE COMENTÓ ESTE TEXTVIEW PORQUE "DATOS A INGRESAR" NO ERA DEL TODO_CORRECTO
     <TextView
         android:id="@+id/titulo_nudos"
         android:layout_width="match_parent"
@@ -30,4 +31,6 @@
         android:gravity="center"
         android:background="#0b103a"
         android:textColor="#FFFFFF"/>
+    -->
+
 </RelativeLayout>
