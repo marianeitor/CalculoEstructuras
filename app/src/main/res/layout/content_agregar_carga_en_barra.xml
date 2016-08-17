@@ -43,7 +43,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
+        android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editTextDist"
         android:layout_below="@+id/barra"
@@ -85,7 +85,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editTextCX"
         android:layout_below="@+id/spi_nudos_conec"
@@ -105,7 +105,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editTextCY"
         android:layout_below="@+id/editTextCX"
@@ -124,7 +124,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editDistanciaXY"
         android:layout_below="@+id/editTextCY"
@@ -144,7 +144,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editTextCZ"
         android:layout_below="@+id/editDistanciaXY"
@@ -164,7 +164,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editDistanciaZ"
         android:layout_below="@+id/editTextCZ"
