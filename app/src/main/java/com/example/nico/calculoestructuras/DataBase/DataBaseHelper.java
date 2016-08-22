@@ -211,6 +211,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             databaseInstance.getWritableDatabase().insert(DATABASE_NAME_BARRA_TABLE, null, values);
         }
 
+        //Carga de conectividades en base de datos
+        for (Conectividad c:ejercicio1.arrayConectividades){
+            ContentValues values = new ContentValues();
+            values.put("barraconectada", c.getNumBarra());
+            values.put("niconec", c.getNumNudoInicial());
+            values.put("nfconec", c.getNumNudoFinal());
+            databaseInstance.getWritableDatabase().insert(DATABASE_NAME_CONECTIV_TABLE, null, values);
+        }
+
         //Carga de vinculos en base de datos
         for (Vinculo v:ejercicio1.arrayVinculos) {
             ContentValues values = new ContentValues();
@@ -218,16 +227,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             values.put("restx", v.getRestX());
             values.put("resty", v.getRestY());
             values.put("restgiro", v.getRestGiro());
+            databaseInstance.getWritableDatabase().insert(DATABASE_NAME_VINCULOS_TABLE, null, values);
         }
-
-        //Carga de conectividades en base de datos
-        for (Conectividad c:ejercicio1.arrayConectividades){
-            ContentValues values = new ContentValues();
-            values.put("barraconectada", c.getNumBarra());
-            values.put("niconec", c.getNumNudoInicial());
-            values.put("nfconec", c.getNumNudoFinal());
-        }
-
 
     }
 
@@ -277,8 +278,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     public ArrayList<Conectividad> getConecFromDB()
     {
-        Cursor cursor = null;
         ArrayList<Conectividad> array = new ArrayList<>();
+        Cursor cursor = null;
         cursor = getReadableDatabase().query(DATABASE_NAME_CONECTIV_TABLE, null, null, null, null, null, null);
         while(cursor.moveToNext())
         {
