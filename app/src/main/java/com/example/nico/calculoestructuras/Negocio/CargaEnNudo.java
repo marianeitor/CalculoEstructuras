@@ -15,6 +15,13 @@ public class CargaEnNudo implements Serializable{
         this.numNudo = numNudo;
     }
 
+    public CargaEnNudo(int numNudo, double cargaX, double cargaY, double cargaZ) {
+        this.numNudo = numNudo;
+        this.cargaEnX = cargaX;
+        this.cargaEnY = cargaY;
+        this.cargaEnZ = cargaZ;
+    }
+
     public int getNumNudo() {
         return numNudo;
     }

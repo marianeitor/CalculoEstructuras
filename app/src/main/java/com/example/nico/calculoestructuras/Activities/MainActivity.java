@@ -2,11 +2,14 @@ package com.example.nico.calculoestructuras.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.R;
@@ -50,5 +53,13 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent i = new Intent(MainActivity.this, OpcionesMetodoActivity.class);
         startActivity(i);
+    }
+
+    public void actionCargarDatos(View v){
+        DataBaseHelper.getDatabaseInstance(this).precargarBD();
+        Button btn = (Button)findViewById(R.id.cargarBD);
+        btn.setClickable(false);
+        Toast.makeText(this.getBaseContext(),"Datos cargados con éxito", Toast.LENGTH_SHORT);
+        //Snackbar.make(v,"Datos cargados con éxito", Snackbar.LENGTH_SHORT);
     }
 }

@@ -67,10 +67,12 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         valY.setEnabled(false);
         valGiro.setFocusable(false);
         valGiro.setEnabled(false);
+
         /* Esto es para que al volver a seleccionar un nodo que ya tiene restricciones
-            los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO"
+            los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO" */
         if(n.isRestriccionX()){
             spinnerRestX.setSelection(1);
+            valX.setText(getIntent().getSerializableExtra("restX").toString());
         }
         if(n.isRestriccionY()){
             spinnerRestY.setSelection(1);
@@ -78,7 +80,7 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         if(n.isRestriccionGiro()){
             spinnerRestRot.setSelection(1);
         }
-        */
+
         spinnerRestX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

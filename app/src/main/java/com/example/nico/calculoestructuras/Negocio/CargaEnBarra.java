@@ -15,6 +15,15 @@ public class CargaEnBarra {
         this.numBarra = numBarra;
     }
 
+    public CargaEnBarra(int numBarra,  double cargaX, double cargaY, double cargaZ, double distancia, double cargaDist) {
+        this.numBarra = numBarra;
+        this.cargaDirstribuida = cargaDist;
+        this.cargaPuntualDistANudo = distancia;
+        this.cargaPuntualEnX = cargaX;
+        this.cargaPuntualEnY = cargaY;
+        this.cargaPuntualEnZ = cargaZ;
+    }
+
     public void setNumBarra(int numBarra) {
         this.numBarra = numBarra;
     }

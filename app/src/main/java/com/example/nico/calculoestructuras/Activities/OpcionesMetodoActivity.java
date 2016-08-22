@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.Adapter.ImageAdapter;
+import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.R;
 
 public class OpcionesMetodoActivity extends AppCompatActivity {
@@ -33,7 +34,6 @@ public class OpcionesMetodoActivity extends AppCompatActivity {
                     // Send intent to SingleViewActivity
                     Intent i = new Intent(OpcionesMetodoActivity.this, PorticosPlanosActivity.class);
                     startActivity(i);
-
                 } else {
                     Toast.makeText(OpcionesMetodoActivity.this, "Funcionalidad no implementada aun",
                             Toast.LENGTH_SHORT).show();

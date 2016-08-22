@@ -15,6 +15,13 @@ public class Vinculo implements Serializable{
         this.numNudo = numNudo;
     }
 
+    public Vinculo(int numNudo, double rest_X, double rest_Y, double rest_Giro) {
+        this.numNudo = numNudo;
+        this.restX = rest_X;
+        this.restY = rest_Y;
+        this.restGiro = rest_Giro;
+    }
+
     public int getNumNudo() {
         return numNudo;
     }

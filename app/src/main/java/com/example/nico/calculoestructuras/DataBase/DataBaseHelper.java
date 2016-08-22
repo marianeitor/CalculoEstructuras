@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.nico.calculoestructuras.Ejercicios.Ejercicio1;
 import com.example.nico.calculoestructuras.Negocio.Barra;
 import com.example.nico.calculoestructuras.Negocio.CargaEnBarra;
 import com.example.nico.calculoestructuras.Negocio.CargaEnNudo;
@@ -14,12 +16,20 @@ import com.example.nico.calculoestructuras.Negocio.Conectividad;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.Negocio.Vinculo;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
  * Created by Nico on 9/11/2015.
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
+
+    private static String DB_PATH = "/data/data/com.example.nico.calculoestructuras/databases/";
+    private static String DB_NAME = "db_calc";
+
     //Nombre tablas
     private final static String DATABASE_NAME_BARRA_TABLE = "Barras";
     private final static String DATABASE_NAME_NUDO_TABLE = "Nudos";
@@ -65,7 +75,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "[cargapuntualeny] FLOAT, "+
             "[cargapuntualenz] FLOAT)";
 
-    //Sentencias de eliminaci�n
+    //Sentencias de eliminacion
     private final static String DATABASE_NAME = "databaseMath";
     private final static String DATABASE_DROP_STATEMENT = "DROP TABLE IF EXISTS " + DATABASE_NAME;
     private final static String TABLE_NUDOS_DROP_STATEMENT = "DROP TABLE IF EXISTS " + DATABASE_NAME_NUDO_TABLE;
@@ -177,6 +187,47 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.crearTablaVinculo();
         this.crearTablaCargaEnBarra();
         this.crearTablaCargaEnNudo();
+
+    }
+
+    public void precargarBD(){
+        //Creación de ejercicio tipo 1
+        Ejercicio1 ejercicio1 = new Ejercicio1();
+
+        //Carga de nudos en base de datos
+        for (Nudo n:ejercicio1.arrayNudos) {
+            ContentValues values = new ContentValues();
+            values.put("coordx", n.getX());
+            values.put("coordy", n.getY());
+            databaseInstance.getWritableDatabase().insert(DATABASE_NAME_NUDO_TABLE, null, values);
+        }
+
+        //Carga de barras en base de datos
+        for (Barra b:ejercicio1.arrayBarras) {
+            ContentValues values = new ContentValues();
+            values.put("elasticidad", b.getElasticidad());
+            values.put("inercia", b.getInercia());
+            values.put("area", b.getArea());
+            databaseInstance.getWritableDatabase().insert(DATABASE_NAME_BARRA_TABLE, null, values);
+        }
+
+        //Carga de vinculos en base de datos
+        for (Vinculo v:ejercicio1.arrayVinculos) {
+            ContentValues values = new ContentValues();
+            values.put("nudovinculado", v.getNumNudo());
+            values.put("restx", v.getRestX());
+            values.put("resty", v.getRestY());
+            values.put("restgiro", v.getRestGiro());
+        }
+
+        //Carga de conectividades en base de datos
+        for (Conectividad c:ejercicio1.arrayConectividades){
+            ContentValues values = new ContentValues();
+            values.put("barraconectada", c.getNumBarra());
+            values.put("niconec", c.getNumNudoInicial());
+            values.put("nfconec", c.getNumNudoFinal());
+        }
+
 
     }
 

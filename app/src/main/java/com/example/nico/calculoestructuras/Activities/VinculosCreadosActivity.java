@@ -54,6 +54,7 @@ public class VinculosCreadosActivity extends AppCompatActivity {
                 if(listaVinculos.size() > position){ //En caso de haber, busca ese vinculo
                     vinculo = (Vinculo)adapter.getVinculo(position);
                     i.putExtra("nudo", nudo);
+                    i.putExtra("restX", vinculo.getRestX());
                     startActivityForResult(i, UPDATE_VINC);
                 } else{ //De lo contrario, crea una nueva
                     vinculo = new Vinculo(position+1);

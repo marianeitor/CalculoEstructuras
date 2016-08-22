@@ -28,20 +28,40 @@
         android:layout_height="250dp"
         android:src="@drawable/estructura"
         android:layout_centerInParent="true"/>
+    <!--
+    <Button
+        android:id="@+id/ingresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_ingresar"
+        android:onClick="actionIngresar"
+        android:textStyle="bold"
+        android:layout_below="@+id/dibujo"
+        />
+    -->
 
     <Button
         android:id="@+id/ingresar"
-        android:layout_marginTop="20dp"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/btn_ingresar"
-        android:layout_centerHorizontal="true"
         android:onClick="actionIngresar"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"
         android:background="#528881"
         android:textSize="20dp"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        />
+        android:layout_below="@+id/dibujo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <Button
+        android:id="@+id/cargarBD"
+        android:text="Cargar datos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="actionCargarDatos"
+        android:layout_below="@+id/dibujo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
