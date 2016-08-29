@@ -19,7 +19,7 @@ import com.example.nico.calculoestructuras.R;
 public class AgregarNudoActivity extends AppCompatActivity {
     EditText x;
     EditText y;
-    public static int EXTRA=1;
+    int nroNudo = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,15 @@ public class AgregarNudoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agregar_nudo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Intent i = getIntent();
+        //Intent i = getIntent();
+        Nudo n = (Nudo)getIntent().getSerializableExtra("nudo");
         x = (EditText) findViewById(R.id.x_ingresada);
         y = (EditText) findViewById(R.id.y_ingresada);
-
+        if(n != null){
+            x.setText(Double.toString(n.getX()));
+            y.setText(Double.toString(n.getY()));
+            nroNudo = (int)getIntent().getSerializableExtra("nroNudo");
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -49,12 +53,12 @@ public class AgregarNudoActivity extends AppCompatActivity {
             Double double_x = Double.parseDouble(sx);
             Double double_y = Double.parseDouble(sy);
             Nudo n = new Nudo(double_x, double_y);
-            ContentValues values = new ContentValues();
-            values.put("coordx", n.getX());
-            values.put("coordy", n.getY());
-            DataBaseHelper.getDatabaseInstance(this).insertNudo(values);
+
             Intent in = new Intent();
             in.putExtra("nudo", n);
+            if(nroNudo != -1){
+                in.putExtra("nroNudo",nroNudo);
+            }
             setResult(RESULT_OK, in);
             this.finish();
         }

@@ -1,25 +1,31 @@
 package com.example.nico.calculoestructuras.Activities;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import com.example.nico.calculoestructuras.Adapter.ListAdapter;
+
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
+import com.example.nico.calculoestructuras.Negocio.Barra;
+import com.example.nico.calculoestructuras.Negocio.Conectividad;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NudosCreadosActivity extends AppCompatActivity {
     ListView List;
     ListAdapter adapter;
     ArrayList<Nudo> listaNudos;
-    private final int RESULT_NUDO=1;
+    Nudo n;
+    private final int UPDATE_NUDO = 0;
+    private final int NEW_NUDO=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +38,18 @@ public class NudosCreadosActivity extends AppCompatActivity {
         listaNudos= DataBaseHelper.getDatabaseInstance(this).getNudosFromDB();
         adapter = new ListAdapter(this, listaNudos);
         List.setAdapter(adapter);
+
+        List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(NudosCreadosActivity.this, AgregarNudoActivity.class);
+
+                n = (Nudo) adapter.getItem(position);
+                i.putExtra("nudo", n);
+                i.putExtra("nroNudo", position+1);
+                startActivityForResult(i, UPDATE_NUDO);
+            }
+        });
 
 
 
@@ -48,21 +66,37 @@ public class NudosCreadosActivity extends AppCompatActivity {
     public void actionCargarOtroNudo(View v)
     {
         Intent i = new Intent(this,AgregarNudoActivity.class);
-        startActivityForResult(i, RESULT_NUDO);
+        startActivityForResult(i, NEW_NUDO);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==RESULT_OK)
         {
+            Nudo nudo = (Nudo)data.getSerializableExtra("nudo");
+            ContentValues values = new ContentValues();
+            values.put("coordx", nudo.getX());
+            values.put("coordy", nudo.getY());
+
             switch (requestCode)
             {
-                case RESULT_NUDO:
+                case UPDATE_NUDO:
                 {
-                    Nudo n = (Nudo)data.getSerializableExtra("nudo");
-                    adapter.addItem(n);
+                    DataBaseHelper.getDatabaseInstance(this).updateNudo(values,(int)data.getSerializableExtra("nroNudo"));
+                    listaNudos= DataBaseHelper.getDatabaseInstance(this).getNudosFromDB();
+                    adapter = new ListAdapter(this, listaNudos);
                     List.setAdapter(adapter);
-                }break;
+                    break;
+                }
+                case NEW_NUDO:
+                {
+                    DataBaseHelper.getDatabaseInstance(this).insertNudo(values);
+                    adapter.addItem(nudo);
+                    List.setAdapter(adapter);
+                    break;
+                }
             }
+            adapter.notifyDataSetChanged();
         }
     }
     public void volverAMenu(View view)

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.Ejercicios.Ejercicio1;
 import com.example.nico.calculoestructuras.Negocio.Barra;
@@ -372,6 +373,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     {
         getWritableDatabase().insert(DATABASE_NAME_NUDO_TABLE, null, values);
         this.close();
+    }
+
+    public void updateNudo(ContentValues values, int nroNudo) {
+        getWritableDatabase().update(DATABASE_NAME_NUDO_TABLE, values, "idnudo = ?", new String[]{String.valueOf(nroNudo)});
     }
     public void insertConec(ContentValues values)
     {
