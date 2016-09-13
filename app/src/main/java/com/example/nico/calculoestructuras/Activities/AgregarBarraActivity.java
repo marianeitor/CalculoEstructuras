@@ -23,6 +23,7 @@ public class AgregarBarraActivity extends AppCompatActivity {
     EditText elasticidad;
     EditText area;
     EditText inercia;
+    int nroBarra = -1;
 
 
     @Override
@@ -32,11 +33,17 @@ public class AgregarBarraActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent i = getIntent();
+        //Intent i = getIntent();
+        Barra b = (Barra)getIntent().getSerializableExtra("barra");
         elasticidad = (EditText)findViewById(R.id.elasticidad_ingresada);
         area = (EditText)findViewById(R.id.area_ingresada);
         inercia = (EditText)findViewById(R.id.inercia_ingresada);
-
+        if(b != null){
+            elasticidad.setText(Double.toString(b.getElasticidad()));
+            area.setText(Double.toString(b.getArea()));
+            inercia.setText(Double.toString(b.getInercia()));
+            nroBarra = (int)getIntent().getSerializableExtra("nroBarra");
+        }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -55,14 +62,12 @@ public class AgregarBarraActivity extends AppCompatActivity {
             Double double_elasticidad = Double.parseDouble(s_elasticidad);
             Double double_area = Double.parseDouble(s_area);
             Double double_inercia = Double.parseDouble(s_inercia);
-            Barra b = new Barra(double_elasticidad, double_area, double_inercia);
-            ContentValues values = new ContentValues();
-            values.put("elasticidad", b.getElasticidad());
-            values.put("area", b.getArea());
-            values.put("inercia", b.getInercia());
-            DataBaseHelper.getDatabaseInstance(this).insertBarra(values);
+            Barra barra = new Barra(double_elasticidad, double_area, double_inercia);
             Intent in = new Intent();
-            in.putExtra("barra", b);
+            in.putExtra("barra", barra);
+            if(nroBarra != -1){
+                in.putExtra("nroBarra", nroBarra);
+            }
             setResult(RESULT_OK, in);
             this.finish();
         }

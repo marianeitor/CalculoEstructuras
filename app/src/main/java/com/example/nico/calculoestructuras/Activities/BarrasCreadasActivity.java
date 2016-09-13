@@ -1,12 +1,12 @@
 package com.example.nico.calculoestructuras.Activities;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.example.nico.calculoestructuras.Adapter.ListAdapterBarras;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
@@ -19,7 +19,9 @@ public class BarrasCreadasActivity extends AppCompatActivity {
     ListView List;
     ListAdapterBarras adapter;
     ArrayList<Barra> listaBarras;
-    private final int RESULT_BARRA=1;
+    Barra b;
+    private final int UPDATE_BARRA = 0;
+    private final int NEW_BARRA = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +35,25 @@ public class BarrasCreadasActivity extends AppCompatActivity {
         adapter = new ListAdapterBarras(this,listaBarras);
         List.setAdapter(adapter);
 
+        List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(BarrasCreadasActivity.this, AgregarBarraActivity.class);
+
+                b = (Barra) adapter.getItem(position);
+                i.putExtra("barra", b);
+                i.putExtra("nroBarra", position+1);
+                startActivityForResult(i, UPDATE_BARRA);
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void actionCargarOtraBarra (View v)
     {
         Intent i = new Intent(this,AgregarBarraActivity.class);
-        startActivityForResult(i, RESULT_BARRA);
+        startActivityForResult(i, NEW_BARRA);
 
     }
 
@@ -47,16 +61,31 @@ public class BarrasCreadasActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==RESULT_OK)
         {
+            Barra barra = (Barra)data.getSerializableExtra("barra");
+            ContentValues values = new ContentValues();
+            values.put("elasticidad", barra.getElasticidad());
+            values.put("inercia", barra.getInercia());
+            values.put("area", barra.getArea());
+
             switch (requestCode)
             {
-                case RESULT_BARRA:
+                case UPDATE_BARRA:
                 {
-                    Barra barra = (Barra)data.getSerializableExtra("barra");
+                    DataBaseHelper.getDatabaseInstance(this).updateBarra(values, (int)data.getSerializableExtra("nroBarra"));
+                    listaBarras= DataBaseHelper.getDatabaseInstance(this).getBarrasFromDB();
+                    adapter = new ListAdapterBarras(this,listaBarras);
+                    List.setAdapter(adapter);
+                    break;
+                }
+                case NEW_BARRA:
+                {
+                    DataBaseHelper.getDatabaseInstance(this).insertBarra(values);
                     adapter.addItem(barra);
                     List.setAdapter(adapter);
-                }break;
-
+                    break;
+                }
             }
+            adapter.notifyDataSetChanged();
         }
     }
 

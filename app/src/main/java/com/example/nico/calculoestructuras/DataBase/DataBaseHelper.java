@@ -384,6 +384,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.close();
     }
 
+    public void updateBarra(ContentValues values, int nroBarra) {
+        getWritableDatabase().update(DATABASE_NAME_BARRA_TABLE, values, "idbarra = ?", new String[]{String.valueOf(nroBarra)});
+    }
+
     public void updateConec(ContentValues values, int nroConec){
         getWritableDatabase().update(DATABASE_NAME_CONECTIV_TABLE, values,"idconectividad = ?", new String[]{String.valueOf(nroConec)} );
     }
