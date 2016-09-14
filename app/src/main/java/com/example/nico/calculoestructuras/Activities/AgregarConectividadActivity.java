@@ -27,6 +27,9 @@ public class AgregarConectividadActivity extends AppCompatActivity {
     int nudoFinal = -1;
     int numBarra = -1;
     Barra b;
+    Spinner spinnerIn;
+    Spinner spinnerFin;
+    TextView nb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +38,18 @@ public class AgregarConectividadActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView nb = (TextView) findViewById(R.id.barra);
+        nb = (TextView) findViewById(R.id.barra);
+        spinnerIn = (Spinner) findViewById(R.id.spi_nudos_conec_inic);
+        spinnerFin = (Spinner) findViewById(R.id.spi_nudos_conec);
         CharSequence c = nb.getText();
+
         b =(Barra) getIntent().getSerializableExtra("barra");
+        nudoFinal = (int)getIntent().getSerializableExtra("n_fin");
+        nudoInicial = (int)getIntent().getSerializableExtra("n_ini");
         numBarra=b.getNumOrden();
         nb.setText(c + " " + numBarra + " : ");
-        Spinner spinnerIn = (Spinner) findViewById(R.id.spi_nudos_conec_inic);
-        Spinner spinnerFin = (Spinner) findViewById(R.id.spi_nudos_conec);
+
+
         ArrayList<Nudo> array = DataBaseHelper.getDatabaseInstance(this).getNudosFromDB();
         ArrayList<String> arrayStrings = new ArrayList<>();
         for (int i = 0; i < array.size() ; i++)
@@ -51,6 +59,10 @@ public class AgregarConectividadActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,arrayStrings);
         spinnerIn.setAdapter(adapter);
         spinnerFin.setAdapter(adapter);
+
+        spinnerIn.setSelection(nudoInicial-1);
+        spinnerFin.setSelection(nudoFinal-1);
+
         spinnerIn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)

@@ -56,10 +56,14 @@ public class ConectividadesCreadasActivity extends AppCompatActivity {
                 if (listaConectividad.size() > position) { //En caso de haber, busca esa conectividad
                     c = (Conectividad) adapter2.getConect(position);
                     i.putExtra("barra", b);
+                    i.putExtra("n_ini", c.getNumNudoInicial());
+                    i.putExtra("n_fin", c.getNumNudoFinal());
                     startActivityForResult(i, UPDATE_CONEC);
                 } else { // De lo contrario crea una nueva
                     c = new Conectividad(position + 1, 0, 0);
                     i.putExtra("barra", b);
+                    i.putExtra("n_ini", c.getNumNudoInicial());
+                    i.putExtra("n_fin", c.getNumNudoFinal());
                     startActivityForResult(i, NEW_CONEC);
                 }
                // i.putExtra("barra", b);
@@ -101,12 +105,19 @@ public class ConectividadesCreadasActivity extends AppCompatActivity {
                 {  // En caso de ser una nueva conectividad la crea en la bd y la agrega a la listaConectividades del adapter
                     DataBaseHelper.getDatabaseInstance(this).insertConec(values);
                     adapter2.addConec(c);
-                } break;
+                    break;
+                }
 
                 case UPDATE_CONEC:
                 { // En caso de una conectividad existente la actualiza en la bd
                     DataBaseHelper.getDatabaseInstance(this).updateConec(values,con.getNumBarra());
-                } break;
+                    listaBarras = DataBaseHelper.getDatabaseInstance(this).getBarrasFromDB();
+                    listaConectividad = DataBaseHelper.getDatabaseInstance(this).getConecFromDB();
+                    adapter2 = new ListAdapterBarrasCon(this,listaBarras,listaConectividad);
+                    //adapter = new ListAdapterBarras(this,listaBarras);
+                    List.setAdapter(adapter2);
+                    break;
+                }
 
             }
 
