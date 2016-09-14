@@ -17,5 +17,13 @@
 
     <include layout="@layout/content_nudos_creados" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab3"
+        android:onClick="actionCargarOtroNudo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="40dp"
+        android:src="@drawable/ic_add" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -73,6 +73,8 @@
         android:textSize="20dp" >
     </Spinner>
 
+    <!--
+
     <ImageView
         android:src="@drawable/tick"
         android:layout_below="@id/spi_nudos_conec"
@@ -91,5 +93,5 @@
         android:layout_alignParentRight="true"
         android:onClick="descartarConectividad"
         />
-
+    -->
 </RelativeLayout>

@@ -61,8 +61,9 @@
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editTextX"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"/>
+        />
+    <!--android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"-->
 
 
     <TextView
@@ -124,9 +125,11 @@
         android:ems="10"
         android:id="@+id/editTextGiro"
         android:layout_below="@+id/spi_rest_y"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
+        />
+    <!--android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"-->
 
+    <!--
     <ImageView
         android:src="@drawable/tick"
         android:layout_below="@id/spi_rest_rot"
@@ -146,5 +149,5 @@
         android:layout_alignParentRight="true"
         android:onClick="descartarVinculo"
         />
-
+    -->
 </RelativeLayout>

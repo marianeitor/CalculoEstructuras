@@ -17,6 +17,13 @@
 
     <include layout="@layout/content_agregar_carga_en_barra" />
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab3"
+        android:onClick="guardarCarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="40dp"
+        android:src="@drawable/ic_done" />
 
 </android.support.design.widget.CoordinatorLayout>

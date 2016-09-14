@@ -60,8 +60,9 @@
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:layout_below="@+id/nudo"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
+        />
+    <!--android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" -->
 
     <TextView
         android:id="@+id/carga_y"
@@ -120,9 +121,11 @@
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:layout_below="@+id/spi_carga_y"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
+        />
+    <!--android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" -->
 
+    <!--
     <ImageView
         android:src="@drawable/tick"
         android:layout_below="@id/spi_carga_z"
@@ -142,5 +145,5 @@
         android:layout_alignParentRight="true"
         android:onClick="descartarCarga"
         />
-
+    -->
 </RelativeLayout>

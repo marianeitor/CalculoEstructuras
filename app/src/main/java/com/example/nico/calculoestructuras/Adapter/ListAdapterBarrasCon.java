@@ -66,10 +66,10 @@ public class ListAdapterBarrasCon extends BaseAdapter {
         TextView titulo =(TextView) view.findViewById(R.id.titulo_barras);
         TextView conectividad = (TextView) view.findViewById(R.id.conectividad);
         if(arrayConect.size()>position) {
-            conectividad.setText(" " + "NI:  " + arrayConect.get(position).getNumNudoInicial() + " NF:  " + arrayConect.get(position).getNumNudoFinal());
+            conectividad.setText(" " + "NI: " + arrayConect.get(position).getNumNudoInicial() + "  NF: " + arrayConect.get(position).getNumNudoFinal());
         }
         else {
-            conectividad.setText(" " + "NI:  " + 0 + " NF:  " + 0);
+            conectividad.setText(" " + "NI: -  NF: -");
         }
         TextView a = (TextView) view.findViewById(R.id.a);
         TextView e = (TextView) view.findViewById(R.id.e);
