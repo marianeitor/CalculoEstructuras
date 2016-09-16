@@ -53,6 +53,7 @@ public class CargasEnNudosActivity extends AppCompatActivity {
                 if(listaCargasNudos.size() > position){ //En caso de haber, busca ese vinculo
                     carga = adapter.getCargaNudo(position);
                     i.putExtra("nudo", n);
+                    i.putExtra("carga", carga);
                     startActivityForResult(i, UPDATE_CARGA);
                 } else{ //De lo contrario, crea una nueva
                     carga = new CargaEnNudo(position+1);
@@ -92,13 +93,13 @@ public class CargasEnNudosActivity extends AppCompatActivity {
             switch (requestCode)
             {
                 case NEW_CARGA:
-                {// En caso de ser un nuevo vinculo lo crea en la bd y lo agrega a la listaVinculos del adapter
+                {// En caso de ser una nueva carga la crea en la bd y la agrega a la listaCargas del adapter
                     DataBaseHelper.getDatabaseInstance(this).insertCargaEnNudo(cargaValues);
                     adapter.addCargaNudo(c);
                 }break;
 
                 case UPDATE_CARGA:
-                {// En caso de un vinculo existente la actualiza en la bd
+                {// En caso de una carga existente la actualiza en la bd
                     DataBaseHelper.getDatabaseInstance(this).updateCargaNudo(cargaValues,c.getNumNudo());
                     adapter.updateCargaNodo(c);
                 }break;

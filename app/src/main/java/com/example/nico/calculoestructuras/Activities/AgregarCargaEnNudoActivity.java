@@ -42,6 +42,7 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         TextView nb = (TextView) findViewById(R.id.nudo);
         CharSequence c = nb.getText();
         n =(Nudo) getIntent().getSerializableExtra("nudo");
+        CargaEnNudo cargaNudo = (CargaEnNudo) getIntent().getSerializableExtra("carga");
         numNudo=n.getnOrden();
         nb.setText(c + " " + numNudo + " : ");
         Spinner spinnerCargaX = (Spinner) findViewById(R.id.spi_carga_x);
@@ -63,6 +64,24 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         valY.setEnabled(false);
         valZ.setFocusable(false);
         valZ.setEnabled(false);
+
+        /* Esto es para que al volver a seleccionar una carga existente
+        los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO" */
+
+        if(cargaNudo != null){
+            if(cargaNudo.getCargaEnX() != 0){
+                spinnerCargaX.setSelection(1);
+                valX.setText(Double.toString(cargaNudo.getCargaEnX()));
+            }
+            if(cargaNudo.getCargaEnY() != 0){
+                spinnerCargaY.setSelection(1);
+                valY.setText(Double.toString(cargaNudo.getCargaEnY()));
+            }
+            if(cargaNudo.getCargaEnZ() != 0){
+                spinnerCargaZ.setSelection(1);
+                valZ.setText(Double.toString(cargaNudo.getCargaEnZ()));
+            }
+        }
 
         spinnerCargaX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -55,6 +55,7 @@
 
     <EditText
         android:id="@+id/editTextX"
+        android:layout_toRightOf="@+id/spi_carga_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
@@ -90,9 +91,8 @@
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:layout_below="@+id/spi_carga_x"
-        android:layout_alignLeft="@+id/editTextX"
-        android:layout_alignStart="@+id/editTextX" />
+        android:layout_toRightOf="@+id/spi_carga_y"
+        android:layout_below="@+id/spi_carga_x"/>
 
     <TextView
         android:id="@+id/carga_z"
@@ -120,6 +120,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
+        android:layout_toRightOf="@+id/spi_carga_z"
         android:layout_below="@+id/spi_carga_y"
         />
     <!--android:layout_alignLeft="@+id/imageView"
