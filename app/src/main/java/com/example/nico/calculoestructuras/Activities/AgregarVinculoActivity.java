@@ -35,6 +35,9 @@ public class AgregarVinculoActivity extends AppCompatActivity {
     EditText valX;
     EditText valY;
     EditText valGiro;
+    Spinner spinnerRestX;
+    Spinner spinnerRestY;
+    Spinner spinnerRestRot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +48,13 @@ public class AgregarVinculoActivity extends AppCompatActivity {
 
         TextView nb = (TextView) findViewById(R.id.nudo);
         CharSequence c = nb.getText();
+        Vinculo vinc = (Vinculo) getIntent().getSerializableExtra("vinculo");
         n = (Nudo) getIntent().getSerializableExtra("nudo");
         numNudo = n.getnOrden();
         nb.setText(c + " " + numNudo + " : ");
-        Spinner spinnerRestX = (Spinner) findViewById(R.id.spi_rest_x);
-        Spinner spinnerRestY = (Spinner) findViewById(R.id.spi_rest_y);
-        Spinner spinnerRestRot = (Spinner) findViewById(R.id.spi_rest_rot);
+        spinnerRestX = (Spinner) findViewById(R.id.spi_rest_x);
+        spinnerRestY = (Spinner) findViewById(R.id.spi_rest_y);
+        spinnerRestRot = (Spinner) findViewById(R.id.spi_rest_rot);
         ArrayList<String> arrayStrings = new ArrayList<>();
         arrayStrings.add("NO" );
         arrayStrings.add("SI");
@@ -72,13 +76,15 @@ public class AgregarVinculoActivity extends AppCompatActivity {
             los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO" */
         if(n.isRestriccionX()){
             spinnerRestX.setSelection(1);
-            valX.setText(getIntent().getSerializableExtra("restX").toString());
+            valX.setText(Double.toString(vinc.getRestX()));
         }
         if(n.isRestriccionY()){
             spinnerRestY.setSelection(1);
+            valY.setText(Double.toString(vinc.getRestY()));
         }
         if(n.isRestriccionGiro()){
             spinnerRestRot.setSelection(1);
+            valGiro.setText(Double.toString(vinc.getRestGiro()));
         }
 
         spinnerRestX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -175,27 +181,13 @@ public class AgregarVinculoActivity extends AppCompatActivity {
             if(valGiro.isEnabled())
                 restRot = Double.parseDouble(valGiro.getText().toString());
 
-        /*ContentValues values = new ContentValues();
-        values.put("nudovinc",numNudo);
-        values.put("restx", restX);
-        values.put("resty", restY);
-        values.put("restgiro", restRot);*/
-
             v = new Vinculo(numNudo);
             v.setRestX(restX);
             v.setRestY(restY);
             v.setRestGiro(restRot);
 
-            //n.setRestricciones((restX != 0),(restY != 0),(restRot != 0));
-
-            //Log.d("vinculo creada", v.toString());
-            //DataBaseHelper.getDatabaseInstance(this).insertVinculo(values);
             Intent in = new Intent();
-        /*Bundle bundle = new Bundle();
-        bundle.putSerializable("vinc", (Serializable) v);
-        bundle.putSerializable("nudo",n);*/
             in.putExtra("vinc", v);
-            //in.putExtras(bundle);
             setResult(RESULT_OK, in);
             this.finish();
         }
