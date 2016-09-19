@@ -50,8 +50,8 @@ public class CargasEnNudosActivity extends AppCompatActivity {
                 n = (Nudo) adapter.getItem(position);
                 // Compara la posicion del item seleccionado con el tamaño de listaCargasNudos para saber si hay alguna
                 // carga que se corresponda con ese nudo
-                if(listaCargasNudos.size() > position){ //En caso de haber, busca ese vinculo
-                    carga = adapter.getCargaNudo(position);
+                if(adapter.getCargaAsociada(n.getnOrden()) != null){ //En caso de haber, busca ese vinculo
+                    carga = adapter.getCargaAsociada(n.getnOrden());
                     i.putExtra("nudo", n);
                     i.putExtra("carga", carga);
                     startActivityForResult(i, UPDATE_CARGA);
@@ -96,16 +96,17 @@ public class CargasEnNudosActivity extends AppCompatActivity {
                 {// En caso de ser una nueva carga la crea en la bd y la agrega a la listaCargas del adapter
                     DataBaseHelper.getDatabaseInstance(this).insertCargaEnNudo(cargaValues);
                     adapter.addCargaNudo(c);
-                }break;
+                    break;
+                }
 
                 case UPDATE_CARGA:
                 {// En caso de una carga existente la actualiza en la bd
                     DataBaseHelper.getDatabaseInstance(this).updateCargaNudo(cargaValues,c.getNumNudo());
                     adapter.updateCargaNodo(c);
-                }break;
+                    break;
+                }
 
             }
-            //nudo.setRestricciones((v.getRestX() != 0), (v.getRestY() != 0), (v.getRestGiro() != 0));
             adapter.notifyDataSetChanged();
 
         }

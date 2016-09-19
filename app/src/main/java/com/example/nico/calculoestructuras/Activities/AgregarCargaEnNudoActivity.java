@@ -48,6 +48,8 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         Spinner spinnerCargaX = (Spinner) findViewById(R.id.spi_carga_x);
         Spinner spinnerCargaY = (Spinner) findViewById(R.id.spi_carga_y);
         Spinner spinnerCargaZ = (Spinner) findViewById(R.id.spi_carga_z);
+
+        // Inicializa los spinner
         ArrayList<String> arrayStrings = new ArrayList<>();
         arrayStrings.add("NO" );
         arrayStrings.add("SI");
@@ -55,6 +57,8 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         spinnerCargaX.setAdapter(adapter);
         spinnerCargaY.setAdapter(adapter);
         spinnerCargaZ.setAdapter(adapter);
+
+        // Inicializa los editText como deshabilitados
         valX = (EditText) findViewById(R.id.editTextX);
         valY = (EditText) findViewById(R.id.editTextY);
         valZ = (EditText) findViewById(R.id.editTextGiro);

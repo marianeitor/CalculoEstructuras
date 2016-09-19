@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.nico.calculoestructuras.Negocio.Barra;
+import com.example.nico.calculoestructuras.Negocio.CargaEnBarra;
 import com.example.nico.calculoestructuras.Negocio.Conectividad;
 import com.example.nico.calculoestructuras.R;
 
@@ -21,16 +22,18 @@ public class ListAdapterCargasBarras extends BaseAdapter {
     Context context;
     ArrayList<Barra> array;
     ArrayList<Conectividad> array2;
+    ArrayList<CargaEnBarra> arrayCargaEnBarra;
     LayoutInflater inflater;
 
 
 
-    public ListAdapterCargasBarras(Context context, ArrayList<Barra> array, ArrayList<Conectividad> array2)
+    public ListAdapterCargasBarras(Context context, ArrayList<Barra> array, ArrayList<Conectividad> array2, ArrayList<CargaEnBarra> arrCargEnBarra)
     {
         super();
         this.context= context;
         this.array= array;
         this.array2=array2;
+        this.arrayCargaEnBarra = arrCargEnBarra;
         this.inflater=((Activity)context).getLayoutInflater();
     }
 
@@ -63,19 +66,71 @@ public class ListAdapterCargasBarras extends BaseAdapter {
         TextView titulo =(TextView) view.findViewById(R.id.titulo_barras);
         TextView conectividad = (TextView) view.findViewById(R.id.conectividad);
         conectividad.setText(" " + "NI:  " + array2.get(position).getNumNudoInicial()  + " NF:  " + array2.get(position).getNumNudoFinal());
-        TextView a = (TextView) view.findViewById(R.id.a);
-        TextView e = (TextView) view.findViewById(R.id.e);
-        TextView i = (TextView) view.findViewById(R.id.i);
+        TextView cargaDist = (TextView) view.findViewById(R.id.nro_cargaDist);
+        TextView cargaX = (TextView) view.findViewById(R.id.nro_cargaX);
+        TextView cargaY = (TextView) view.findViewById(R.id.nro_cargaY);
+        TextView cargaZ = (TextView) view.findViewById(R.id.nro_cargaZ);
         CharSequence barra = titulo.getText();
-        int idBarra = array.get(position).getNumOrden();
-        titulo.setText(barra +" "+ idBarra + " :");
-        a.setText("" + array.get(position).getArea());
-        e.setText(""+array.get(position).getElasticidad());
-        i.setText("" + array.get(position).getInercia());
+        int index = position+1;
+        titulo.setText(barra +" "+ index + " :");
 
+        if(this.getCargaAsociada(index) != null){
+            CargaEnBarra carga = getCargaAsociada(index);
+            if(carga.getCargaDistribuida() != 0){
+                cargaDist.setText(Double.toString(carga.getCargaDistribuida()));
+            }else{
+                cargaDist.setText("-");
+            }
+
+            if(carga.getCargaPuntualEnX() != 0){
+                cargaX.setText(Double.toString(carga.getCargaPuntualEnX()));
+            }else{
+                cargaX.setText("-");
+            }
+
+            if(carga.getCargaPuntualEnY() != 0){
+                cargaY.setText(Double.toString(carga.getCargaPuntualEnY()));
+            }else{
+                cargaY.setText("-");
+            }
+
+            if(carga.getCargaPuntualEnZ() != 0){
+                cargaZ.setText(Double.toString(carga.getCargaPuntualEnZ()));
+            }else{
+                cargaZ.setText("-");
+            }
+        }
+        else{
+            cargaDist.setText("-");
+            cargaX.setText("-");
+            cargaY.setText("-");
+            cargaZ.setText("-");
+        }
         return view;
     }
 
+    public int getPosCarga(CargaEnBarra cargaEnBarra){
+        for(int i=0 ; i < arrayCargaEnBarra.size() ; i++){
+            if(arrayCargaEnBarra.get(i).getNumBarra() == cargaEnBarra.getNumBarra()){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public CargaEnBarra getCargaAsociada(int nroBarra){
+        if(arrayCargaEnBarra.size() == 0){
+            return null;
+        }else{
+            for (CargaEnBarra carga:arrayCargaEnBarra) {
+                if(carga.getNumBarra() == nroBarra){
+                    return carga;
+                }
+            }
+            return null;
+        }
+
+    }
 
     public ArrayList<Barra> addItem(Barra b)
     {
@@ -93,5 +148,17 @@ public class ListAdapterCargasBarras extends BaseAdapter {
     {
         array.remove(index);
         return array;
+    }
+
+    public ArrayList<CargaEnBarra> addCargaBarra(CargaEnBarra carga) {
+        arrayCargaEnBarra.add(carga);
+        return arrayCargaEnBarra;
+    }
+
+    public void updateCargaBarra(CargaEnBarra cargaEnBarra) {
+        int position = getPosCarga(cargaEnBarra);
+        if(position != -1) {
+            arrayCargaEnBarra.set(position,cargaEnBarra);
+        }
     }
 }

@@ -102,8 +102,8 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
         cb.setCargaPuntualEnY(12000.0);
         cb.setCargaPuntualEnZ(1000.0);
         valuescb.put("barracargada", cb.getNumBarra());
-        valuescb.put("cargadistribuida", cb.getCargaDirstribuida());
-        valuescb.put("cargapuntualdistanudo", cb.getCargaPuntualDistANudo());
+        valuescb.put("cargadistribuida", cb.getCargaDistribuida());
+        valuescb.put("cargapuntualdistanudo", cb.getCargaPuntualDistXY());
         valuescb.put("cargapuntualenx", cb.getCargaPuntualEnX());
         valuescb.put("cargapuntualeny", cb.getCargaPuntualEnY());
         valuescb.put("cargapuntualenz", cb.getCargaPuntualEnZ());

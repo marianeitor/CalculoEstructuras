@@ -1,12 +1,16 @@
 package com.example.nico.calculoestructuras.Negocio;
 
+import java.io.Serializable;
+
 /**
  * Created by Nico on 9/11/2015.
  */
-public class CargaEnBarra {
+public class CargaEnBarra implements Serializable{
     private int numBarra;
-    private double cargaDirstribuida;
-    private double cargaPuntualDistANudo;
+    private double cargaDistribuida;
+    private double cargaPuntualDistXY;
+
+    private double cargaPuntualDistZ;
     private double cargaPuntualEnX;
     private double cargaPuntualEnY;
     private double cargaPuntualEnZ;
@@ -17,8 +21,8 @@ public class CargaEnBarra {
 
     public CargaEnBarra(int numBarra,  double cargaX, double cargaY, double cargaZ, double distancia, double cargaDist) {
         this.numBarra = numBarra;
-        this.cargaDirstribuida = cargaDist;
-        this.cargaPuntualDistANudo = distancia;
+        this.cargaDistribuida = cargaDist;
+        this.cargaPuntualDistXY = distancia;
         this.cargaPuntualEnX = cargaX;
         this.cargaPuntualEnY = cargaY;
         this.cargaPuntualEnZ = cargaZ;
@@ -28,12 +32,12 @@ public class CargaEnBarra {
         this.numBarra = numBarra;
     }
 
-    public void setCargaDirstribuida(double cargaDirstribuida) {
-        this.cargaDirstribuida = cargaDirstribuida;
+    public void setCargaDistribuida(double cargaDirstribuida) {
+        this.cargaDistribuida = cargaDirstribuida;
     }
 
-    public void setCargaPuntualDistANudo(double cargaPuntualDistANudo) {
-        this.cargaPuntualDistANudo = cargaPuntualDistANudo;
+    public void setCargaPuntualDistXY(double cargaPuntualDistXY) {
+        this.cargaPuntualDistXY = cargaPuntualDistXY;
     }
 
     public void setCargaPuntualEnX(double cargaPuntualEnX) {
@@ -48,16 +52,24 @@ public class CargaEnBarra {
         this.cargaPuntualEnZ = cargaPuntualEnZ;
     }
 
+    public double getCargaPuntualDistZ() {
+        return cargaPuntualDistZ;
+    }
+
+    public void setCargaPuntualDistZ(double cargaPuntualDistZ) {
+        this.cargaPuntualDistZ = cargaPuntualDistZ;
+    }
+
     public int getNumBarra() {
         return numBarra;
     }
 
-    public double getCargaDirstribuida() {
-        return cargaDirstribuida;
+    public double getCargaDistribuida() {
+        return cargaDistribuida;
     }
 
-    public double getCargaPuntualDistANudo() {
-        return cargaPuntualDistANudo;
+    public double getCargaPuntualDistXY() {
+        return cargaPuntualDistXY;
     }
 
     public double getCargaPuntualEnX() {

@@ -82,28 +82,52 @@ public class ListAdapterCargasNodos extends BaseAdapter {
         TextView restEnGiro = (TextView) view.findViewById(R.id.rest_giro);
 
         //vinculo.setText(" " + "Rest x:  " + array.get(position).isRestriccionX()  + " Rest y:  " + array.get(position).isRestriccionY()+" Rest Giro: "+array.get(position).isRestriccionGiro() );
-        if(array2.size()>0 && array2.size()>position) {
-            if (array2.get(position).getCargaEnX()!=0) {
+        if(this.getCargaAsociada(index) != null) {
+            CargaEnNudo carga = getCargaAsociada(index);
+            if (carga.getCargaEnX()!=0) {
                 restEnX.setText("Carga en X: SI");
             }
-            if (array2.get(position).getCargaEnX()==0) {
+            if (carga.getCargaEnX()==0) {
                 restEnX.setText("Carga en X: NO");
             }
-            if (array2.get(position).getCargaEnY()!=0) {
+            if (carga.getCargaEnY()!=0) {
                 restEnY.setText("Carga en Y: SI");
             }
-            if (array2.get(position).getCargaEnY()==0) {
+            if (carga.getCargaEnY()==0) {
                 restEnY.setText("Carga en Y: NO");
             }
-            if (array2.get(position).getCargaEnZ()!=0) {
+            if (carga.getCargaEnZ()!=0) {
                 restEnGiro.setText("Carga en Z: SI");
             }
-            if (array2.get(position).getCargaEnZ()==0) {
+            if (carga.getCargaEnZ()==0) {
                 restEnGiro.setText("Carga en Z: NO");
             }
         }
         return view;
     }
+
+    public CargaEnNudo getCargaAsociada(int nroNudo) {
+        if(array2.size() == 0){
+            return null;
+        }else{
+            for (CargaEnNudo carga:array2) {
+                if(carga.getNumNudo() == nroNudo){
+                    return carga;
+                }
+            }
+            return null;
+        }
+    }
+
+    public int getPosCarga(CargaEnNudo carga){
+        for(int i=0 ; i < array2.size() ; i++){
+            if(array2.get(i).getNumNudo() == carga.getNumNudo()){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public ArrayList<Nudo> removeItem(int position)
     {
         array.remove(position);
@@ -117,12 +141,10 @@ public class ListAdapterCargasNodos extends BaseAdapter {
         return array;
     }
 
-    public void updateCargaNodo(CargaEnNudo c){
-        int position = c.getNumNudo()-1;
-        CargaEnNudo carga = this.getCargaNudo(position);
-        carga.setCargaEnX(c.getCargaEnX());
-        carga.setCargaEnY(c.getCargaEnY());
-        carga.setCargaEnZ(c.getCargaEnZ());
-        array2.set(position,carga);
+    public void updateCargaNodo(CargaEnNudo carga){
+        int position = this.getPosCarga(carga);
+        if(position != -1) {
+            array2.set(position,carga);
+        }
     }
 }

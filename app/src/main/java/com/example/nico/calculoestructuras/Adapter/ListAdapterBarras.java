@@ -62,7 +62,7 @@ public class ListAdapterBarras extends BaseAdapter {
         TextView e = (TextView) view.findViewById(R.id.e);
         TextView i = (TextView) view.findViewById(R.id.i);
         CharSequence barra = titulo.getText();
-        //int idBarra = array.get(position).getNumOrden(); //Esto hacía que no se incremente el número de barra
+        //int idBarra = arrayBarra.get(position).getNumOrden(); //Esto hacía que no se incremente el número de barra
         int idBarra = position +1; //Se arregló con este renglón
         titulo.setText(barra +" "+ idBarra + " :");
         a.setText("" + array.get(position).getArea());

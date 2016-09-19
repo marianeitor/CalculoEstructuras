@@ -5,9 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.Ejercicios.Ejercicio1;
 import com.example.nico.calculoestructuras.Negocio.Barra;
@@ -17,10 +15,6 @@ import com.example.nico.calculoestructuras.Negocio.Conectividad;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.Negocio.Vinculo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -71,10 +65,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "[idcargabarra] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT," +
             "[barracargada] INTEGER   NOT NULL REFERENCES barra(idbarra)," +
             "[cargadistribuida] FLOAT, " +
-            "[cargapuntualdistanudo] FLOAT, "+
             "[cargapuntualenx] FLOAT, "+
             "[cargapuntualeny] FLOAT, "+
-            "[cargapuntualenz] FLOAT)";
+            "[cargapuntualdistxy] FLOAT, "+
+            "[cargapuntualenz] FLOAT, " +
+            "[cargapuntualdistz] FLOAT)";
 
     //Sentencias de eliminacion
     private final static String DATABASE_NAME = "databaseMath";
@@ -316,17 +311,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public ArrayList<CargaEnBarra> getCargaEnBarraFromDB(){
         ArrayList<CargaEnBarra> array = new ArrayList<>();
         Cursor cursor = null;
-        cursor = getReadableDatabase().query(DATABASE_NAME_CARGAENBARRA_TABLE, null, null, null, null, null, null);
+        cursor = getReadableDatabase().query(DATABASE_NAME_CARGAENBARRA_TABLE, null, null, null, null, null, null, null);
         while(cursor.moveToNext())
         {
 
             CargaEnBarra v = new CargaEnBarra( cursor.getInt(cursor.getColumnIndex("barracargada")));
             if(cursor.getDouble(cursor.getColumnIndex("cargadistribuida"))!= 0){
-                v.setCargaDirstribuida(cursor.getDouble(cursor.getColumnIndex("cargadistribuida")));
-
-            }
-            if(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistanudo"))!=0){
-                v.setCargaPuntualDistANudo(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistanudo")));
+                v.setCargaDistribuida(cursor.getDouble(cursor.getColumnIndex("cargadistribuida")));
             }
             if(cursor.getDouble(cursor.getColumnIndex("cargapuntualenx"))!=0){
                 v.setCargaPuntualEnX(cursor.getDouble(cursor.getColumnIndex("cargapuntualenx")));
@@ -334,8 +325,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             if(cursor.getDouble(cursor.getColumnIndex("cargapuntualeny"))!=0){
                 v.setCargaPuntualEnY(cursor.getDouble(cursor.getColumnIndex("cargapuntualeny")));
             }
+            if(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistxy"))!=0){
+                v.setCargaPuntualDistXY(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistxy")));
+            }
             if(cursor.getDouble(cursor.getColumnIndex("cargapuntualenz")) !=0){
                 v.setCargaPuntualEnZ(cursor.getDouble(cursor.getColumnIndex("cargapuntualenz")));
+            }
+            if(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistz")) !=0){
+                v.setCargaPuntualEnZ(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistz")));
             }
             array.add(v);
         }
@@ -398,6 +395,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void updateCargaNudo(ContentValues values, int nroCarga){
         getWritableDatabase().update(DATABASE_NAME_CARGAENNUDO_TABLE, values, "idcargaNudo = ?", new String[]{String.valueOf(nroCarga)});
+    }
+
+    public void updateCargaBarra(ContentValues values, int nroCarga){
+        getWritableDatabase().update(DATABASE_NAME_CARGAENBARRA_TABLE, values, "idcargabarra = ?", new String[]{String.valueOf(nroCarga)});
     }
 
     public void insertVinculo(ContentValues values){

@@ -21,22 +21,20 @@
 
 
     <TextView
-        android:id="@+id/ni"
+        android:id="@+id/txt_carga_dist"
         android:layout_below="@id/barra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Carga Distibuida: "
+        android:text="Carga Distribuida: "
         android:textSize="20dp" />
 
     <Spinner
         android:layout_below="@+id/barra"
-        android:layout_toRightOf="@id/ni"
-        android:id="@+id/spi_nudos_conec_inic"
+        android:layout_toRightOf="@id/txt_carga_dist"
+        android:id="@+id/spi_carga_dist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
         android:textSize="20dp">
     </Spinner>
 
@@ -45,27 +43,24 @@
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:id="@+id/editTextDist"
+        android:id="@+id/edit_carga_dist"
         android:layout_below="@+id/barra"
-
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp" />
+        android:layout_toRightOf="@+id/spi_carga_dist" />
     <!--android:layout_toRightOf="@+id/imageView2"
         android:layout_toEndOf="@+id/imageView2" -->
 
     <TextView
-        android:id="@+id/nf"
-        android:layout_below="@id/spi_nudos_conec_inic"
+        android:id="@+id/txt_carga_puntual"
+        android:layout_below="@id/spi_carga_dist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Carga Puntual: "
+        android:text="Carga Puntual XY: "
         android:textSize="20dp" />
 
     <Spinner
-        android:layout_toRightOf="@id/nf"
-        android:layout_below="@+id/spi_nudos_conec_inic"
-        android:id="@+id/spi_nudos_conec"
+        android:layout_toRightOf="@id/txt_carga_puntual"
+        android:layout_below="@+id/spi_carga_dist"
+        android:id="@+id/spi_carga_puntual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -74,72 +69,88 @@
     </Spinner>
 
     <TextView
-        android:id="@+id/txt_CX"
+        android:id="@+id/txt_carga_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Carga en X: "
         android:textSize="20dp"
-        android:layout_alignBottom="@+id/editTextCX"
-        android:layout_below="@+id/spi_nudos_conec" />
+        android:layout_below="@+id/spi_carga_puntual" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:id="@+id/editTextCX"
-        android:layout_below="@+id/spi_nudos_conec"
-        android:layout_toRightOf="@+id/txt_CX"
-        android:layout_toEndOf="@+id/txt_CX" />
+        android:id="@+id/edit_carga_x"
+        android:layout_below="@+id/spi_carga_puntual"
+        android:layout_toRightOf="@+id/txt_carga_x"
+        android:layout_toEndOf="@+id/txt_carga_x" />
 
     <TextView
-        android:id="@+id/txt_CY"
+        android:id="@+id/txt_carga_y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
         android:text="Carga en Y: "
         android:textSize="20dp"
-        android:layout_alignBottom="@+id/editTextCY"
-        android:layout_below="@+id/txt_CX"/>
+        android:layout_below="@+id/edit_carga_x"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:id="@+id/editTextCY"
-        android:layout_below="@+id/editTextCX"
-        android:layout_toRightOf="@+id/txt_CY"
-        android:layout_toEndOf="@+id/txt_CY"/>
+        android:id="@+id/edit_carga_y"
+        android:layout_below="@+id/edit_carga_x"
+        android:layout_toRightOf="@+id/txt_carga_y"
+        android:layout_toEndOf="@+id/txt_carga_y"/>
 
     <TextView
-        android:id="@+id/txt_DistanciaXY"
+        android:id="@+id/txt_distancia_xy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Distancia al nudo inicial: "
         android:textSize="20dp"
-        android:layout_below="@+id/txt_CY"/>
+        android:layout_below="@+id/edit_carga_y"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:id="@+id/editDistanciaXY"
-        android:layout_below="@+id/editTextCY"
-        android:layout_toRightOf="@+id/txt_DistanciaXY"
-        android:layout_toEndOf="@+id/txt_DistanciaXY"/>
+        android:id="@+id/edit_distancia_xy"
+        android:layout_below="@+id/edit_carga_y"
+        android:layout_toRightOf="@+id/txt_distancia_xy"
+        android:layout_toEndOf="@+id/txt_distancia_xy"/>
 
     <TextView
-        android:id="@+id/txt_CZ"
+        android:id="@+id/txt_carga_puntual_z"
+        android:layout_below="@id/edit_distancia_xy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carga Puntual Z: "
+        android:textSize="20dp" />
+
+    <Spinner
+        android:layout_toRightOf="@id/txt_carga_puntual_z"
+        android:layout_below="@+id/edit_distancia_xy"
+        android:id="@+id/spi_carga_puntual_z"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" >
+    </Spinner>
+
+    <TextView
+        android:id="@+id/txt_carga_z"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Carga en Z: "
         android:textSize="20dp"
-        android:layout_below="@+id/editDistanciaXY"
+        android:layout_below="@+id/spi_carga_puntual_z"
          />
 
     <EditText
@@ -147,30 +158,29 @@
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:id="@+id/editTextCZ"
-        android:layout_below="@+id/editDistanciaXY"
-        android:layout_toRightOf="@+id/txt_CZ"
-        android:layout_toEndOf="@+id/txt_CZ"/>
+        android:id="@+id/edit_carga_z"
+        android:layout_below="@+id/spi_carga_puntual_z"
+        android:layout_toRightOf="@+id/txt_carga_z"
+        android:layout_toEndOf="@+id/txt_carga_z"/>
 
     <TextView
-        android:id="@+id/txt_DistanciaZ"
+        android:id="@+id/txt_distancia_z"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Distancia al nudo inicial: "
         android:textSize="20dp"
-        android:layout_below="@+id/editTextCZ"
-        android:layout_alignBottom="@+id/editDistanciaZ"/>
+        android:layout_below="@+id/edit_carga_z" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:id="@+id/editDistanciaZ"
-        android:layout_below="@+id/editTextCZ"
-        android:layout_toRightOf="@+id/txt_DistanciaZ"
-        android:layout_toEndOf="@+id/txt_DistanciaZ"/>
+        android:id="@+id/edit_distancia_z"
+        android:layout_below="@+id/edit_carga_z"
+        android:layout_toRightOf="@+id/txt_distancia_z"
+        android:layout_toEndOf="@+id/txt_distancia_z"/>
 
     <!--
     <ImageView
