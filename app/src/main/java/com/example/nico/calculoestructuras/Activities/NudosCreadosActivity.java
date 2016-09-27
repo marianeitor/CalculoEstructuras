@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import com.example.nico.calculoestructuras.Adapter.ListAdapter;
 
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.Negocio.Barra;
 import com.example.nico.calculoestructuras.Negocio.Conectividad;
@@ -63,6 +68,26 @@ public class NudosCreadosActivity extends AppCompatActivity {
        // });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_save){
+            Toast toast = Toast.makeText(getBaseContext(), "Guardado", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            //Snackbar.make(getCurrentFocus(), "Guardado", Snackbar.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
     public void actionCargarOtroNudo(View v)
     {
         Intent i = new Intent(this,AgregarNudoActivity.class);

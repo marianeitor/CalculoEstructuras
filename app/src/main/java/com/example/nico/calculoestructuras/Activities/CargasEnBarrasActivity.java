@@ -82,7 +82,7 @@ public class CargasEnBarrasActivity extends AppCompatActivity {
             values.put("cargapuntualeny", cargaEnBarra.getCargaPuntualEnY());
             values.put("cargapuntualdistxy", cargaEnBarra.getCargaPuntualDistXY());
             values.put("cargapuntualenz", cargaEnBarra.getCargaPuntualEnZ());
-            values.put("cargapuntualdistz", cargaEnBarra.getCargaPuntualDistXY());
+            values.put("cargapuntualdistz", cargaEnBarra.getCargaPuntualDistZ());
 
             switch (requestCode)
             {

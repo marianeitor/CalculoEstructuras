@@ -34,7 +34,10 @@ public class OpcionesMetodoActivity extends AppCompatActivity {
                     // Send intent to SingleViewActivity
                     Intent i = new Intent(OpcionesMetodoActivity.this, PorticosPlanosActivity.class);
                     startActivity(i);
-                } else {
+                } else if(position == 3){
+                    Intent i = new Intent(OpcionesMetodoActivity.this, NuevoEjercicioActivity.class);
+                    startActivity(i);
+                }else {
                     Toast.makeText(OpcionesMetodoActivity.this, "Funcionalidad no implementada aun",
                             Toast.LENGTH_SHORT).show();
                 }

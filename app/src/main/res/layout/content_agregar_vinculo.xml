@@ -42,6 +42,15 @@
         android:text="Restric en x"
         android:textSize="20dp" />
 
+    <android.support.v7.widget.SwitchCompat
+        android:layout_below="@+id/spi_rest_rot"
+        android:id="@+id/toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+
     <Spinner
         android:layout_below="@+id/nudo"
         android:layout_toRightOf="@id/restX"

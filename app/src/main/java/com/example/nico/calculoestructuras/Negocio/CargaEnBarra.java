@@ -9,7 +9,6 @@ public class CargaEnBarra implements Serializable{
     private int numBarra;
     private double cargaDistribuida;
     private double cargaPuntualDistXY;
-
     private double cargaPuntualDistZ;
     private double cargaPuntualEnX;
     private double cargaPuntualEnY;

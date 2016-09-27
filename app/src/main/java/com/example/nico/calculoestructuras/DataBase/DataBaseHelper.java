@@ -394,11 +394,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void updateCargaNudo(ContentValues values, int nroCarga){
-        getWritableDatabase().update(DATABASE_NAME_CARGAENNUDO_TABLE, values, "idcargaNudo = ?", new String[]{String.valueOf(nroCarga)});
+        getWritableDatabase().update(DATABASE_NAME_CARGAENNUDO_TABLE, values, "nudoCargado = ?", new String[]{String.valueOf(nroCarga)});
     }
 
     public void updateCargaBarra(ContentValues values, int nroCarga){
-        getWritableDatabase().update(DATABASE_NAME_CARGAENBARRA_TABLE, values, "idcargabarra = ?", new String[]{String.valueOf(nroCarga)});
+        getWritableDatabase().update(DATABASE_NAME_CARGAENBARRA_TABLE, values, "barracargada = ?", new String[]{String.valueOf(nroCarga)});
     }
 
     public void insertVinculo(ContentValues values){

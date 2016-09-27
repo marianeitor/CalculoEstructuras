@@ -43,4 +43,5 @@
     <string name="title_activity_agregar_carga_en_barra">Agregar Carga En Barra</string>
     <string name="barra_properties">Propiedades Mecánicas de la Barra:</string>
     <string name="title_activity_asignacion_vinculos">Asignacion de Vinculos</string>
+    <string name="title_activity_nuevo_ejercicio">NuevoEjercicioActivity</string>
 </resources>

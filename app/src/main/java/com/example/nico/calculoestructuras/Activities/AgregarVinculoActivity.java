@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
@@ -45,6 +48,8 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agregar_vinculo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final SwitchCompat toggle = (SwitchCompat) findViewById(R.id.toggle);
 
         TextView nb = (TextView) findViewById(R.id.nudo);
         CharSequence c = nb.getText();
@@ -86,6 +91,16 @@ public class AgregarVinculoActivity extends AppCompatActivity {
             spinnerRestRot.setSelection(1);
             valGiro.setText(Double.toString(vinc.getRestGiro()));
         }
+
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    valX.setEnabled(true);
+                } else {
+                    valX.setEnabled(true);
+                }
+            }
+        });
 
         spinnerRestX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
