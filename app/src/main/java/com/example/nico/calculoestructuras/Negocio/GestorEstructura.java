@@ -27,6 +27,7 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
     double [][] sms;
 
     public GestorEstructura(){
+        /*
         //Grabo en BD las 3 barras
         for(int i=0; i<2;i++) {
             Barra b = new Barra(21000000.0, 15.0, 1500.0);
@@ -119,6 +120,8 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
         valuescn.put("cargaenx", cn.getCargaEnY());
         valuescn.put("cargaeny", cn.getCargaEnY());
         valuescn.put("cargaenz", cn.getCargaEnZ());
+
+        */
 
         //Genero las listas de objetos obtenidos desde la BD
         listaBarras= DataBaseHelper.getDatabaseInstance(this).getBarrasFromDB();

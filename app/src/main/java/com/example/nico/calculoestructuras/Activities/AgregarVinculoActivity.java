@@ -38,10 +38,11 @@ public class AgregarVinculoActivity extends AppCompatActivity {
     EditText valX;
     EditText valY;
     EditText valGiro;
+    /* Se cambiaron por switches
     Spinner spinnerRestX;
     Spinner spinnerRestY;
     Spinner spinnerRestRot;
-
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,9 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final SwitchCompat toggle = (SwitchCompat) findViewById(R.id.toggle);
+        final SwitchCompat switchX = (SwitchCompat) findViewById(R.id.switch_rest_x);
+        final SwitchCompat switchY = (SwitchCompat) findViewById(R.id.switch_rest_y);
+        final SwitchCompat switchZ = (SwitchCompat) findViewById(R.id.switch_rest_z);
 
         TextView nb = (TextView) findViewById(R.id.nudo);
         CharSequence c = nb.getText();
@@ -57,6 +60,7 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         n = (Nudo) getIntent().getSerializableExtra("nudo");
         numNudo = n.getnOrden();
         nb.setText(c + " " + numNudo + " : ");
+        /*
         spinnerRestX = (Spinner) findViewById(R.id.spi_rest_x);
         spinnerRestY = (Spinner) findViewById(R.id.spi_rest_y);
         spinnerRestRot = (Spinner) findViewById(R.id.spi_rest_rot);
@@ -66,7 +70,8 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayStrings);
         spinnerRestX.setAdapter(adapter);
         spinnerRestY.setAdapter(adapter);
-        spinnerRestRot.setAdapter(adapter);
+        spinnerRestRot.setAdapter(adapter); */
+
         valX = (EditText) findViewById(R.id.editTextX);
         valY = (EditText) findViewById(R.id.editTextY);
         valGiro = (EditText) findViewById(R.id.editTextGiro);
@@ -80,28 +85,55 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         /* Esto es para que al volver a seleccionar un nodo que ya tiene restricciones
             los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO" */
         if(n.isRestriccionX()){
-            spinnerRestX.setSelection(1);
+            switchX.setChecked(true);
             valX.setText(Double.toString(vinc.getRestX()));
         }
         if(n.isRestriccionY()){
-            spinnerRestY.setSelection(1);
+            switchY.setChecked(true);
             valY.setText(Double.toString(vinc.getRestY()));
         }
         if(n.isRestriccionGiro()){
-            spinnerRestRot.setSelection(1);
+            switchZ.setChecked(true);
             valGiro.setText(Double.toString(vinc.getRestGiro()));
         }
 
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switchX.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     valX.setEnabled(true);
+                    valX.setFocusableInTouchMode(true);
                 } else {
-                    valX.setEnabled(true);
+                    valX.setText("");
+                    valX.setEnabled(false);
                 }
             }
         });
 
+        switchY.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    valY.setEnabled(true);
+                    valY.setFocusableInTouchMode(true);
+                } else {
+                    valY.setText("");
+                    valY.setEnabled(false);
+                }
+            }
+        });
+
+        switchZ.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    valGiro.setEnabled(true);
+                    valGiro.setFocusableInTouchMode(true);
+                } else {
+                    valGiro.setText("");
+                    valGiro.setEnabled(false);
+                }
+            }
+        });
+
+        /*
         spinnerRestX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -161,7 +193,7 @@ public class AgregarVinculoActivity extends AppCompatActivity {
                 Toast.makeText(AgregarVinculoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
-
+        */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

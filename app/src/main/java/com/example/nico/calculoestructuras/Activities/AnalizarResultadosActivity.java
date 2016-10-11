@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.nico.calculoestructuras.Adapter.ListAdapterOpc;
+import com.example.nico.calculoestructuras.Negocio.GestorEstructura;
 import com.example.nico.calculoestructuras.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class AnalizarResultadosActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0: {
-
+                        GestorEstructura gestor = new GestorEstructura();
                     }
                     break;
                     case 1: {

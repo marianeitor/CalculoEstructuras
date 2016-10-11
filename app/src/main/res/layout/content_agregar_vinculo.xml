@@ -34,23 +34,26 @@
         android:background="#885159"/>
 
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/restX"
         android:layout_below="@id/nudo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Restric en x"
+        android:text="Restricción en x"
         android:textSize="20dp" />
 
     <android.support.v7.widget.SwitchCompat
-        android:layout_below="@+id/spi_rest_rot"
-        android:id="@+id/toggle"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/nudo"
+        android:layout_toRightOf="@+id/restX"
+        android:id="@+id/switch_rest_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="20dp" />
-
+<!--
     <Spinner
         android:layout_below="@+id/nudo"
         android:layout_toRightOf="@id/restX"
@@ -61,11 +64,12 @@
         android:layout_marginLeft="10dp"
         android:textSize="20dp">
     </Spinner>
-
+-->
     <EditText
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/spi_rest_x"
+        android:layout_toRightOf="@+id/switch_rest_x"
         android:layout_below="@+id/nudo"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
@@ -76,67 +80,93 @@
 
 
     <TextView
+        android:layout_marginTop="5dp"
         android:id="@+id/restY"
-        android:layout_below="@id/spi_rest_x"
+        android:layout_below="@id/switch_rest_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Restric en Y"
         android:textSize="20dp" />
 
-    <Spinner
-        android:layout_toRightOf="@id/restY"
-        android:layout_below="@+id/spi_rest_x"
-        android:id="@+id/spi_rest_y"
+    <android.support.v7.widget.SwitchCompat
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/switch_rest_x"
+        android:layout_toRightOf="@+id/restY"
+        android:id="@+id/switch_rest_y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:textSize="20dp" >
-    </Spinner>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/spi_rest_y"
-        android:inputType="numberSigned|numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextY"
-        android:layout_below="@+id/spi_rest_x"
-        android:layout_alignLeft="@+id/editTextX"
-        android:layout_alignStart="@+id/editTextX" />
-
-    <TextView
-        android:id="@+id/rest_rot"
-        android:layout_below="@id/spi_rest_y"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Restric rot"
         android:textSize="20dp" />
+    <!--
+        <Spinner
+            android:layout_toRightOf="@id/restY"
+            android:layout_below="@+id/spi_rest_x"
+            android:id="@+id/spi_rest_y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp" >
+        </Spinner>
+    -->
+        <EditText
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/switch_rest_y"
+            android:inputType="numberSigned|numberDecimal"
+            android:ems="10"
+            android:id="@+id/editTextY"
+            android:layout_below="@+id/switch_rest_x"
+            android:layout_alignLeft="@+id/editTextX"
+            android:layout_alignStart="@+id/editTextX" />
 
-    <Spinner
-        android:layout_toRightOf="@id/rest_rot"
-        android:layout_below="@+id/spi_rest_y"
-        android:id="@+id/spi_rest_rot"
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/rest_rot"
+            android:layout_below="@id/switch_rest_y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Restric rot"
+            android:textSize="20dp" />
+
+      <android.support.v7.widget.SwitchCompat
+          android:layout_marginTop="5dp"
+        android:layout_below="@id/switch_rest_y"
+        android:layout_toRightOf="@+id/restY"
+        android:id="@+id/switch_rest_z"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:textSize="20dp">
-    </Spinner>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/spi_rest_rot"
-        android:inputType="numberSigned|numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextGiro"
-        android:layout_below="@+id/spi_rest_y"
-        />
-    <!--android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"-->
+        android:textSize="20dp" />
+    <!--
+        <Spinner
+            android:layout_toRightOf="@id/rest_rot"
+            android:layout_below="@+id/spi_rest_y"
+            android:id="@+id/spi_rest_rot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp">
+        </Spinner>
+-->
+        <EditText
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/switch_rest_z"
+            android:inputType="numberSigned|numberDecimal"
+            android:ems="10"
+            android:id="@+id/editTextGiro"
+            android:layout_below="@+id/switch_rest_y"
+            />
+        <!--android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView"-->
 
     <!--
     <ImageView
