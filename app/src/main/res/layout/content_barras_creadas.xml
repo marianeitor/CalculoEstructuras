@@ -32,7 +32,7 @@
 
     </ListView>
 
-
+<!--
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -54,5 +54,5 @@
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="10dp"
         />
-
+-->
 </RelativeLayout>

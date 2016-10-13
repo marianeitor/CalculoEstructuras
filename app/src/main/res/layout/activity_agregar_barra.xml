@@ -17,5 +17,14 @@
 
     <include layout="@layout/content_agregar_barra"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_guardarBarra"
+        android:onClick="guardarBarra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="40dp"
+        android:src="@drawable/ic_done" />
+
 
 </android.support.design.widget.CoordinatorLayout>

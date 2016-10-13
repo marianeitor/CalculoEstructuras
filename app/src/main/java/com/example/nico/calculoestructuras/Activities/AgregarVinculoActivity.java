@@ -87,14 +87,17 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         if(n.isRestriccionX()){
             switchX.setChecked(true);
             valX.setText(Double.toString(vinc.getRestX()));
+            valX.setEnabled(true);
         }
         if(n.isRestriccionY()){
             switchY.setChecked(true);
             valY.setText(Double.toString(vinc.getRestY()));
+            valY.setEnabled(true);
         }
         if(n.isRestriccionGiro()){
             switchZ.setChecked(true);
             valGiro.setText(Double.toString(vinc.getRestGiro()));
+            valGiro.setEnabled(true);
         }
 
         switchX.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

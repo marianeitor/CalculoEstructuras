@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,15 +41,22 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final SwitchCompat switchX = (SwitchCompat)findViewById(R.id.switch_carga_x);
+        final SwitchCompat switchY = (SwitchCompat)findViewById(R.id.switch_carga_y);
+        final SwitchCompat switchZ = (SwitchCompat)findViewById(R.id.switch_carga_z);
+
         TextView nb = (TextView) findViewById(R.id.nudo);
         CharSequence c = nb.getText();
         n =(Nudo) getIntent().getSerializableExtra("nudo");
         CargaEnNudo cargaNudo = (CargaEnNudo) getIntent().getSerializableExtra("carga");
         numNudo=n.getnOrden();
         nb.setText(c + " " + numNudo + " : ");
+
+        /* Se reemplazaron los spinners por switches
         Spinner spinnerCargaX = (Spinner) findViewById(R.id.spi_carga_x);
         Spinner spinnerCargaY = (Spinner) findViewById(R.id.spi_carga_y);
         Spinner spinnerCargaZ = (Spinner) findViewById(R.id.spi_carga_z);
+
 
         // Inicializa los spinner
         ArrayList<String> arrayStrings = new ArrayList<>();
@@ -57,6 +66,7 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
         spinnerCargaX.setAdapter(adapter);
         spinnerCargaY.setAdapter(adapter);
         spinnerCargaZ.setAdapter(adapter);
+        */
 
         // Inicializa los editText como deshabilitados
         valX = (EditText) findViewById(R.id.editTextX);
@@ -74,19 +84,60 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
 
         if(cargaNudo != null){
             if(cargaNudo.getCargaEnX() != 0){
-                spinnerCargaX.setSelection(1);
+                switchX.setChecked(true);
                 valX.setText(Double.toString(cargaNudo.getCargaEnX()));
+                valX.setEnabled(true);
             }
             if(cargaNudo.getCargaEnY() != 0){
-                spinnerCargaY.setSelection(1);
+                switchY.setChecked(true);
                 valY.setText(Double.toString(cargaNudo.getCargaEnY()));
+                valY.setEnabled(true);
             }
             if(cargaNudo.getCargaEnZ() != 0){
-                spinnerCargaZ.setSelection(1);
+                switchZ.setChecked(true);
                 valZ.setText(Double.toString(cargaNudo.getCargaEnZ()));
+                valZ.setEnabled(true);
             }
         }
 
+        switchX.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    valX.setEnabled(true);
+                    valX.setFocusableInTouchMode(true);
+                } else {
+                    valX.setText("");
+                    valX.setEnabled(false);
+                }
+            }
+        });
+
+        switchY.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    valY.setEnabled(true);
+                    valY.setFocusableInTouchMode(true);
+                } else {
+                    valY.setText("");
+                    valY.setEnabled(false);
+                }
+            }
+        });
+
+        switchZ.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    valZ.setEnabled(true);
+                    valZ.setFocusableInTouchMode(true);
+                } else {
+                    valZ.setText("");
+                    valZ.setEnabled(false);
+                }
+            }
+        });
+
+
+        /*
         spinnerCargaX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -146,7 +197,7 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
                 Toast.makeText(AgregarCargaEnNudoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
-
+        */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

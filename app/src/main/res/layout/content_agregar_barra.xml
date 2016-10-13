@@ -96,7 +96,7 @@
             android:background="#ffffff"
             android:cursorVisible="true"/>
     </LinearLayout>
-
+    <!--
     <ImageView
         android:src="@drawable/tick"
         android:layout_below="@+id/renglon_inercia"
@@ -115,4 +115,5 @@
         android:layout_alignParentRight="true"
         android:onClick="descartarBarra"
         />
+        -->
 </RelativeLayout>

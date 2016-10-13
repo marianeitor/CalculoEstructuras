@@ -308,6 +308,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.close();
         return array;
     }
+
     public ArrayList<CargaEnBarra> getCargaEnBarraFromDB(){
         ArrayList<CargaEnBarra> array = new ArrayList<>();
         Cursor cursor = null;
@@ -332,7 +333,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 v.setCargaPuntualEnZ(cursor.getDouble(cursor.getColumnIndex("cargapuntualenz")));
             }
             if(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistz")) !=0){
-                v.setCargaPuntualEnZ(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistz")));
+                v.setCargaPuntualDistZ(cursor.getDouble(cursor.getColumnIndex("cargapuntualdistz")));
             }
             array.add(v);
         }

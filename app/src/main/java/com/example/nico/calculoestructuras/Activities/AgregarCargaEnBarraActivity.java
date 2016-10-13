@@ -3,10 +3,12 @@ package com.example.nico.calculoestructuras.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,6 +48,17 @@ public class AgregarCargaEnBarraActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final SwitchCompat switchCargaDist = (SwitchCompat)findViewById(R.id.switch_carga_dist);
+        final SwitchCompat switchCargaXY = (SwitchCompat)findViewById(R.id.switch_carga_puntual);
+        final SwitchCompat switchCargaZ = (SwitchCompat)findViewById(R.id.switch_carga_puntual_z);
+
+        editCargaDist = (EditText) findViewById(R.id.edit_carga_dist);
+        editCargaX = (EditText) findViewById(R.id.edit_carga_x);
+        editCargaY = (EditText) findViewById(R.id.edit_carga_y);
+        editCargaZ = (EditText) findViewById(R.id.edit_carga_z);
+        editDistanciaXY = (EditText) findViewById(R.id.edit_distancia_xy);
+        editDistanciaZ = (EditText) findViewById(R.id.edit_distancia_z);
+
         TextView nb = (TextView) findViewById(R.id.barra);
         CharSequence c = nb.getText();
         b =(Barra) getIntent().getSerializableExtra("barra");
@@ -53,15 +66,10 @@ public class AgregarCargaEnBarraActivity extends AppCompatActivity {
         numBarra=b.getNumOrden();
         nb.setText(c + " " + numBarra + " : ");
 
+        /* Se reemplazaron los spinners por switches
         spinnerCargaDist = (Spinner) findViewById(R.id.spi_carga_dist);
         spinnerCargaPuntual = (Spinner) findViewById(R.id.spi_carga_puntual);
         spinnerCargaPuntualZ = (Spinner) findViewById(R.id.spi_carga_puntual_z);
-        editCargaDist = (EditText) findViewById(R.id.edit_carga_dist);
-        editCargaX = (EditText) findViewById(R.id.edit_carga_x);
-        editCargaY = (EditText) findViewById(R.id.edit_carga_y);
-        editCargaZ = (EditText) findViewById(R.id.edit_carga_z);
-        editDistanciaXY = (EditText) findViewById(R.id.edit_distancia_xy);
-        editDistanciaZ = (EditText) findViewById(R.id.edit_distancia_z);
         // Inicializa los spinner
         ArrayList<String> arrayStrings = new ArrayList<>();
         arrayStrings.add("NO" );
@@ -70,7 +78,10 @@ public class AgregarCargaEnBarraActivity extends AppCompatActivity {
         spinnerCargaDist.setAdapter(adapter);
         spinnerCargaPuntual.setAdapter(adapter);
         spinnerCargaPuntualZ.setAdapter(adapter);
+        /*
 
+
+         */
         // Inicializa los editText como deshabilitados
         editCargaDist.setFocusable(false);
         editCargaDist.setEnabled(false);
@@ -89,31 +100,79 @@ public class AgregarCargaEnBarraActivity extends AppCompatActivity {
         los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO" */
         if(cargaEnBarra != null){
             if(cargaEnBarra.getCargaDistribuida() != 0){
-                spinnerCargaDist.setSelection(1);
+                switchCargaDist.setChecked(true);
                 editCargaDist.setText(Double.toString(cargaEnBarra.getCargaDistribuida()));
+                editCargaDist.setEnabled(true);
             }
-            if(cargaEnBarra.getCargaPuntualEnX() != 0){
-                spinnerCargaPuntual.setSelection(1);
+            if((cargaEnBarra.getCargaPuntualEnX() != 0)||(cargaEnBarra.getCargaPuntualEnY() != 0)){
+                switchCargaXY.setChecked(true);
                 editCargaX.setText(Double.toString(cargaEnBarra.getCargaPuntualEnX()));
-            }
-            if(cargaEnBarra.getCargaPuntualEnY() != 0){
-                spinnerCargaPuntual.setSelection(1);
+                editCargaX.setEnabled(true);
                 editCargaY.setText(Double.toString(cargaEnBarra.getCargaPuntualEnY()));
+                editCargaY.setEnabled(true);
+                editDistanciaXY.setText(Double.toString(cargaEnBarra.getCargaPuntualDistXY()));
+                editDistanciaXY.setEnabled(true);
             }
             if(cargaEnBarra.getCargaPuntualEnZ() != 0){
-                spinnerCargaPuntualZ.setSelection(1);
+                switchCargaZ.setChecked(true);
                 editCargaZ.setText(Double.toString(cargaEnBarra.getCargaPuntualEnZ()));
-            }
-            if(cargaEnBarra.getCargaPuntualDistXY() != 0){
-                spinnerCargaPuntual.setSelection(1);
-                editDistanciaXY.setText(Double.toString(cargaEnBarra.getCargaPuntualDistXY()));
-            }
-            if(cargaEnBarra.getCargaPuntualDistZ() != 0){
-                spinnerCargaPuntualZ.setSelection(1);
+                editCargaZ.setEnabled(true);
                 editDistanciaZ.setText(Double.toString(cargaEnBarra.getCargaPuntualDistZ()));
+                editDistanciaZ.setEnabled(true);
             }
         }
 
+        switchCargaDist.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    editCargaDist.setEnabled(true);
+                    editCargaDist.setFocusableInTouchMode(true);
+                } else {
+                    editCargaDist.setText("");
+                    editCargaDist.setEnabled(false);
+                }
+            }
+        });
+
+        switchCargaXY.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    editCargaX.setEnabled(true);
+                    editCargaY.setEnabled(true);
+                    editDistanciaXY.setEnabled(true);
+                    editCargaX.setFocusableInTouchMode(true);
+                    editCargaY.setFocusableInTouchMode(true);
+                    editDistanciaXY.setFocusableInTouchMode(true);
+                } else {
+                    editCargaX.setEnabled(false);
+                    editCargaY.setEnabled(false);
+                    editDistanciaXY.setEnabled(false);
+                    editCargaX.setText("");
+                    editCargaY.setText("");
+                    editDistanciaXY.setText("");
+                }
+            }
+        });
+
+        switchCargaZ.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    editCargaZ.setEnabled(true);
+                    editDistanciaZ.setEnabled(true);
+                    editCargaZ.setFocusableInTouchMode(true);
+                    editDistanciaZ.setFocusableInTouchMode(true);
+                } else {
+                    editCargaZ.setEnabled(false);
+                    editDistanciaZ.setEnabled(false);
+                    editCargaZ.setText("");
+                    editDistanciaZ.setText("");
+                }
+            }
+        });
+
+
+        /*
         spinnerCargaDist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -186,7 +245,7 @@ public class AgregarCargaEnBarraActivity extends AppCompatActivity {
                 Toast.makeText(AgregarCargaEnBarraActivity.this,"Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
             }
         });
-
+        */
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

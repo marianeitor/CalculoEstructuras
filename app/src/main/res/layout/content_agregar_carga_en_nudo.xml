@@ -34,6 +34,7 @@
         android:background="#885159"/>
 
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/carga_x"
         android:layout_below="@id/nudo"
         android:layout_width="wrap_content"
@@ -42,6 +43,17 @@
         android:text="Carga en X"
         android:textSize="20dp" />
 
+    <android.support.v7.widget.SwitchCompat
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/nudo"
+        android:layout_toRightOf="@+id/carga_x"
+        android:id="@+id/switch_carga_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+    <!--
     <Spinner
         android:id="@+id/spi_carga_x"
         android:layout_below="@+id/nudo"
@@ -52,10 +64,11 @@
         android:layout_marginLeft="10dp"
         android:textSize="20dp">
     </Spinner>
-
+    -->
     <EditText
+        android:layout_marginTop="20dp"
         android:id="@+id/editTextX"
-        android:layout_toRightOf="@+id/spi_carga_x"
+        android:layout_toRightOf="@+id/switch_carga_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
@@ -66,13 +79,26 @@
         android:layout_alignStart="@+id/imageView" -->
 
     <TextView
+        android:layout_marginTop="5dp"
         android:id="@+id/carga_y"
-        android:layout_below="@id/spi_carga_x"
+        android:layout_below="@id/switch_carga_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Carga en Y"
         android:textSize="20dp" />
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/switch_carga_x"
+        android:layout_toRightOf="@+id/carga_y"
+        android:id="@+id/switch_carga_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+    <!--
 
     <Spinner
         android:id="@+id/spi_carga_y"
@@ -84,24 +110,39 @@
         android:layout_marginLeft="10dp"
         android:textSize="20dp" >
     </Spinner>
+    -->
 
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/editTextY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:layout_toRightOf="@+id/spi_carga_y"
-        android:layout_below="@+id/spi_carga_x"/>
+        android:layout_toRightOf="@+id/switch_carga_y"
+        android:layout_below="@+id/switch_carga_x"/>
 
     <TextView
+        android:layout_marginTop="5dp"
         android:id="@+id/carga_z"
-        android:layout_below="@id/spi_carga_y"
+        android:layout_below="@id/switch_carga_y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Carga en Z"
         android:textSize="20dp" />
+
+    <android.support.v7.widget.SwitchCompat
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/switch_carga_y"
+        android:layout_toRightOf="@+id/carga_z"
+        android:id="@+id/switch_carga_z"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+    <!--
 
     <Spinner
         android:id="@+id/spi_carga_z"
@@ -113,15 +154,17 @@
         android:layout_marginLeft="10dp"
         android:textSize="20dp">
     </Spinner>
+-->
 
     <EditText
+        android:layout_marginTop="5dp"
         android:id="@+id/editTextGiro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
-        android:layout_toRightOf="@+id/spi_carga_z"
-        android:layout_below="@+id/spi_carga_y"
+        android:layout_toRightOf="@+id/switch_carga_z"
+        android:layout_below="@+id/switch_carga_y"
         />
     <!--android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView" -->
