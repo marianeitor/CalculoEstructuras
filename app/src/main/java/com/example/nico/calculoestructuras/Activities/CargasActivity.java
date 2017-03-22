@@ -35,8 +35,8 @@ public class CargasActivity extends AppCompatActivity {
         }
         if(listaOpciones==null) {
             listaOpciones = new ArrayList<>();
-            listaOpciones.add("Nudos");
-            listaOpciones.add("Barras");
+            listaOpciones.add("Cargas nodales");
+            listaOpciones.add("Cargas por tramos");
         }
         adapter = new ListAdapterOpc(this, listaOpciones);
         list.setAdapter(adapter);

@@ -27,9 +27,9 @@
     <string name="title_activity_agregar_barra">Agregar Barra</string>
     <string name="title_activity_conectividades_creadas">Conectividades Creadas</string>
     <string name="title_activity_activity_carga_conectividades">Asignacion de Conectividades</string>
-    <string name="iner">Inercia:</string>
+    <string name="iner">Mom. Iner.:</string>
     <string name="area">Area: </string>
-    <string name="elast">Elasticidad: </string>
+    <string name="elast">Mod. Elast.: </string>
     <string name="titulo_conectividad">Conectividad: </string>
     <string name="title_activity_agregar_conectividad">Agregar Conectividad</string>
     <string name="nudoi">Nudo Inicial: </string>

@@ -69,7 +69,7 @@
         android:layout_below="@id/switch_carga_dist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carga Puntual XY: "
+        android:text="Carga concentrada XY: "
         android:textSize="20dp" />
 
     <android.support.v7.widget.SwitchCompat
@@ -157,7 +157,7 @@
         android:layout_below="@id/edit_distancia_xy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carga Puntual Z: "
+        android:text="Carga concentrada Z: "
         android:textSize="20dp" />
 
     <android.support.v7.widget.SwitchCompat
