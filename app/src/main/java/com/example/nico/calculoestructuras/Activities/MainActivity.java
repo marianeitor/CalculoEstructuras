@@ -59,7 +59,10 @@ public class MainActivity extends AppCompatActivity {
         DataBaseHelper.getDatabaseInstance(this).precargarBD();
         Button btn = (Button)findViewById(R.id.cargarBD);
         btn.setClickable(false);
-        Toast.makeText(this.getBaseContext(),"Datos cargados con éxito", Toast.LENGTH_SHORT);
+        btn.setEnabled(false);
+        Toast.makeText(this.getBaseContext(),"Ejercicio cargado con éxito", Toast.LENGTH_SHORT).show();
         //Snackbar.make(v,"Datos cargados con éxito", Snackbar.LENGTH_SHORT);
+        Intent i = new Intent(MainActivity.this, OpcionesMetodoActivity.class);
+        startActivity(i);
     }
 }

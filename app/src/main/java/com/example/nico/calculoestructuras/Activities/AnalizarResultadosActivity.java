@@ -35,8 +35,8 @@ public class AnalizarResultadosActivity extends AppCompatActivity {
         if(listaOpciones==null) {
             listaOpciones = new ArrayList<>();
             listaOpciones.add("Desplazamiento");
-            listaOpciones.add("Fuerzas Internas");
-            listaOpciones.add("Reacciones");
+            listaOpciones.add("Fuerzas de ext. de barra");
+            listaOpciones.add("Reacciones de Vínculo");
         }
         adapter = new ListAdapterOpc(this, listaOpciones);
         list.setAdapter(adapter);

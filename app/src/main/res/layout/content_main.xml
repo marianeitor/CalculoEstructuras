@@ -57,7 +57,7 @@
 
     <Button
         android:id="@+id/cargarBD"
-        android:text="Cargar datos"
+        android:text="Ejercicio de prueba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="actionCargarDatos"

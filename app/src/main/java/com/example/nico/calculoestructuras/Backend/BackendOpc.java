@@ -28,7 +28,7 @@ public class BackendOpc extends Object{
         lista.add(" VINCULOS ");
         lista.add(" CARGAS ");
         lista.add(" ANALIZAR ");
-        lista.add(" MATRICES RIGIDEZ ");
+        lista.add(" MATRICES ");
 
         return lista;
 
