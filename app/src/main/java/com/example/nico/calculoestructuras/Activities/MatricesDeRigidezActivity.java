@@ -39,7 +39,7 @@ public class MatricesDeRigidezActivity extends AppCompatActivity {
             listaOpciones.add("Matrices Elementales");
             listaOpciones.add("Matriz Global");
             listaOpciones.add("Matriz SFF");
-            listaOpciones.add("Matriz SFL");
+            listaOpciones.add("Matriz SFR");
             listaOpciones.add("Matriz SRF");
             listaOpciones.add("Matriz SRR");
             listaOpciones.add("Vector AF");
