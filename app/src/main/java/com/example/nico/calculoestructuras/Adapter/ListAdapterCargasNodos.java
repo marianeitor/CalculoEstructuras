@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.nico.calculoestructuras.Negocio.CargaEnNudo;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
-import com.example.nico.calculoestructuras.Negocio.Vinculo;
 import com.example.nico.calculoestructuras.R;
 
 import java.util.ArrayList;

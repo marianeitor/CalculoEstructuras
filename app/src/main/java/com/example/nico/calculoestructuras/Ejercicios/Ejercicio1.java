@@ -8,7 +8,6 @@ import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.Negocio.Vinculo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Carlos on May 2016.

@@ -1,13 +1,9 @@
 package com.example.nico.calculoestructuras.Activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.R;
 
@@ -65,13 +60,9 @@ public class AgregarNudoActivity extends AppCompatActivity {
     {
         String sx = x.getText().toString();
         String sy = y.getText().toString();
-        if (sx.matches("") || sy.matches(""))
-        {
+        if (sx.matches("") || sy.matches("")) {
             Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else
-        {
+        } else {
             Double double_x = Double.parseDouble(sx);
             Double double_y = Double.parseDouble(sy);
             Nudo n = new Nudo(double_x, double_y);

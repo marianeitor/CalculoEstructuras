@@ -2,26 +2,18 @@ package com.example.nico.calculoestructuras.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.Negocio.CargaEnNudo;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
-import com.example.nico.calculoestructuras.Negocio.Vinculo;
 import com.example.nico.calculoestructuras.R;
-
-import java.util.ArrayList;
 
 public class AgregarCargaEnNudoActivity extends AppCompatActivity {
     Nudo n;
@@ -207,9 +199,7 @@ public class AgregarCargaEnNudoActivity extends AppCompatActivity {
                 valY.isEnabled() && (valY.getText().toString().equals(""))||
                 valZ.isEnabled() && (valZ.getText().toString().equals(""))){
             Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else {
+        } else {
             if(valX.isEnabled())
                 cargaX = Double.parseDouble(valX.getText().toString());
             if(valY.isEnabled())

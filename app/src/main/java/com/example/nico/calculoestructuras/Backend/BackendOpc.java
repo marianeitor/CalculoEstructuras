@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Nico on 25/11/2015.
  */
-public class BackendOpc extends Object{
+public class BackendOpc {
     private static BackendOpc instance;
     private ArrayList<String> lista;
     //constructor privado

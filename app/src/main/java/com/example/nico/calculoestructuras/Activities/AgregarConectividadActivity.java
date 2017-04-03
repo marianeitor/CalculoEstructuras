@@ -1,10 +1,7 @@
 package com.example.nico.calculoestructuras.Activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -69,8 +66,7 @@ public class AgregarConectividadActivity extends AppCompatActivity {
             {
                 String nudo=(String) parent.getSelectedItem();
                 String[]s = nudo.split(" ");
-                int i = Integer.parseInt(s[1]);
-                nudoInicial=i;
+                nudoInicial = Integer.parseInt(s[1]);
             }
 
             @Override
@@ -84,8 +80,7 @@ public class AgregarConectividadActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String nudo=(String) parent.getSelectedItem();
                 String[]s = nudo.split(" ");
-                int i = Integer.parseInt(s[1]);
-                nudoFinal=i;
+                nudoFinal = Integer.parseInt(s[1]);
             }
 
             @Override
@@ -102,9 +97,7 @@ public class AgregarConectividadActivity extends AppCompatActivity {
     public void guardarConectividad(View view){
         if(nudoFinal == -1 || nudoInicial == -1 || numBarra == -1){
             Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else{
+        } else {
             Conectividad conectividad = new Conectividad(numBarra,nudoInicial,nudoFinal);
             Intent in = new Intent();
             in.putExtra("conectividad", conectividad);

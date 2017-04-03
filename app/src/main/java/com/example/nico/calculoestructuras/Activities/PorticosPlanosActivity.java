@@ -2,8 +2,6 @@ package com.example.nico.calculoestructuras.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -13,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
-
 
 import com.example.nico.calculoestructuras.Adapter.ListAdapterOpc;
 import com.example.nico.calculoestructuras.Backend.BackendOpc;
@@ -34,10 +31,8 @@ public class PorticosPlanosActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         list = (ListView) findViewById(R.id.listaopc);
-        if(list == null)
-        {
-            ListView listaCreada = new ListView(this);
-            list = listaCreada;
+        if(list == null) {
+            list = new ListView(this);
         }
         if(listaOpciones==null) {
             listaOpciones = BackendOpc.getInstance().getStringList();

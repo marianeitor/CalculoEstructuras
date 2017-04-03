@@ -9,20 +9,16 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.example.nico.calculoestructuras.Adapter.ListAdapter;
-
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.nico.calculoestructuras.Adapter.ListAdapter;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
-import com.example.nico.calculoestructuras.Negocio.Barra;
-import com.example.nico.calculoestructuras.Negocio.Conectividad;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NudosCreadosActivity extends AppCompatActivity {
     ListView List;

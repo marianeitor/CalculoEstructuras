@@ -117,7 +117,7 @@ public class ListAdapterOpc extends BaseAdapter{
             }break;
             case 7:
             {
-                titulo.setText(array.get(5));
+                titulo.setText(array.get(7));
                 numero.setImageResource(R.drawable.number8);
                 Color c = new Color();
                 linearLayout.setBackgroundColor(c.parseColor("#528881"));

@@ -1,7 +1,5 @@
 package com.example.nico.calculoestructuras.Negocio;
 
-import android.content.ContentValues;
-
 import com.example.nico.calculoestructuras.Activities.OptionsMenuTitleOnly;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 
@@ -223,7 +221,7 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
     }
     public void cargarArray(){
         if(pp.getfromidBarra(0)!=null) {
-            alRigidez = new ArrayList();
+            alRigidez = new ArrayList<>();
             for (int i = 0; i < listaBarras.size(); i++) {
                 alRigidez.add(i, pp.getfromidBarra(i).toString());
             }
@@ -237,10 +235,10 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
     }
 
     public ArrayList<Conectividad> ordenar(ArrayList<Conectividad> a){
-        ArrayList ar=a;
-        Iterator it=ar.iterator();
+        ArrayList ar = a;
+        Iterator it = ar.iterator();
         int i=0;
-        while(it.hasNext()){
+        while(it.hasNext()) {
             ar.add(a.get(i).getNumBarra(),a.get(i));
             i++;
         }
@@ -249,9 +247,7 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
 
     @Override
     public String toString(){
-        String res="";
-
-        return res;
+        return "";
     }
 
 }

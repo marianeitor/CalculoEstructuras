@@ -210,7 +210,9 @@
         <activity
             android:name=".Activities.NuevoEjercicioActivity"
             android:label="@string/title_activity_nuevo_ejercicio"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

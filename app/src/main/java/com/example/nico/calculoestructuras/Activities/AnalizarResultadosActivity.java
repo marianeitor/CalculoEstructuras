@@ -1,8 +1,6 @@
 package com.example.nico.calculoestructuras.Activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -27,10 +25,8 @@ public class AnalizarResultadosActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         list = (ListView) findViewById(R.id.listaopc);
-        if(list == null)
-        {
-            ListView listaCreada = new ListView(this);
-            list = listaCreada;
+        if(list == null) {
+            list = new ListView(this);
         }
         if(listaOpciones==null) {
             listaOpciones = new ArrayList<>();
