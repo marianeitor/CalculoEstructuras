@@ -7,13 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.nico.calculoestructuras.Ejercicios.Ejercicio1;
 import com.example.nico.calculoestructuras.Negocio.Barra;
 import com.example.nico.calculoestructuras.Negocio.CargaEnBarra;
 import com.example.nico.calculoestructuras.Negocio.CargaEnNudo;
 import com.example.nico.calculoestructuras.Negocio.Conectividad;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.Negocio.Vinculo;
+import com.example.nico.calculoestructuras.xmlparser.Ejercicio;
 
 import java.util.ArrayList;
 
@@ -22,8 +22,8 @@ import java.util.ArrayList;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    private static String DB_PATH = "/data/data/com.example.nico.calculoestructuras/databases/";
-    private static String DB_NAME = "db_calc";
+   /* private static String DB_PATH = "/data/data/com.example.nico.calculoestructuras/databases/";
+    private static String DB_NAME = "db_calc";*/
 
     //Nombre tablas
     private final static String DATABASE_NAME_BARRA_TABLE = "Barras";
@@ -49,7 +49,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             "[restx] FLOAT," +
             "[resty] FLOAT," +
             "[restgiro] FLOAT)";
-
     private final static String DATABASE_CREATE_STATEMENT_CONECTIVIDAD="CREATE TABLE [Conectividades] (" +
             "[idconectividad] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT," +
             "[barraconectada] INTEGER   NOT NULL REFERENCES barras(idbarra)," +
@@ -186,12 +185,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void precargarBD(){
-        //Creación de ejercicio tipo 1
-        Ejercicio1 ejercicio1 = new Ejercicio1();
+    public void ejercicioToDataBase(Ejercicio ejercicio){
 
         //Carga de nudos en base de datos
-        for (Nudo n:ejercicio1.arrayNudos) {
+        for (Nudo n:ejercicio.nudos) {
             ContentValues values = new ContentValues();
             values.put("coordx", n.getX());
             values.put("coordy", n.getY());
@@ -199,7 +196,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         //Carga de barras en base de datos
-        for (Barra b:ejercicio1.arrayBarras) {
+        for (Barra b:ejercicio.barras) {
             ContentValues values = new ContentValues();
             values.put("elasticidad", b.getElasticidad());
             values.put("inercia", b.getInercia());
@@ -208,7 +205,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         //Carga de conectividades en base de datos
-        for (Conectividad c:ejercicio1.arrayConectividades){
+        for (Conectividad c:ejercicio.conectividades){
             ContentValues values = new ContentValues();
             values.put("barraconectada", c.getNumBarra());
             values.put("niconec", c.getNumNudoInicial());
@@ -217,7 +214,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         //Carga de vinculos en base de datos
-        for (Vinculo v:ejercicio1.arrayVinculos) {
+        for (Vinculo v:ejercicio.vinculos) {
             ContentValues values = new ContentValues();
             values.put("nudovinculado", v.getNumNudo());
             values.put("restx", v.getRestX());
@@ -226,6 +223,40 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             databaseInstance.getWritableDatabase().insert(DATABASE_NAME_VINCULOS_TABLE, null, values);
         }
 
+        //Carga de cargas en nudos en base de datos
+        for (CargaEnNudo c:ejercicio.cargaNudo) {
+            ContentValues values = new ContentValues();
+            values.put("nudoCargado", c.getNumNudo());
+            values.put("cargaenx", c.getCargaEnX());
+            values.put("cargaeny", c.getCargaEnY());
+            values.put("cargaenz", c.getCargaEnZ());
+            databaseInstance.getWritableDatabase().insert(DATABASE_NAME_CARGAENNUDO_TABLE, null, values);
+        }
+
+        //Carga de cargas en barras en base de datos
+        for (CargaEnBarra c:ejercicio.cargaBarra) {
+            ContentValues values = new ContentValues();
+            values.put("barracargada", c.getNumBarra());
+            values.put("cargadistribuida", c.getCargaDistribuida());
+            values.put("cargapuntualenx", c.getCargaPuntualEnX());
+            values.put("cargapuntualeny", c.getCargaPuntualEnY());
+            values.put("cargapuntualenz", c.getCargaPuntualEnZ());
+            values.put("cargapuntualdistxy", c.getCargaPuntualDistXY());
+            values.put("cargapuntualdistz", c.getCargaPuntualDistZ());
+            databaseInstance.getWritableDatabase().insert(DATABASE_NAME_CARGAENBARRA_TABLE, null, values);
+        }
+
+    }
+
+    public Ejercicio dataBaseToEjercicio() {
+        return new Ejercicio(
+                getNudosFromDB(),
+                getBarrasFromDB(),
+                getConecFromDB(),
+                getVinculoFromDB(),
+                getCargaEnNudoFromDB(),
+                getCargaEnBarraFromDB()
+        );
     }
 
     @Override
@@ -256,6 +287,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Barra b = new Barra(cursor.getInt(cursor.getColumnIndex("idbarra")),cursor.getDouble(cursor.getColumnIndex("elasticidad")),cursor.getDouble(cursor.getColumnIndex("area")),cursor.getDouble(cursor.getColumnIndex("inercia")));
             array.add(b);
         }
+        cursor.close();
         this.close();
         return array;
     }
@@ -264,11 +296,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ArrayList<Nudo> array = new ArrayList<>();
         Cursor cursor = null;
         cursor = getReadableDatabase().query(DATABASE_NAME_NUDO_TABLE, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
             Nudo n = new Nudo(cursor.getInt(cursor.getColumnIndex("idnudo")), cursor.getDouble(cursor.getColumnIndex("coordx")),cursor.getDouble(cursor.getColumnIndex("coordy")));
             array.add(n);
         }
+        cursor.close();
         this.close();
         return array;
     }
@@ -277,11 +309,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ArrayList<Conectividad> array = new ArrayList<>();
         Cursor cursor = null;
         cursor = getReadableDatabase().query(DATABASE_NAME_CONECTIV_TABLE, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
             Conectividad c = new Conectividad(cursor.getInt(cursor.getColumnIndex("barraconectada")),cursor.getInt(cursor.getColumnIndex("niconec")), cursor.getInt(cursor.getColumnIndex("nfconec")));
             array.add(c);
         }
+        cursor.close();
         this.close();
         return array;
     }
@@ -290,8 +322,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ArrayList<Vinculo> array = new ArrayList<>();
         Cursor cursor = null;
         cursor = getReadableDatabase().query(DATABASE_NAME_VINCULOS_TABLE, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
 
             Vinculo v = new Vinculo( cursor.getInt(cursor.getColumnIndex("nudovinculado")));
             if(cursor.getDouble(cursor.getColumnIndex("restx"))!=0){
@@ -305,6 +336,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
             array.add(v);
         }
+        cursor.close();
         this.close();
         return array;
     }
@@ -313,8 +345,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ArrayList<CargaEnBarra> array = new ArrayList<>();
         Cursor cursor = null;
         cursor = getReadableDatabase().query(DATABASE_NAME_CARGAENBARRA_TABLE, null, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
 
             CargaEnBarra v = new CargaEnBarra( cursor.getInt(cursor.getColumnIndex("barracargada")));
             if(cursor.getDouble(cursor.getColumnIndex("cargadistribuida"))!= 0){
@@ -337,6 +368,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
             array.add(v);
         }
+        cursor.close();
         this.close();
         return array;
     }
@@ -344,8 +376,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ArrayList<CargaEnNudo> array = new ArrayList<>();
         Cursor cursor = null;
         cursor = getReadableDatabase().query(DATABASE_NAME_CARGAENNUDO_TABLE, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
 
             CargaEnNudo v = new CargaEnNudo( cursor.getInt(cursor.getColumnIndex("nudoCargado")));
             if(cursor.getDouble(cursor.getColumnIndex("cargaenx")) != 0) {
@@ -359,6 +390,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
             array.add(v);
         }
+        cursor.close();
         this.close();
         return array;
     }
@@ -415,56 +447,52 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.close();
     }
 
-    public void getNudos()
-    {
+    public void getNudos() {
         Cursor cursor = null;
         cursor = getReadableDatabase().query(DATABASE_NAME_NUDO_TABLE, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
             Log.d("NUDO: ", " x: " + cursor.getDouble(cursor.getColumnIndex("coordx")) + " y: " + cursor.getDouble(cursor.getColumnIndex("coordy")));
         }
+        cursor.close();
         this.close();
     }
 
 
-    public void getBarras()
-    {
+    public void getBarras() {
         Cursor cursor = null;
 
         cursor = getReadableDatabase().query(DATABASE_NAME_BARRA_TABLE, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
             Log.d("BARRA: ", "id: " + cursor.getInt(cursor.getColumnIndex("idbarra")) + " i: " + cursor.getDouble(cursor.getColumnIndex("inercia")) + " e: " + cursor.getDouble(cursor.getColumnIndex("elasticidad")) + " a: " + cursor.getDouble(cursor.getColumnIndex("area")));
         }
+        cursor.close();
         this.close();
     }
 
-    public Barra findBarraFromDB(int idbarra)
-    {
+    public Barra findBarraFromDB(int idbarra) {
         Cursor cursor = null;
         Barra b = new Barra(1,1.1,1.1,1.1);
         String [] args = new String[1];
         args[0] = " " + idbarra;
         cursor =getReadableDatabase().rawQuery("SELECT * FROM " + DATABASE_NAME_BARRA_TABLE + " WHERE idbarra=?", args);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
             b=new Barra(cursor.getInt(cursor.getColumnIndex("idbarra")),cursor.getDouble(cursor.getColumnIndex("elasticidad")),cursor.getDouble(cursor.getColumnIndex("area")),cursor.getDouble(cursor.getColumnIndex("inercia")));
 
         }
+        cursor.close();
         this.close();
         return b;
     }
-    public int findLastIDBarraInserted()
-    {
+    public int findLastIDBarraInserted() {
         Cursor cursor = null;
         int index=0;
         Barra b = new Barra(1,1.1,1.1,1.1);
         cursor =getReadableDatabase().rawQuery("SELECT MAX(idbarra) FROM " + DATABASE_NAME_BARRA_TABLE,null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
 
             index = cursor.getInt(0);
         }
+        cursor.close();
         this.close();
         return index;
     }
@@ -472,15 +500,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 
-    public void getConec()
-    {
+    public void getConec() {
         Cursor cursor = null;
 
         cursor = getReadableDatabase().query(DATABASE_NAME_CONECTIV_TABLE, null, null, null, null, null, null);
-        while(cursor.moveToNext())
-        {
+        while(cursor.moveToNext()) {
             Log.d("CONECT: ", "id: " + cursor.getInt(cursor.getColumnIndex("idconectividad")) + " B: " + cursor.getInt(cursor.getColumnIndex("barraconectada")) + " NI: " + cursor.getInt(cursor.getColumnIndex("niconec")) + " NF: " + cursor.getInt(cursor.getColumnIndex("nfconec")));
         }
+        cursor.close();
         this.close();
     }
 

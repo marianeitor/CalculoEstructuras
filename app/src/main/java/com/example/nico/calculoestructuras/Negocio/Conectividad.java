@@ -16,6 +16,8 @@ public class Conectividad implements Serializable {
         this.numNudoFinal = numNudoFinal;
     }
 
+    public Conectividad() {} // Constructor especial para armar conectividades desde un archivo xml
+
     public int getNumBarra() {
         return numBarra;
     }

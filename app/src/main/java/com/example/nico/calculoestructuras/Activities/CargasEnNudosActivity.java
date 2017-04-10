@@ -47,7 +47,7 @@ public class CargasEnNudosActivity extends AppCompatActivity {
                 n = (Nudo) adapter.getItem(position);
                 // Compara la posicion del item seleccionado con el tamaño de listaCargasNudos para saber si hay alguna
                 // carga que se corresponda con ese nudo
-                if(adapter.getCargaAsociada(n.getnOrden()) != null){ //En caso de haber, busca ese vinculo
+                if(adapter.getCargaAsociada(n.getnOrden()) != null){ //En caso de haber, busca esa carga
                     carga = adapter.getCargaAsociada(n.getnOrden());
                     i.putExtra("nudo", n);
                     i.putExtra("carga", carga);

@@ -27,6 +27,8 @@ public class CargaEnBarra implements Serializable{
         this.cargaPuntualEnZ = cargaZ;
     }
 
+    public CargaEnBarra() {} // Constructor especial para armar cargas en barra desde un archivo xml
+
     public void setNumBarra(int numBarra) {
         this.numBarra = numBarra;
     }

@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Carga Distribuida: "
+        android:text="@string/carga_distribuida"
         android:textSize="20dp" />
 
     <android.support.v7.widget.SwitchCompat
@@ -69,7 +69,7 @@
         android:layout_below="@id/switch_carga_dist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carga concentrada XY: "
+        android:text="@string/carga_concentrada_xy"
         android:textSize="20dp" />
 
     <android.support.v7.widget.SwitchCompat
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Carga en X: "
+        android:text="@string/carga_en_x"
         android:textSize="20dp"
         android:layout_below="@+id/switch_carga_puntual" />
 
@@ -118,7 +118,7 @@
         android:id="@+id/txt_carga_y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carga en Y: "
+        android:text="@string/carga_en_y"
         android:textSize="20dp"
         android:layout_below="@+id/edit_carga_x"/>
 
@@ -137,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Distancia al nudo inicial: "
+        android:text="@string/distancia_xy"
         android:textSize="20dp"
         android:layout_below="@+id/edit_carga_y"/>
 
@@ -157,7 +157,7 @@
         android:layout_below="@id/edit_distancia_xy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Carga concentrada Z: "
+        android:text="@string/carga_puntual_z"
         android:textSize="20dp" />
 
     <android.support.v7.widget.SwitchCompat
@@ -188,7 +188,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Carga en Z: "
+        android:text="@string/carga_en_z"
         android:textSize="20dp"
         android:layout_below="@+id/switch_carga_puntual_z"
          />
@@ -208,7 +208,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Distancia al nudo inicial: "
+        android:text="@string/distancia_z"
         android:textSize="20dp"
         android:layout_below="@+id/edit_carga_z" />
 

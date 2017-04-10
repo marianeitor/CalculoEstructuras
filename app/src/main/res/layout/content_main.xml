@@ -28,7 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:src="@drawable/estructura"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        />
     <!--
     <Button
         android:id="@+id/ingresar"
@@ -39,7 +40,7 @@
         android:textStyle="bold"
         android:layout_below="@+id/dibujo"
         />
-    -->
+
 
     <Button
         android:id="@+id/ingresar"
@@ -54,11 +55,21 @@
         android:layout_below="@+id/dibujo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+-->
 
+    <Button
+        android:id="@+id/btn_nuevo_ejercicio"
+        android:text="Nuevo Ejercicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="actionNuevoEjercicio"
+        android:layout_below="@+id/dibujo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/cargarBD"
-        android:text="Ejercicio de prueba"
+        android:text="Ejercicios guardados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="actionCargarDatos"

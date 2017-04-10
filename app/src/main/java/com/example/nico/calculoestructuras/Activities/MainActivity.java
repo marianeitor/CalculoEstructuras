@@ -7,11 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.R;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //Iniciar la Bd
-        DataBaseHelper.getDatabaseInstance(this).inicializarBD();
-
 
     }
 
@@ -48,20 +44,16 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void actionIngresar(View v)
-    {
+
+    public void actionNuevoEjercicio(View v) {
+        DataBaseHelper.getDatabaseInstance(this).inicializarBD();
         Intent i = new Intent(MainActivity.this, OpcionesMetodoActivity.class);
         startActivity(i);
     }
 
     public void actionCargarDatos(View v){
-        DataBaseHelper.getDatabaseInstance(this).precargarBD();
-        Button btn = (Button)findViewById(R.id.cargarBD);
-        btn.setClickable(false);
-        btn.setEnabled(false);
-        Toast.makeText(this.getBaseContext(),"Ejercicio cargado con éxito", Toast.LENGTH_SHORT).show();
-        //Snackbar.make(v,"Datos cargados con éxito", Snackbar.LENGTH_SHORT);
-        Intent i = new Intent(MainActivity.this, OpcionesMetodoActivity.class);
+        Intent i = new Intent(MainActivity.this, SeleccionarEjercicioActivity.class);
         startActivity(i);
     }
+
 }

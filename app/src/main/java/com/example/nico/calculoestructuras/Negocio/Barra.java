@@ -17,6 +17,8 @@ public class Barra implements Serializable {
     double g2; //coseno director
     double[][] sm;
 
+    public Barra() {} // Constructor especial para armar barras desde un archivo xml
+
     public double getLongitud() {
         return longitud;
     }

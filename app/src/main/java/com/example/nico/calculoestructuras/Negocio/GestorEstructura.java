@@ -235,14 +235,13 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
     }
 
     public ArrayList<Conectividad> ordenar(ArrayList<Conectividad> a){
-        ArrayList ar = a;
-        Iterator it = ar.iterator();
+        Iterator it = ((ArrayList) a).iterator();
         int i=0;
         while(it.hasNext()) {
-            ar.add(a.get(i).getNumBarra(),a.get(i));
+            ((ArrayList) a).add(a.get(i).getNumBarra(),a.get(i));
             i++;
         }
-        return ar;
+        return (ArrayList) a;
     }
 
     @Override

@@ -22,6 +22,8 @@ public class Vinculo implements Serializable{
         this.restGiro = rest_Giro;
     }
 
+    public Vinculo() {} // Constructor especial para armar vinculos desde un archivo xml
+
     public int getNumNudo() {
         return numNudo;
     }

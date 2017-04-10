@@ -28,6 +28,7 @@
     <string name="title_activity_conectividades_creadas">Conectividades Creadas</string>
     <string name="title_activity_activity_carga_conectividades">Asignación de Conectividades</string>
     <string name="iner">Mom. Iner.:</string>
+    <string name="inercia">Inercia: </string>
     <string name="area">Área: </string>
     <string name="elast">Mod. Elast.: </string>
     <string name="titulo_conectividad">Conectividad: </string>
@@ -44,4 +45,14 @@
     <string name="barra_properties">Propiedades Mecánicas de la Barra:</string>
     <string name="title_activity_asignacion_vinculos">Asignación de Vínculos</string>
     <string name="title_activity_nuevo_ejercicio">NuevoEjercicioActivity</string>
+    <string name="title_activity_seleccionar_ejercicio">Seleccionar ejercicio</string>
+    <string name="elasticidad">Elasticidad: </string>
+    <string name="carga_distribuida">Carga Distribuida:</string>
+    <string name="carga_concentrada_xy">Carga concentrada XY:</string>
+    <string name="carga_en_x">Carga en X: </string>
+    <string name="carga_en_y">Carga en Y: </string>
+    <string name="distancia_xy">Distancia al nudo inicial:</string>
+    <string name="carga_puntual_z">Carga concentrada Z:</string>
+    <string name="carga_en_z">Carga en Z:</string>
+    <string name="distancia_z">Distancia al nudo inicial:</string>
 </resources>

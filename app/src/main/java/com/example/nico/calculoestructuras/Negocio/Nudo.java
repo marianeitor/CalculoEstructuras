@@ -16,6 +16,8 @@ public class Nudo implements Serializable{
     double fuerzaY;
     double momento; //fuerzas x,y, momento
 
+    public Nudo() {} // Constructor especial para armar nudos desde un archivo xml
+
     public boolean isRestriccionX() {
         return restriccionX;
     }

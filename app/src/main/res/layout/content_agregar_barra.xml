@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Elasticidad: "
+            android:text="@string/elasticidad"
             android:textSize="20dp"
             />
 
@@ -40,10 +40,12 @@
             android:id="@+id/elasticidad_ingresada"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="20dp"
             android:layout_weight="1"
-            android:inputType="numberSigned|numberDecimal"
             android:background="#ffffff"
-            android:cursorVisible="true"/>
+            android:cursorVisible="true"
+            android:inputType="numberSigned|numberDecimal" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Área: "
+            android:text="@string/area"
             android:textSize="20dp"
             />
 
@@ -66,10 +68,12 @@
             android:id="@+id/area_ingresada"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="20dp"
             android:layout_weight="1"
-            android:inputType="numberDecimal"
             android:background="#ffffff"
-            android:cursorVisible="true"/>
+            android:cursorVisible="true"
+            android:inputType="numberDecimal" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/renglon_inercia"
@@ -83,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Inercia: "
+            android:text="@string/inercia"
             android:textSize="20dp"
             />
 
@@ -91,10 +95,12 @@
             android:id="@+id/inercia_ingresada"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textSize="20dp"
             android:layout_weight="1"
-            android:inputType="numberSigned|numberDecimal"
             android:background="#ffffff"
-            android:cursorVisible="true"/>
+            android:cursorVisible="true"
+            android:inputType="numberSigned|numberDecimal" />
     </LinearLayout>
     <!--
     <ImageView

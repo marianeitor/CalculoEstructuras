@@ -22,6 +22,8 @@ public class CargaEnNudo implements Serializable{
         this.cargaEnZ = cargaZ;
     }
 
+    public CargaEnNudo() {} // Constructor especial para armar cargas en nudo desde un archivo xml
+
     public int getNumNudo() {
         return numNudo;
     }

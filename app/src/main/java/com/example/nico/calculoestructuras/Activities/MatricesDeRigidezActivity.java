@@ -53,11 +53,11 @@ public class MatricesDeRigidezActivity extends AppCompatActivity {
                             Intent intent = new Intent(MatricesDeRigidezActivity.this, MatricesElementalesActivity.class);
                             startActivity(intent);
                         } catch (ArrayIndexOutOfBoundsException a) {
-                            Toast.makeText(MatricesDeRigidezActivity.this, "Debe cargar valores primero", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MatricesDeRigidezActivity.this, "ArrayIndexOutOfBoundsException", Toast.LENGTH_LONG).show();
                         } catch (SQLiteConstraintException e) {
-                            Toast.makeText(MatricesDeRigidezActivity.this, "Debe cargar valores primero", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MatricesDeRigidezActivity.this, "SQLiteConstraintException", Toast.LENGTH_LONG).show();
                         } catch (NullPointerException n) {
-                            Toast.makeText(MatricesDeRigidezActivity.this, "Debe cargar valores primero", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MatricesDeRigidezActivity.this, "NullPointerException ", Toast.LENGTH_LONG).show();
                         }
                     }
                     break;

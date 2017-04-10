@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.nico.calculoestructuras">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/edit_icon"
@@ -211,8 +214,17 @@
             android:name=".Activities.NuevoEjercicioActivity"
             android:label="@string/title_activity_nuevo_ejercicio"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
+        <activity
+            android:name=".Activities.SeleccionarEjercicioActivity"
+            android:label="@string/title_activity_seleccionar_ejercicio"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.nico.calculoestructuras.Activities.MainActivity" />
+        </activity>
+        <activity android:name=".Negocio.GestorEstructura" />
+        <activity android:name=".Activities.OptionsMenuTitleOnly" />
     </application>
 
 </manifest>
