@@ -68,7 +68,7 @@
         </activity>
         <activity
             android:name=".Activities.OpcionesMetodoActivity"
-            android:label="@string/title_activity_opcoines_metodo"
+            android:label="@string/title_activity_opciones_metodo"
             android:parentActivityName=".Activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

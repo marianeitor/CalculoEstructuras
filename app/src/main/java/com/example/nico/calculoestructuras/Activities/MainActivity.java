@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_save) {
             return true;
         }
 
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void actionNuevoEjercicio(View v) {
         DataBaseHelper.getDatabaseInstance(this).inicializarBD();
-        Intent i = new Intent(MainActivity.this, OpcionesMetodoActivity.class);
+        Intent i = new Intent(MainActivity.this, NuevoEjercicioActivity.class);
         startActivity(i);
     }
 

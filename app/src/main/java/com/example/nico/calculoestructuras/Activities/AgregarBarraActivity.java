@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.Negocio.Barra;
@@ -16,6 +18,7 @@ import com.example.nico.calculoestructuras.R;
 public class AgregarBarraActivity extends AppCompatActivity {
     EditText elasticidad;
     EditText area;
+    TextView unidadElasticidad;
     EditText inercia;
     int nroBarra = -1;
 
@@ -31,6 +34,8 @@ public class AgregarBarraActivity extends AppCompatActivity {
         elasticidad = (EditText)findViewById(R.id.elasticidad_ingresada);
         area = (EditText)findViewById(R.id.area_ingresada);
         inercia = (EditText)findViewById(R.id.inercia_ingresada);
+        unidadElasticidad = (TextView)findViewById(R.id.txt_unidad_elasticidad);
+        unidadElasticidad.setText(Html.fromHtml("<sup>kg</sup>/<sub>m<sup>2</sup></sub>"));
         if(b != null){
             elasticidad.setText(Double.toString(b.getElasticidad()));
             area.setText(Double.toString(b.getArea()));
@@ -43,7 +48,8 @@ public class AgregarBarraActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        //todo: está comentado porque en este punto estaría inconsistente el ejercicio a guardar
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

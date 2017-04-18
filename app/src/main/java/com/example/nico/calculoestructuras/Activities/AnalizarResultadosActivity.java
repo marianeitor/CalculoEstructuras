@@ -3,6 +3,8 @@ package com.example.nico.calculoestructuras.Activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -61,6 +63,24 @@ public class AnalizarResultadosActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_save:
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                DialogGuardar dialogGuardar = new DialogGuardar();
+                dialogGuardar.show(fragmentManager, "tag");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

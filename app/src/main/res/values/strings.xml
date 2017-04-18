@@ -3,7 +3,6 @@
     <string name="action_settings">Configuración</string>
     <string name="btn_ingresar">Ingresar</string>
     <string name="hello">Bienvenido a Cálculo De Estructuras</string>
-    <string name="title_activity_opciones_metodo">C.EST</string>
     <string name="title_activity_matrices_elemtales">Matrices Elementales</string>
     <string name="barra"> Barra </string>
     <string name="title_activity_matriz_sff">Matriz SFF</string>
@@ -12,7 +11,7 @@
     <string name="uno"> NUDOS </string>
     <string name="title_activity_matriz_global">Matriz Global</string>
     <string name="title_activity_matriz_af">Matriz AF</string>
-    <string name="title_activity_opcoines_metodo">Opciones Método</string>
+    <string name="title_activity_opciones_metodo">Opciones Método</string>
     <string name="title_activity_porticos_planos">Pórticos Planos</string>
     <string name="datosIngresar">Datos a ingresar: </string>
     <string name="title_activity_analizar_resultados">Analizar Resultados</string>
@@ -44,7 +43,7 @@
     <string name="title_activity_agregar_carga_en_barra">Agregar Carga En Barra</string>
     <string name="barra_properties">Propiedades Mecánicas de la Barra:</string>
     <string name="title_activity_asignacion_vinculos">Asignación de Vínculos</string>
-    <string name="title_activity_nuevo_ejercicio">NuevoEjercicioActivity</string>
+    <string name="title_activity_nuevo_ejercicio">Nuevo Ejercicio</string>
     <string name="title_activity_seleccionar_ejercicio">Seleccionar ejercicio</string>
     <string name="elasticidad">Elasticidad: </string>
     <string name="carga_distribuida">Carga Distribuida:</string>
@@ -55,4 +54,6 @@
     <string name="carga_puntual_z">Carga concentrada Z:</string>
     <string name="carga_en_z">Carga en Z:</string>
     <string name="distancia_z">Distancia al nudo inicial:</string>
+    <string name="action_help">Ayuda</string>
+    <string name="action_about">Acerca de</string>
 </resources>

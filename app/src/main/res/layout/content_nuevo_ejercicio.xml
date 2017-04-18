@@ -54,7 +54,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Longitud: "/>
+            android:text="Longitud: "
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/spi_longitud"
@@ -75,7 +76,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fuerza: "/>
+            android:text="Fuerza: "
+            android:textSize="20sp"/>
 
         <Spinner
             android:id="@+id/spi_fuerza"
@@ -96,7 +98,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Temperatura: "/>
+            android:text="Temperatura: "
+            android:textSize="20sp"/>
 
         <Spinner
             android:id="@+id/spi_temperatura"

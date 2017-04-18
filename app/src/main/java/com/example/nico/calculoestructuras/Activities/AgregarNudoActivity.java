@@ -39,7 +39,8 @@ public class AgregarNudoActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        //todo: está comentado porque en este punto estaría inconsistente el ejercicio a guardar
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
