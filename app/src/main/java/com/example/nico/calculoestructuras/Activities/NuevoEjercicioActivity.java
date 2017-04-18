@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.R;
+import com.example.nico.calculoestructuras.xmlparser.XmlParser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -56,20 +57,12 @@ public class NuevoEjercicioActivity extends AppCompatActivity {
     }
 
     public void crearEjercicio(View view) {
-        try {
-            OutputStreamWriter fout =
-                    new OutputStreamWriter(
-                            getBaseContext().openFileOutput(titulo.getText().toString() + ".xml",
-                                    Context.MODE_PRIVATE));
-            fout.close();
-            Intent i = new Intent(NuevoEjercicioActivity.this, OpcionesMetodoActivity.class);
-            startActivity(i);
-            NuevoEjercicioActivity.this.finish();
+        final XmlParser xmlParser = new XmlParser(getApplicationContext());
+        xmlParser.guardarEjercicio(titulo.getText().toString());
+        Intent i = new Intent(NuevoEjercicioActivity.this, OpcionesMetodoActivity.class);
+        startActivity(i);
+        NuevoEjercicioActivity.this.finish();
             /* TODO: GUARDAR TAMBIEN LAS UNIDADES ELEGIDAS (CREAR TABLA EN BD) */
-
-        } catch (IOException e) {
-            Toast.makeText(NuevoEjercicioActivity.this, "Error al crear ejercicio", Toast.LENGTH_SHORT).show();
-        }
     }
 
 }
