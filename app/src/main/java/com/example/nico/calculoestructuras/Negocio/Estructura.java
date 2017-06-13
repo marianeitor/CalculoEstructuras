@@ -138,6 +138,31 @@ public class Estructura {
         return s_MS;
     }
 
+    public double[][] crear_Sms(){
+        this.makeS_Ms();
+        for (int k = 0; k < cantBarras; ++k) {
+            Conectividad con = getFromIdBarraConectividad(k);
+            int ni = con.getNumNudoInicial();
+            int nf = con.getNumNudoFinal();
+            Barra bar = getfromidBarra(k);
+
+            for (int i = 0; i < dof; ++i) {//no estoy seguro de q si ese 3 es = a dof.. preguntar
+                for (int h = 0; h < dof; ++h) {//ideam anterior
+                    int fila= ni * dof + i-dof;
+                    int col=ni * dof + h-dof;
+                    s_MS[fila][col] += bar.getSm(i, h);
+                    s_MS[fila][col+dof] += bar.getSm(i, h + dof);
+                    s_MS[fila+dof][col] += bar.getSm(i + dof, h);
+                    s_MS[fila+dof][col+dof] += bar.getSm(i + dof, h + dof);
+                }
+            }
+        }
+        return s_MS;
+    }
+
+
+
+
     public void allocNodo(int n) {
         arrayNodos = new Nudo[n];
     }

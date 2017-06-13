@@ -8,10 +8,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.Adapter.ListAdapterOpc;
+import com.example.nico.calculoestructuras.Backend.EjercicioActual;
 import com.example.nico.calculoestructuras.Negocio.GestorEstructura;
 import com.example.nico.calculoestructuras.R;
+import com.example.nico.calculoestructuras.xmlparser.XmlParser;
 
 import java.util.ArrayList;
 
@@ -73,11 +76,16 @@ public class AnalizarResultadosActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+//            case R.id.action_save_as:
+//                android.app.FragmentManager fragmentManager = getFragmentManager();
+//                DialogGuardar dialogGuardar = new DialogGuardar();
+//                dialogGuardar.show(fragmentManager, "tag");
+//                return true;
             case R.id.action_save:
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                DialogGuardar dialogGuardar = new DialogGuardar();
-                dialogGuardar.show(fragmentManager, "tag");
-                return true;
+                String titulo = ((EjercicioActual)getApplicationContext()).getNombreEjercicio();
+                final XmlParser xmlParser = new XmlParser(getApplicationContext());
+                xmlParser.guardarEjercicio(titulo);
+                Toast.makeText(this, "Guardado con éxito", Toast.LENGTH_SHORT).show();
             default:
                 return super.onOptionsItemSelected(item);
         }

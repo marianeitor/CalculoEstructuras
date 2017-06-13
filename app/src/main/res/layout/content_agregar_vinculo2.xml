@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_agregar_vinculo"
+    tools:context="com.example.nico.calculoestructuras.Activities.AgregarVinculoActivity">
+
+    <TextView
+        android:id="@+id/vinculo_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vínculos"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="#003050"
+        android:textColor="#FFFFFF"/>
+
+    <TextView
+        android:id="@+id/nudo"
+        android:layout_below="@id/vinculo_titulo"
+        android:layout_width="match_parent"
+        android:gravity="left"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Nudo"
+        android:textSize="25dp"
+        android:background="#885159"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/restX"
+        android:layout_below="@id/nudo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Restricción en X"
+        android:textSize="20dp" />
+    <!--
+    <android.support.v7.widget.SwitchCompat
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/nudo"
+        android:layout_toRightOf="@+id/restX"
+        android:id="@+id/switch_rest_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+    -->
+        <Spinner
+            android:id="@+id/spi_rest_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/spi_rest_rot"
+            android:layout_toEndOf="@+id/spi_rest_rot"
+            android:layout_alignTop="@+id/restX">
+        </Spinner>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextX"
+        android:layout_below="@+id/restX"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <!--android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"-->
+
+
+    <TextView
+        android:id="@+id/restY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Restric en Y"
+        android:textSize="20dp"
+        android:layout_below="@+id/editTextX"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="17dp" />
+    <!--
+    <android.support.v7.widget.SwitchCompat
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/switch_rest_x"
+        android:layout_toRightOf="@+id/restY"
+        android:id="@+id/switch_rest_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+    -->
+        <Spinner
+            android:id="@+id/spi_rest_y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_toEndOf="@+id/restY"
+            android:layout_alignBottom="@+id/restY"
+            android:layout_alignTop="@+id/restY"
+            android:layout_toRightOf="@+id/restY">
+        </Spinner>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextY"
+        android:layout_below="@+id/restY"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/rest_rot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Restric rot"
+        android:textSize="20dp"
+        android:layout_below="@+id/editTextY"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+    <!--
+    <android.support.v7.widget.SwitchCompat
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/switch_rest_y"
+        android:layout_toRightOf="@+id/restY"
+        android:id="@+id/switch_rest_z"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp" />
+-->
+        <Spinner
+            android:id="@+id/spi_rest_rot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_alignRight="@+id/restX"
+            android:layout_alignEnd="@+id/restX"
+            android:layout_alignTop="@+id/rest_rot">
+        </Spinner>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned|numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextGiro"
+        android:layout_below="@+id/rest_rot"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

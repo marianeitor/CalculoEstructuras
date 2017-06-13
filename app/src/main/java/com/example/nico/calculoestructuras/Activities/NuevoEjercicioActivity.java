@@ -1,23 +1,19 @@
 package com.example.nico.calculoestructuras.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.example.nico.calculoestructuras.Backend.EjercicioActual;
 import com.example.nico.calculoestructuras.R;
+import com.example.nico.calculoestructuras.xmlparser.Ejercicio;
 import com.example.nico.calculoestructuras.xmlparser.XmlParser;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class NuevoEjercicioActivity extends AppCompatActivity {
@@ -57,8 +53,11 @@ public class NuevoEjercicioActivity extends AppCompatActivity {
     }
 
     public void crearEjercicio(View view) {
+        EjercicioActual actual = (EjercicioActual)getApplication();
         final XmlParser xmlParser = new XmlParser(getApplicationContext());
-        xmlParser.guardarEjercicio(titulo.getText().toString());
+        String _titulo = titulo.getText().toString();
+        actual.setNombreEjercicio(_titulo);
+        xmlParser.guardarEjercicio(_titulo);
         Intent i = new Intent(NuevoEjercicioActivity.this, OpcionesMetodoActivity.class);
         startActivity(i);
         NuevoEjercicioActivity.this.finish();

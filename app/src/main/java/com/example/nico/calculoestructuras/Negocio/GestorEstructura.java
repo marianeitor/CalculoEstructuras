@@ -160,7 +160,7 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
     }
 
     public void resolucion(){
-        sms=pp.loadS_Ms();
+        sms=pp.crear_Sms();
         alSFF=pp.makeSFF();
         alAF=pp.makeAF();
     }

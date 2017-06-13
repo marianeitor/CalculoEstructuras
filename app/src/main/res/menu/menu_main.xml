@@ -6,6 +6,6 @@
         android:orderInCategory="100" app:showAsAction="never" /-->
     <item android:id="@+id/action_save" android:title="Guardar"
         android:orderInCategory="200" app:showAsAction="never" />
-    <item android:id="@+id/action_save_as" android:title="Guardar como"
-        android:orderInCategory="300" app:showAsAction="never" />
+    <!--item android:id="@+id/action_save_as" android:title="Guardar como"
+        android:orderInCategory="300" app:showAsAction="never" /-->
 </menu>

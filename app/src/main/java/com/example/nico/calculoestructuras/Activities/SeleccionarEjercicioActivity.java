@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.nico.calculoestructuras.Backend.EjercicioActual;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.R;
 import com.example.nico.calculoestructuras.xmlparser.XmlParser;
@@ -41,8 +42,11 @@ public class SeleccionarEjercicioActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 DataBaseHelper.getDatabaseInstance(getBaseContext()).inicializarBD();
+                String _titulo = lstOpciones.getItemAtPosition(i).toString();
                 XmlParser xmlParser = new XmlParser(getBaseContext());
-                xmlParser.cargarEjercicio(lstOpciones.getItemAtPosition(i).toString());
+                xmlParser.cargarEjercicio(_titulo);
+                EjercicioActual actual = (EjercicioActual)getApplication();
+                actual.setNombreEjercicio(_titulo);
                 Intent intent = new Intent(SeleccionarEjercicioActivity.this, OpcionesMetodoActivity.class);
                 startActivity(intent);
                 SeleccionarEjercicioActivity.this.finish();

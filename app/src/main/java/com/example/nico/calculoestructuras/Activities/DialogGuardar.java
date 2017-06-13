@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.nico.calculoestructuras.Backend.EjercicioActual;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.R;
+import com.example.nico.calculoestructuras.xmlparser.Ejercicio;
 import com.example.nico.calculoestructuras.xmlparser.XmlParser;
 
 /**
@@ -38,6 +40,8 @@ public class DialogGuardar extends DialogFragment {
                         if(titulo.equals(""))
                             editText.setText("Sin nombre");
                         final XmlParser xmlParser = new XmlParser(inflater.getContext());
+                        EjercicioActual actual = (EjercicioActual)inflater.getContext();
+                        actual.setNombreEjercicio(titulo);
                         xmlParser.guardarEjercicio(titulo);
                         Toast.makeText(getActivity(), "Guardado con éxito", Toast.LENGTH_SHORT).show();
                         //crearEjercicio(titulo, inflater.getContext());

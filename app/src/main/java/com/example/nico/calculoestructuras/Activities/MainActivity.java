@@ -8,8 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.nico.calculoestructuras.Backend.EjercicioActual;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 import com.example.nico.calculoestructuras.R;
+import com.example.nico.calculoestructuras.xmlparser.Ejercicio;
 
 
 public class MainActivity extends AppCompatActivity {

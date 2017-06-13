@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.nico.calculoestructuras.Backend.EjercicioActual;
 import com.example.nico.calculoestructuras.Negocio.Nudo;
 import com.example.nico.calculoestructuras.R;
+import com.example.nico.calculoestructuras.xmlparser.XmlParser;
 
 public class AgregarNudoActivity extends AppCompatActivity {
     EditText x;
@@ -47,11 +49,16 @@ public class AgregarNudoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+//            case R.id.action_save_as:
+//                android.app.FragmentManager fragmentManager = getFragmentManager();
+//                DialogGuardar dialogGuardar = new DialogGuardar();
+//                dialogGuardar.show(fragmentManager, "tag");
+//                return true;
             case R.id.action_save:
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                DialogGuardar dialogGuardar = new DialogGuardar();
-                dialogGuardar.show(fragmentManager, "tag");
-                return true;
+                String titulo = ((EjercicioActual)getApplicationContext()).getNombreEjercicio();
+                final XmlParser xmlParser = new XmlParser(getApplicationContext());
+                xmlParser.guardarEjercicio(titulo);
+                Toast.makeText(this, "Guardado con éxito", Toast.LENGTH_SHORT).show();
             default:
                 return super.onOptionsItemSelected(item);
         }
