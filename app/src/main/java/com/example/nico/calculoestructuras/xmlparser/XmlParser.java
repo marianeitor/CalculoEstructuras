@@ -39,11 +39,20 @@ public class XmlParser {
         _context = context;
     }
 
+    /**
+     * Verifica si existe un ejercicio con el titulo dado.
+     * @param tituloEjercicio Titulo del ejercicio a buscar
+     * @return boolean
+     */
     public boolean existe(String tituloEjercicio) {
         File file = _context.getFileStreamPath(tituloEjercicio + ".xml");
         return (file.exists());
     }
 
+    /**
+     * Carga un ejercicio desde el directorio de ejercicios guardados.
+     * @param directorioEjercicio Directorio de ejercicios guardados.
+     */
     public void cargarEjercicio (String directorioEjercicio) {
         try{
             FileInputStream file2 = _context.openFileInput(directorioEjercicio+".xml");
@@ -84,6 +93,10 @@ public class XmlParser {
         }
     }
 
+    /**
+     * Guarda el ejercicio en formato xml.
+     * @param tituloEjercicio Titulo del ejercicio
+     */
     public void guardarEjercicio (String tituloEjercicio) {
         try{
             XmlSerializer serializer = Xml.newSerializer();

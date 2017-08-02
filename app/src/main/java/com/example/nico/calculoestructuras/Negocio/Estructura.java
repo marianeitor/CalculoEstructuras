@@ -1,5 +1,9 @@
 package com.example.nico.calculoestructuras.Negocio;
 
+import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
+
+import java.util.ArrayList;
+
 /**
  * Created by Nico on 9/11/2015.
  */
@@ -14,6 +18,12 @@ public class Estructura {
     private final int cantNodos;
     private double[][] s_MS;
     private int nk = 0;
+    ArrayList<Barra> listaBarras;
+    ArrayList<Nudo> listaNudos;
+    ArrayList<Conectividad> listaConectividades;
+    ArrayList<Vinculo> listaVinculos;
+    ArrayList<CargaEnBarra> listaCargasEnBarras;
+    ArrayList<CargaEnNudo> listasCargasEnNudos;
 
     public Estructura(int n, int e, int d) {
         cantNodos=n;

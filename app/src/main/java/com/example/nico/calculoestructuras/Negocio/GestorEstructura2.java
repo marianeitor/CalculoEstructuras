@@ -11,8 +11,8 @@ import java.util.Iterator;
 /**
  * Created by Nico on 9/11/2015.
  */
-public class GestorEstructura extends OptionsMenuTitleOnly {
-    PorticoPlano porticoPlano;
+public class GestorEstructura2 extends OptionsMenuTitleOnly {
+    PorticoPlano2 porticoPlano;
     ArrayList<String> alRigidez;
     double [][] alSFF;
     double [] alAF;
@@ -24,7 +24,7 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
     ArrayList<CargaEnNudo> listasCargasEnNudos;
     double [][] sms;
 
-    public GestorEstructura(){
+    public GestorEstructura2(){
         //Genero las listas de objetos obtenidos desde la BD
         listaBarras = DataBaseHelper.getDatabaseInstance(this).getBarrasFromDB();
         listaNudos = DataBaseHelper.getDatabaseInstance(this).getNudosFromDB();
@@ -36,25 +36,25 @@ public class GestorEstructura extends OptionsMenuTitleOnly {
         //Genero objeto Portico Plano
         int cantBarras = listaBarras.size();
         int cantNudos = listaNudos.size();
-        porticoPlano = new PorticoPlano(cantNudos,cantBarras);
+        porticoPlano = new PorticoPlano2(cantNudos,cantBarras, this);
 
-        // Todo: Consultar - Creo que estos for deberian hacerse directamente en la clase PorticoPlano
-        for (int i=0; i<cantNudos;i++){
-            porticoPlano.crearNodo(i,listaNudos.get(i).getX(),listaNudos.get(i).getY(),false,false,false);
-        }
-        for (int j=0;j<cantBarras;j++){
-            porticoPlano.crearBarra(j, listaConectividades.get(j).getNumNudoInicial(), listaConectividades.get(j).numNudoFinal, listaBarras.get(j).getElasticidad(),
-                    listaBarras.get(j).getArea(), listaBarras.get(j).getInercia());
-        }
-        for(int k=0; k<cantBarras;k++){
-            porticoPlano.crearConectividad(listaConectividades.get(k).getNumBarra(),listaConectividades.get(k).getNumNudoInicial(),listaConectividades.get(k).getNumNudoFinal());
-        }
-        for (int l=0; l<listaVinculos.size();l++){
-            porticoPlano.crearVinculo(listaVinculos.get(l).getNumNudo(),listaVinculos.get(l).getRestX(),listaVinculos.get(l).getRestY(),listaVinculos.get(l).getRestGiro());
-        }
-        for(int m=0; m<listasCargasEnNudos.size();m++){
-            porticoPlano.crearCargaNodo(listasCargasEnNudos.get(m).getNumNudo(),listasCargasEnNudos.get(m).getCargaEnX(),listasCargasEnNudos.get(m).getCargaEnY(),listasCargasEnNudos.get(m).getCargaEnZ());
-        }
+//        // Todo: Consultar - Creo que estos for deberian hacerse directamente en la clase PorticoPlano
+//        for (int i=0; i<cantNudos;i++){
+//            porticoPlano.crearNodo(i,listaNudos.get(i).getX(),listaNudos.get(i).getY(),false,false,false);
+//        }
+//        for (int j=0;j<cantBarras;j++){
+//            porticoPlano.crearBarra(j, listaConectividades.get(j).getNumNudoInicial(), listaConectividades.get(j).numNudoFinal, listaBarras.get(j).getElasticidad(),
+//                    listaBarras.get(j).getArea(), listaBarras.get(j).getInercia());
+//        }
+//        for(int k=0; k<cantBarras;k++){
+//            porticoPlano.crearConectividad(listaConectividades.get(k).getNumBarra(),listaConectividades.get(k).getNumNudoInicial(),listaConectividades.get(k).getNumNudoFinal());
+//        }
+//        for (int l=0; l<listaVinculos.size();l++){
+//            porticoPlano.crearVinculo(listaVinculos.get(l).getNumNudo(),listaVinculos.get(l).getRestX(),listaVinculos.get(l).getRestY(),listaVinculos.get(l).getRestGiro());
+//        }
+//        for(int m=0; m<listasCargasEnNudos.size();m++){
+//            porticoPlano.crearCargaNodo(listasCargasEnNudos.get(m).getNumNudo(),listasCargasEnNudos.get(m).getCargaEnX(),listasCargasEnNudos.get(m).getCargaEnY(),listasCargasEnNudos.get(m).getCargaEnZ());
+//        }
 
         this.cargarArray();
         this.resolucion();

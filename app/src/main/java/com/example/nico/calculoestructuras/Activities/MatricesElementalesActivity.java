@@ -12,7 +12,7 @@ import com.example.nico.calculoestructuras.R;
 import java.util.ArrayList;
 
 public class MatricesElementalesActivity extends AppCompatActivity {
-    GestorEstructura ge;
+    GestorEstructura gestorEstructura;
     ListView List;
     ListAdapterMatriz adapter;
     ArrayList<String> listaArrays;
@@ -24,24 +24,16 @@ public class MatricesElementalesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ge = new GestorEstructura();
+        gestorEstructura = new GestorEstructura();
         List=(ListView) findViewById(R.id.lista_matrices);
-        if(ge.getAl()!=null){
-            listaArrays= ge.getAl();}
+        if(gestorEstructura.getAl()!=null){
+            listaArrays= gestorEstructura.getAl();
+        }
         else {
             listaArrays = new ArrayList<>();
         }
         adapter = new ListAdapterMatriz(this,listaArrays);
         List.setAdapter(adapter);
-
-      //  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-      //  fab.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-       //     public void onClick(View view) {
-       //         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-       //                 .setAction("Action", null).show();
-       //     }
-       // });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

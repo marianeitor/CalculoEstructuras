@@ -18,6 +18,7 @@ import com.example.nico.calculoestructuras.R;
 import com.example.nico.calculoestructuras.xmlparser.XmlParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MatricesDeRigidezActivity extends AppCompatActivity {
     ArrayList<String> listaOpciones;
@@ -35,15 +36,18 @@ public class MatricesDeRigidezActivity extends AppCompatActivity {
             list = new ListView(this);
         }
         if(listaOpciones==null) {
-            listaOpciones = new ArrayList<>();
-            listaOpciones.add("Matrices Elementales");
-            listaOpciones.add("Matriz Global");
-            listaOpciones.add("Matriz SFF");
-            listaOpciones.add("Matriz SFR");
-            listaOpciones.add("Matriz SRF");
-            listaOpciones.add("Matriz SRR");
-            listaOpciones.add("Vector AF");
-            listaOpciones.add("Vector DR");
+            listaOpciones = new ArrayList<>(Arrays.asList(
+                    "Matrices Elementales", "Matriz Global", "Matriz SFF", "Matriz SFR",
+                    "Matriz SRF", "Matriz SRR", "Vector AF", "Vector DR"
+            ));
+//            listaOpciones.add("Matrices Elementales");
+//            listaOpciones.add("Matriz Global");
+//            listaOpciones.add("Matriz SFF");
+//            listaOpciones.add("Matriz SFR");
+//            listaOpciones.add("Matriz SRF");
+//            listaOpciones.add("Matriz SRR");
+//            listaOpciones.add("Vector AF");
+//            listaOpciones.add("Vector DR");
         }
         adapter = new ListAdapterOpc(this, listaOpciones);
         list.setAdapter(adapter);

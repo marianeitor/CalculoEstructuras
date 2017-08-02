@@ -325,15 +325,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         while(cursor.moveToNext()) {
 
             Vinculo v = new Vinculo( cursor.getInt(cursor.getColumnIndex("nudovinculado")));
-            if(cursor.getDouble(cursor.getColumnIndex("restx"))!=0){
+            if(cursor.isNull(cursor.getColumnIndex("restx")))
+                v.setRestX(Double.NaN);
+            else{
                 v.setRestX(cursor.getDouble(cursor.getColumnIndex("restx")));
             }
-            if(cursor.getDouble(cursor.getColumnIndex("resty"))!=0){
+            if(cursor.isNull(cursor.getColumnIndex("resty")))
+                v.setRestY(Double.NaN);
+            else{
                 v.setRestY(cursor.getDouble(cursor.getColumnIndex("resty")));
             }
-            if(cursor.getDouble(cursor.getColumnIndex("restgiro"))!=0){
+            if(cursor.isNull(cursor.getColumnIndex("restgiro")))
+                v.setRestGiro(Double.NaN);
+            else{
                 v.setRestGiro(cursor.getDouble(cursor.getColumnIndex("restgiro")));
             }
+//            if(cursor.getDouble(cursor.getColumnIndex("restx"))!=0){
+//                v.setRestX(cursor.getDouble(cursor.getColumnIndex("restx")));
+//            }
+//            if(cursor.getDouble(cursor.getColumnIndex("resty"))!=0){
+//                v.setRestY(cursor.getDouble(cursor.getColumnIndex("resty")));
+//            }
+//            if(cursor.getDouble(cursor.getColumnIndex("restgiro"))!=0){
+//                v.setRestGiro(cursor.getDouble(cursor.getColumnIndex("restgiro")));
+//            }
             array.add(v);
         }
         cursor.close();

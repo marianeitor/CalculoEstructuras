@@ -48,9 +48,7 @@ public class VinculosCreadosActivity extends AppCompatActivity {
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(CargaConectividadesActivity.this, "probando bd", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(VinculosCreadosActivity.this, AgregarVinculoActivity.class);
-                //int in = position +1;
                 nudo = (Nudo) adapter.getItem(position);
                 // Compara la posicion del item seleccionado con el tamaño de listaVinculos para saber si hay algun
                 // vinculo que se corresponda con ese nudo
@@ -62,6 +60,7 @@ public class VinculosCreadosActivity extends AppCompatActivity {
                 } else{ //De lo contrario, crea una nueva
                     vinculo = new Vinculo(position+1);
                     i.putExtra("nudo", nudo);
+                    i.putExtra("vinculo", vinculo);
                     startActivityForResult(i, NEW_VINC);
                 }
             }
@@ -77,20 +76,20 @@ public class VinculosCreadosActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK) {
             Vinculo v = (Vinculo)data.getSerializableExtra("vinc");
-           // vinculo.setNumNudo(v.getNumNudo());
-            //vinculo.setRestX(v.getRestX());
-            //vinculo.setRestY(v.getRestY());
-           // vinculo.setRestGiro(v.getRestGiro());
-
             ContentValues vincValues = new ContentValues();
             vincValues.put("nudovinculado",v.getNumNudo());
-            vincValues.put("restx", v.getRestX());
-            vincValues.put("resty", v.getRestY());
-            vincValues.put("restgiro", v.getRestGiro());
-
-            //Nudo n = (Nudo)data.getExtras().getSerializable("nudo");
-
-            //ContentValues nudoValues = new ContentValues();
+            if(Double.isNaN(v.getRestX()))
+                vincValues.putNull("restx");
+            else
+                vincValues.put("restx", v.getRestX());
+            if(Double.isNaN(v.getRestY()))
+                vincValues.putNull("resty");
+            else
+                vincValues.put("resty", v.getRestY());
+            if(Double.isNaN(v.getRestGiro()))
+                vincValues.putNull("restgiro");
+            else
+                vincValues.put("restgiro", v.getRestGiro());
 
             switch (requestCode)
             {

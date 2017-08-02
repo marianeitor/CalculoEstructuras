@@ -83,23 +83,10 @@ public class ListAdapterNodosVinc extends BaseAdapter{
         TextView restEnY = (TextView) view.findViewById(R.id.rest_Y);
         TextView restEnGiro = (TextView) view.findViewById(R.id.rest_giro);
 
-        //vinculo.setText(" " + "Rest x:  " + array.get(position).isRestriccionX()  + " Rest y:  " + array.get(position).isRestriccionY()+" Rest Giro: "+array.get(position).isRestriccionGiro() );
         if(array2.size()>0 && array2.size()>position) {
-            if (array2.get(position).getRestX()!=0) {
-                restEnX.setText("Rest en X: SI");
-            } else{
-                restEnX.setText("Rest en X: NO");
-            }
-            if (array2.get(position).getRestY()!=0) {
-                restEnY.setText("Rest en Y: SI");
-            } else{
-                restEnY.setText("Rest en Y: NO");
-            }
-            if (array2.get(position).getRestGiro()!=0) {
-                restEnGiro.setText("Rest en Rot: SI");
-            }else{
-                restEnGiro.setText("Rest en Rot: NO");
-            }
+            setLabel(array2.get(position).getRestX(), restEnX);
+            setLabel(array2.get(position).getRestY(), restEnY);
+            setLabel(array2.get(position).getRestGiro(), restEnGiro);
         }
         return view;
     }
@@ -123,5 +110,12 @@ public class ListAdapterNodosVinc extends BaseAdapter{
         vinculo.setRestY(v.getRestY());
         vinculo.setRestGiro(v.getRestGiro());
         array2.set(position,vinculo);
+    }
+
+    private void setLabel(Double value, TextView textView){
+        if(Double.isNaN(value))
+            textView.setText("Rest en X: NO");
+        else
+            textView.setText("Rest en X: SI");
     }
 }

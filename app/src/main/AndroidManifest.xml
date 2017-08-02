@@ -25,7 +25,7 @@
         <activity
             android:name=".Activities.MatricesElementalesActivity"
             android:label="@string/title_activity_matrices_elemtales"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Activities.MatricesDeRigidezActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -34,7 +34,7 @@
         <activity
             android:name=".Activities.MatrizSFFActivity"
             android:label="@string/title_activity_matriz_sff"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Activities.MatricesDeRigidezActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,7 +43,7 @@
         <activity
             android:name=".Activities.MatricesDeRigidezActivity"
             android:label="@string/title_activity_matrices_de_rigidez"
-            android:parentActivityName=".Activities.MainActivity"
+            android:parentActivityName=".Activities.PorticosPlanosActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

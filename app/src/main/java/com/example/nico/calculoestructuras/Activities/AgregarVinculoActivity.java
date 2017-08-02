@@ -28,11 +28,7 @@ public class AgregarVinculoActivity extends AppCompatActivity {
     EditText valX;
     EditText valY;
     EditText valGiro;
-    /* Se cambiaron por switches
-    Spinner spinnerRestX;
-    Spinner spinnerRestY;
-    Spinner spinnerRestRot;
-    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,17 +46,6 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         n = (Nudo) getIntent().getSerializableExtra("nudo");
         numNudo = n.getnOrden();
         nb.setText(c + " " + numNudo + " : ");
-        /*
-        spinnerRestX = (Spinner) findViewById(R.id.spi_rest_x);
-        spinnerRestY = (Spinner) findViewById(R.id.spi_rest_y);
-        spinnerRestRot = (Spinner) findViewById(R.id.spi_rest_rot);
-        ArrayList<String> arrayStrings = new ArrayList<>();
-        arrayStrings.add("NO" );
-        arrayStrings.add("SI");
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayStrings);
-        spinnerRestX.setAdapter(adapter);
-        spinnerRestY.setAdapter(adapter);
-        spinnerRestRot.setAdapter(adapter); */
 
         valX = (EditText) findViewById(R.id.editTextX);
         valY = (EditText) findViewById(R.id.editTextY);
@@ -73,18 +58,18 @@ public class AgregarVinculoActivity extends AppCompatActivity {
         valGiro.setEnabled(false);
 
         /* Esto es para que al volver a seleccionar un nodo que ya tiene restricciones
-            los spinner tengan la configuracion correcta y no vuelvan todos a ponerse en "NO" */
-        if(n.isRestriccionX()){
+            los switches tengan la configuracion correcta y no vuelvan todos a ponerse en "NO" */
+        if(!Double.isNaN(vinc.getRestX())){
             switchX.setChecked(true);
             valX.setText(Double.toString(vinc.getRestX()));
             valX.setEnabled(true);
         }
-        if(n.isRestriccionY()){
+        if(!Double.isNaN(vinc.getRestY())){
             switchY.setChecked(true);
             valY.setText(Double.toString(vinc.getRestY()));
             valY.setEnabled(true);
         }
-        if(n.isRestriccionGiro()){
+        if(!Double.isNaN(vinc.getRestGiro())){
             switchZ.setChecked(true);
             valGiro.setText(Double.toString(vinc.getRestGiro()));
             valGiro.setEnabled(true);
@@ -126,67 +111,6 @@ public class AgregarVinculoActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        spinnerRestX.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String rest = (String) parent.getSelectedItem();
-                if (position == 0) {
-                    valX.setText("");
-                    valX.setEnabled(false);
-                }
-                if (position == 1) {
-                    valX.setEnabled(true);
-                    valX.setFocusableInTouchMode(true);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(AgregarVinculoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        spinnerRestY.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String rest = (String) parent.getSelectedItem();
-                if(position == 0){
-                    valY.setText("");
-                    valY.setEnabled(false);
-                }
-                if(position == 1){
-                    valY.setEnabled(true);
-                    valY.setFocusableInTouchMode(true);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(AgregarVinculoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        spinnerRestRot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String rest = (String) parent.getSelectedItem();
-                if(position == 0){
-                    valGiro.setText("");
-                    valGiro.setEnabled(false);
-                }
-                if(position == 1){
-                    valGiro.setEnabled(true);
-                    valGiro.setFocusableInTouchMode(true);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(AgregarVinculoActivity.this, "Debe seleccionar algun valor", Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -215,12 +139,9 @@ public class AgregarVinculoActivity extends AppCompatActivity {
                 valGiro.isEnabled() && (valGiro.getText().toString().equals(""))){
             Toast.makeText(this, "Faltan valores de ingresar", Toast.LENGTH_SHORT).show();
         } else {
-            if(valX.isEnabled())
-                restX = Double.parseDouble(valX.getText().toString());
-            if(valY.isEnabled())
-                restY = Double.parseDouble(valY.getText().toString());
-            if(valGiro.isEnabled())
-                restRot = Double.parseDouble(valGiro.getText().toString());
+            restX = valX.isEnabled() ? Double.parseDouble(valX.getText().toString()) : Double.NaN;
+            restY = (valY.isEnabled()) ? Double.parseDouble(valY.getText().toString()) : Double.NaN;
+            restRot = (valGiro.isEnabled()) ? Double.parseDouble(valGiro.getText().toString()) : Double.NaN;
 
             v = new Vinculo(numNudo);
             v.setRestX(restX);

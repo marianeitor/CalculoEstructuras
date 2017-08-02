@@ -7,11 +7,12 @@ import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
 import com.example.nico.calculoestructuras.Negocio.GestorEstructura;
+import com.example.nico.calculoestructuras.Negocio.GestorEstructura2;
 import com.example.nico.calculoestructuras.R;
 
 public class MatrizGlobalActivity extends AppCompatActivity {
-    GestorEstructura ge;
-    String matriz;
+    GestorEstructura2 gestorEstructura;
+    String matrizGlobal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,22 +21,13 @@ public class MatrizGlobalActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ge = new GestorEstructura();
-        if(ge.getGlobal()!=null){
-            matriz= ge.getGlobal();}
-
+        gestorEstructura = new GestorEstructura2();
+//        if(gestorEstructura.getGlobal()!=null){
+//            matrizGlobal= gestorEstructura.getGlobal();}
+        matrizGlobal = gestorEstructura.getGlobal();
         TextView salida = (TextView) findViewById(R.id.sm);
-        salida.setText(matriz);
+        salida.setText(matrizGlobal);
         salida.setMovementMethod(new ScrollingMovementMethod());
-
-       // FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-       // fab.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-       //     public void onClick(View view) {
-       //         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-       //                 .setAction("Action", null).show();
-        //    }
-       // });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

@@ -80,22 +80,12 @@ public class PorticosPlanosActivity extends AppCompatActivity {
                     case 6: {
                         Intent intent = new Intent(PorticosPlanosActivity.this, MatricesDeRigidezActivity.class);
                         startActivity(intent);
-
                     }
                     break;
 
                 }
             }
         });
-
-      //  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-       // fab.setOnClickListener(new View.OnClickListener() {
-       //     @Override
-       //     public void onClick(View view) {
-       //         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-       //                 .setAction("Action", null).show();
-       //     }
-       // });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
