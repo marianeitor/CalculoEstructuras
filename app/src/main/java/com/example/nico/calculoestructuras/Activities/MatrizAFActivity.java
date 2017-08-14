@@ -24,7 +24,7 @@ public class MatrizAFActivity extends AppCompatActivity {
         if(ge.getAlAF()!=null){
             matriz= ge.getAlAF();}
 
-        TextView salida = (TextView) findViewById(R.id.sm);
+        TextView salida = (TextView) findViewById(R.id.matrizElemental);
         salida.setText(matriz);
         salida.setMovementMethod(new ScrollingMovementMethod());
 

@@ -3,6 +3,7 @@ package com.example.nico.calculoestructuras.Negocio;
 import com.example.nico.calculoestructuras.Activities.OptionsMenuTitleOnly;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -11,9 +12,12 @@ import java.util.Iterator;
 /**
  * Created by Nico on 9/11/2015.
  */
-public class GestorEstructura2 extends OptionsMenuTitleOnly {
+public class GestorEstructura2 extends OptionsMenuTitleOnly implements Serializable {
+
     PorticoPlano2 porticoPlano;
-    ArrayList<String> alRigidez;
+
+    /** matricesElementales: Contiene las matrices de todas las barras**/
+    ArrayList<String> matricesElementales;
     double [][] alSFF;
     double [] alAF;
     ArrayList<Barra> listaBarras;
@@ -38,25 +42,7 @@ public class GestorEstructura2 extends OptionsMenuTitleOnly {
         int cantNudos = listaNudos.size();
         porticoPlano = new PorticoPlano2(cantNudos,cantBarras, this);
 
-//        // Todo: Consultar - Creo que estos for deberian hacerse directamente en la clase PorticoPlano
-//        for (int i=0; i<cantNudos;i++){
-//            porticoPlano.crearNodo(i,listaNudos.get(i).getX(),listaNudos.get(i).getY(),false,false,false);
-//        }
-//        for (int j=0;j<cantBarras;j++){
-//            porticoPlano.crearBarra(j, listaConectividades.get(j).getNumNudoInicial(), listaConectividades.get(j).numNudoFinal, listaBarras.get(j).getElasticidad(),
-//                    listaBarras.get(j).getArea(), listaBarras.get(j).getInercia());
-//        }
-//        for(int k=0; k<cantBarras;k++){
-//            porticoPlano.crearConectividad(listaConectividades.get(k).getNumBarra(),listaConectividades.get(k).getNumNudoInicial(),listaConectividades.get(k).getNumNudoFinal());
-//        }
-//        for (int l=0; l<listaVinculos.size();l++){
-//            porticoPlano.crearVinculo(listaVinculos.get(l).getNumNudo(),listaVinculos.get(l).getRestX(),listaVinculos.get(l).getRestY(),listaVinculos.get(l).getRestGiro());
-//        }
-//        for(int m=0; m<listasCargasEnNudos.size();m++){
-//            porticoPlano.crearCargaNodo(listasCargasEnNudos.get(m).getNumNudo(),listasCargasEnNudos.get(m).getCargaEnX(),listasCargasEnNudos.get(m).getCargaEnY(),listasCargasEnNudos.get(m).getCargaEnZ());
-//        }
-
-        this.cargarArray();
+        this.cargarMatricesElementales();
         this.resolucion();
 
 
@@ -64,9 +50,9 @@ public class GestorEstructura2 extends OptionsMenuTitleOnly {
     }
 
     public void resolucion(){
-        sms= porticoPlano.crear_Sms();
-        alSFF= porticoPlano.makeSFF();
-        alAF= porticoPlano.makeAF();
+        sms= porticoPlano.cargarMatrizGlobal();
+//        alSFF= porticoPlano.makeSFF();
+//        alAF= porticoPlano.makeAF();
     }
 
     public String getGlobal(){
@@ -124,18 +110,26 @@ public class GestorEstructura2 extends OptionsMenuTitleOnly {
         str+="\n";
         return str;
     }
-    public void cargarArray(){
-        if(porticoPlano.getfromidBarra(0)!=null) {
-            alRigidez = new ArrayList<>();
-            for (int i = 0; i < listaBarras.size(); i++) {
-                alRigidez.add(i, porticoPlano.getfromidBarra(i).toString());
+
+    /**
+     * Reune las matrices elementales de cada barra en una variable general
+     */
+    public void cargarMatricesElementales(){
+        if(porticoPlano.listaBarras.size() != 0) {
+            matricesElementales = new ArrayList<>();
+            for (int i = 1; i <= listaBarras.size(); i++) {
+                matricesElementales.add(porticoPlano.getfromidBarra(i).toString());
             }
         }
     }
 
-    public ArrayList getAl(){
-        if(alRigidez !=null){
-            return alRigidez;}
+    /**
+     * Obtiene las matrices elementales
+     * @return double[][] | null
+     */
+    public ArrayList getMatricesElementales(){
+        if(matricesElementales !=null){
+            return matricesElementales;}
         return null;
     }
 

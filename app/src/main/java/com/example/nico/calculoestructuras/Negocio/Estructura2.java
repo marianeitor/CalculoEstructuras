@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Nico on 9/11/2015.
@@ -13,7 +14,7 @@ public class Estructura2 {
     private final int dof;
     private final int cantBarras;
     private final int cantNodos;
-    private double[][] s_MS;
+    private double[][] matrizGlobal;
     private int nk = 0;
     ArrayList<Barra> listaBarras;
     ArrayList<Nudo> listaNudos;
@@ -33,19 +34,11 @@ public class Estructura2 {
         listaCargasEnBarras = DataBaseHelper.getDatabaseInstance(context).getCargaEnBarraFromDB();
         listasCargasEnNudos = DataBaseHelper.getDatabaseInstance(context).getCargaEnNudoFromDB();
         crearBarras();
+        matrizGlobal = new double[dof * cantNodos][dof * cantNodos];
     }
 
-    public double[][] getS_MS() {
-        return s_MS;
-    }
-
-    public void makeS_Ms() {
-        s_MS = new double[dof * cantNodos][dof * cantNodos];
-        for (int i = 0; i < dof * cantNodos; ++i) {
-            for (int h = 0; h < dof * cantNodos; ++h) {
-                s_MS[i][h] = 0;
-            }
-        }
+    public double[][] getMatrizGlobal() {
+        return matrizGlobal;
     }
 
     public void crearBarras() {
@@ -61,49 +54,49 @@ public class Estructura2 {
         }
     }
 
-//Agregar validacion
-    public double[][] loadS_Ms(){
-        this.makeS_Ms();
-        for (int k = 0; k < cantBarras; ++k) {
-            Conectividad con = getFromIdBarraConectividad(k);
-            int ni = con.getNumNudoInicial();
-            int nf = con.getNumNudoFinal();
-            Barra bar = getfromidBarra(k);
-
-            for (int i = 0; i < dof; ++i) {//no estoy seguro de q si ese 3 es = a dof.. preguntar
-                for (int h = 0; h < dof; ++h) {//ideam anterior
-                    int fila= ni * dof + i-dof;
-                    int col=ni * dof + h-dof;
-                    s_MS[fila][col] += bar.getSm(i, h);
-                    s_MS[fila][col] += bar.getSm(i, h + dof);
-                    s_MS[fila][col] += bar.getSm(i + dof, h);
-                    s_MS[fila][col] += bar.getSm(i + dof, h + dof);
-                }
-            }
-        }
-        return s_MS;
-    }
-
-    public double[][] crear_Sms(){
-        this.makeS_Ms();
+    /**
+     * Forma la matriz global a partir de las matrices elementales.
+     * @return double[][]
+     */
+    public double[][] cargarMatrizGlobal(){
         for (int k = 0; k < cantBarras; ++k) {
             Conectividad con = getFromIdBarraConectividad(k+1);
-            int ni = con.getNumNudoInicial();
-            int nf = con.getNumNudoFinal();
-            Barra bar = getfromidBarra(k+1);
+            int nudoInicial = con.getNumNudoInicial();
+            int nudoFinal = con.getNumNudoFinal();
+            Barra barra = getfromidBarra(k+1);
+            double[][] matrizElemental = barra.getMatrizElemental();
+            double[][] primerCuadrante = new double[dof][dof];
+            double[][] segundoCuadrante = new double[dof][dof];
+            double[][] tercerCuadrante = new double[dof][dof];
+            double[][] cuartoCuadrante = new double[dof][dof];
+            for (int i = 0; i < dof; i++) {
+                primerCuadrante[i] = Arrays.copyOfRange(matrizElemental[i], 0, dof);
+            }
+            copiarCuadrante(nudoInicial, nudoInicial, primerCuadrante);
+            for (int i = 0; i < dof; i++) {
+                segundoCuadrante[i] = Arrays.copyOfRange(matrizElemental[i], dof, matrizElemental[i].length);
+            }
+            copiarCuadrante(nudoInicial, nudoFinal, segundoCuadrante);
+            for (int i = 0; i < dof; i++) {
+                tercerCuadrante[i] = Arrays.copyOfRange(matrizElemental[i + dof], 0, dof);
+            }
+            copiarCuadrante(nudoFinal, nudoInicial, tercerCuadrante);
+            for (int i = 0; i < dof; i++) {
+                cuartoCuadrante[i] = Arrays.copyOfRange(matrizElemental[i + dof], dof, matrizElemental[i].length);
+            }
+            copiarCuadrante(nudoFinal, nudoFinal, cuartoCuadrante);
+        }
+        return matrizGlobal;
+    }
 
-            for (int i = 0; i < dof; ++i) {//no estoy seguro de q si ese 3 es = a dof.. preguntar
-                for (int h = 0; h < dof; ++h) {//ideam anterior
-                    int fila= ni * dof + i-dof;
-                    int col=ni * dof + h-dof;
-                    s_MS[fila][col] += bar.getSm(i, h);
-                    s_MS[fila][col+dof] += bar.getSm(i, h + dof);
-                    s_MS[fila+dof][col] += bar.getSm(i + dof, h);
-                    s_MS[fila+dof][col+dof] += bar.getSm(i + dof, h + dof);
-                }
+    private void copiarCuadrante(int nudoFila, int nudoColumna, double[][] cuadrante) {
+        int filaInicial = (nudoFila - 1) * dof;
+        int columnaInicial = (nudoColumna -1) * dof;
+        for (int i = 0; i < dof; ++i) {
+            for (int j = 0; j < dof; ++j) {
+                matrizGlobal[filaInicial + i][columnaInicial + j] += cuadrante[i][j];
             }
         }
-        return s_MS;
     }
 
     /**
@@ -194,37 +187,37 @@ public class Estructura2 {
     return restglob;
     }
 
-    public double [][] makeSFF(){
+//    public double [][] makeSFF(){
 
-        int[] restG= makeKRestGlob();
-        double [][] kred = new double[nk][nk];
-
-        for (int i = 0; i < dof * cantNodos; ++i) {
-            if (restG[i] != -1) {
-                for (int j = 0; j < dof * cantNodos; ++j) {
-                    if (restG[j] != -1) {
-                        kred[restG[i]][restG[j]] = getS_MS()[i][j];
-                    }
-                }
-            }
-        }
-        return kred;
-    }
-
-    public double[] makeAF(){//No se como toma las fuerzas
-        nk=0;
-        int[] restG= makeKRestGlob();
-        double [] pred = new double[nk];
+//        int[] restG= makeKRestGlob();
+//        double [][] kred = new double[nk][nk];
+//
 //        for (int i = 0; i < dof * cantNodos; ++i) {
 //            if (restG[i] != -1) {
-//                int idj = i / 3;
-//                int idf = i % 3;
-//                //pred[makeKRestGlob()[i]] = getfromidNudo(idj).getF()[idf];
-//                pred[restG[i]] = getFromIdNudoCarga(idj+1).getCargaEnX();
+//                for (int j = 0; j < dof * cantNodos; ++j) {
+//                    if (restG[j] != -1) {
+//                        kred[restG[i]][restG[j]] = getMatrizGlobal()[i][j];
+//                    }
+//                }
 //            }
 //        }
-        return pred;
-    }
+//        return kred;
+//    }
+//
+//    public double[] makeAF(){//No se como toma las fuerzas
+//        nk=0;
+//        int[] restG= makeKRestGlob();
+//        double [] pred = new double[nk];
+////        for (int i = 0; i < dof * cantNodos; ++i) {
+////            if (restG[i] != -1) {
+////                int idj = i / 3;
+////                int idf = i % 3;
+////                //pred[makeKRestGlob()[i]] = getfromidNudo(idj).getF()[idf];
+////                pred[restG[i]] = getFromIdNudoCarga(idj+1).getCargaEnX();
+////            }
+////        }
+//        return pred;
+//    }
 
     @Override
     public String toString() {

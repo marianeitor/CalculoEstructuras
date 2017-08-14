@@ -57,7 +57,7 @@ public class ListAdapterMatriz extends BaseAdapter {
 
         view = View.inflate(context, R.layout.list_matriz_item, null);
         TextView titulo =(TextView) view.findViewById(R.id.titulo_barras);
-        TextView e = (TextView) view.findViewById(R.id.sm);
+        TextView e = (TextView) view.findViewById(R.id.matrizElemental);
         CharSequence barra = titulo.getText();
         int idBarra = position+1;
         titulo.setText(barra+" "+ idBarra + " :");

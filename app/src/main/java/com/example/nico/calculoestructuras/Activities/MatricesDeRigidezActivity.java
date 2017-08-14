@@ -32,86 +32,49 @@ public class MatricesDeRigidezActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         list = (ListView) findViewById(R.id.listaopc);
-        if(list == null) {
-            list = new ListView(this);
-        }
-        if(listaOpciones==null) {
-            listaOpciones = new ArrayList<>(Arrays.asList(
-                    "Matrices Elementales", "Matriz Global", "Matriz SFF", "Matriz SFR",
-                    "Matriz SRF", "Matriz SRR", "Vector AF", "Vector DR"
-            ));
-//            listaOpciones.add("Matrices Elementales");
-//            listaOpciones.add("Matriz Global");
-//            listaOpciones.add("Matriz SFF");
-//            listaOpciones.add("Matriz SFR");
-//            listaOpciones.add("Matriz SRF");
-//            listaOpciones.add("Matriz SRR");
-//            listaOpciones.add("Vector AF");
-//            listaOpciones.add("Vector DR");
-        }
+        listaOpciones = new ArrayList<>(Arrays.asList(
+                "Matrices Elementales", "Matriz Global", "Matriz SFF", "Matriz SFR",
+                "Matriz SRF", "Matriz SRR", "Vector AF", "Vector DR"
+        ));
         adapter = new ListAdapterOpc(this, listaOpciones);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent;
                 switch (i) {
-                    case 0: {
-
-                        try {
-                            Intent intent = new Intent(MatricesDeRigidezActivity.this, MatricesElementalesActivity.class);
-                            startActivity(intent);
-                        } catch (ArrayIndexOutOfBoundsException a) {
-                            Toast.makeText(MatricesDeRigidezActivity.this, "ArrayIndexOutOfBoundsException", Toast.LENGTH_LONG).show();
-                        } catch (SQLiteConstraintException e) {
-                            Toast.makeText(MatricesDeRigidezActivity.this, "SQLiteConstraintException", Toast.LENGTH_LONG).show();
-                        } catch (NullPointerException n) {
-                            Toast.makeText(MatricesDeRigidezActivity.this, "NullPointerException ", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    break;
-                    case 1: {
-                        Intent intent = new Intent(MatricesDeRigidezActivity.this, MatrizGlobalActivity.class);
+                    case 0:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatricesElementalesActivity.class);
                         startActivity(intent);
-
-                    }
-                    break;
-                    case 2: {
-                        Intent intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
+                        break;
+                    case 1:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizGlobalActivity.class);
                         startActivity(intent);
-
-                    }
-                    break;
-                    case 3: {
-                        Intent intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
+                        break;
+                    case 2:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
                         startActivity(intent);
-
-                    }
-                    break;
-                    case 4: {
-                        Intent intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
+                        break;
+                    case 3:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
                         startActivity(intent);
-
-                    }
-                    break;
-                    case 5: {
-                        Intent intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
+                        break;
+                    case 4:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
                         startActivity(intent);
-
-                    }
-                    break;
-                    case 6: {
-                        Intent intent = new Intent(MatricesDeRigidezActivity.this, MatrizAFActivity.class);
+                        break;
+                    case 5:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
                         startActivity(intent);
-
-                    }
-                    break;
-                    case 7: {
-                        Intent intent = new Intent(MatricesDeRigidezActivity.this, MatrizAFActivity.class);
+                        break;
+                    case 6:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizAFActivity.class);
                         startActivity(intent);
-
-                    }
-                    break;
-
+                        break;
+                    case 7:
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizAFActivity.class);
+                        startActivity(intent);
+                        break;
                 }
             }
         });

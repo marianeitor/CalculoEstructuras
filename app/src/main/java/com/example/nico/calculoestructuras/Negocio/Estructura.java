@@ -1,7 +1,5 @@
 package com.example.nico.calculoestructuras.Negocio;
 
-import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
-
 import java.util.ArrayList;
 
 /**
@@ -138,10 +136,10 @@ public class Estructura {
                 for (int h = 0; h < dof; ++h) {//ideam anterior
                     int fila= ni * dof + i-dof;
                     int col=ni * dof + h-dof;
-                    s_MS[fila][col] += bar.getSm(i, h);
-                    s_MS[fila][col] += bar.getSm(i, h + dof);
-                    s_MS[fila][col] += bar.getSm(i + dof, h);
-                    s_MS[fila][col] += bar.getSm(i + dof, h + dof);
+                    s_MS[fila][col] += bar.getElement(i, h);
+                    s_MS[fila][col] += bar.getElement(i, h + dof);
+                    s_MS[fila][col] += bar.getElement(i + dof, h);
+                    s_MS[fila][col] += bar.getElement(i + dof, h + dof);
                 }
             }
         }
@@ -160,10 +158,10 @@ public class Estructura {
                 for (int h = 0; h < dof; ++h) {//ideam anterior
                     int fila= ni * dof + i-dof;
                     int col=ni * dof + h-dof;
-                    s_MS[fila][col] += bar.getSm(i, h);
-                    s_MS[fila][col+dof] += bar.getSm(i, h + dof);
-                    s_MS[fila+dof][col] += bar.getSm(i + dof, h);
-                    s_MS[fila+dof][col+dof] += bar.getSm(i + dof, h + dof);
+                    s_MS[fila][col] += bar.getElement(i, h);
+                    s_MS[fila][col+dof] += bar.getElement(i, h + dof);
+                    s_MS[fila+dof][col] += bar.getElement(i + dof, h);
+                    s_MS[fila+dof][col+dof] += bar.getElement(i + dof, h + dof);
                 }
             }
         }

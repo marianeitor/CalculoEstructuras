@@ -23,7 +23,7 @@ public class MatrizSFFActivity extends AppCompatActivity {
         if(ge.getGlobal()!=null){
             matriz= ge.getSFF();}
 
-        TextView salida = (TextView) findViewById(R.id.sm);
+        TextView salida = (TextView) findViewById(R.id.matrizElemental);
         salida.setText(matriz);
         salida.setMovementMethod(new ScrollingMovementMethod());
 

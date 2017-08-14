@@ -22,10 +22,8 @@ public class MatrizGlobalActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         gestorEstructura = new GestorEstructura2();
-//        if(gestorEstructura.getGlobal()!=null){
-//            matrizGlobal= gestorEstructura.getGlobal();}
         matrizGlobal = gestorEstructura.getGlobal();
-        TextView salida = (TextView) findViewById(R.id.sm);
+        TextView salida = (TextView) findViewById(R.id.matrizElemental);
         salida.setText(matrizGlobal);
         salida.setMovementMethod(new ScrollingMovementMethod());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

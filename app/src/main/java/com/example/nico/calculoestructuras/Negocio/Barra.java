@@ -15,7 +15,7 @@ public class Barra implements Serializable {
     double longitud;
     double g1; //coseno director
     double g2; //coseno director
-    double[][] sm;
+    double[][] matrizElemental;
 
     public Barra() {} // Constructor especial para armar barras desde un archivo xml
 
@@ -43,13 +43,27 @@ public class Barra implements Serializable {
         this.g2 = g2;
     }
 
-    public double getSm(int i, int j) {
-        return sm[i][j];
+    /**
+     * Obtiene el elemento de la matriz elemental en la ubicación dada.
+     * @param fila    fila
+     * @param columna columna
+     * @return double
+     */
+    public double getElement(int fila, int columna) {
+        return matrizElemental[fila][columna];
+    }
+
+    /**
+     * Devuelve la matriz elemental.
+     * @return double[][]
+     */
+    public double[][] getMatrizElemental() {
+        return matrizElemental;
     }
 
 
-    public void setSm(double[][] sm) {
-        this.sm = sm;
+    public void setMatrizElemental(double[][] matrizElemental) {
+        this.matrizElemental = matrizElemental;
     }
 
 
@@ -79,7 +93,7 @@ public class Barra implements Serializable {
         double d = g2 * g2 * s + g1 * g1 * s1;
         double e = g1 * s2;
 
-        sm = new double[][]{
+        matrizElemental = new double[][]{
                 {a, b, -c, -a, -b, -c},
                 {b, d, e, -b, -d, e},
                 {-c, e, s3, c, -e, s3 / 2},
@@ -96,7 +110,7 @@ public class Barra implements Serializable {
         for (int i=0;i<6;i++) {
             res+=" [ ";
             for (int j=0;j<6;j++) {
-                double d =getSm(i, j);
+                double d = getElement(i, j);
                 BigDecimal big = new BigDecimal(d);
                 big = big.setScale(2, RoundingMode.HALF_UP);
                 res+=big;
