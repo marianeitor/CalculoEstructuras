@@ -1,7 +1,6 @@
 package com.example.nico.calculoestructuras.Activities;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.nico.calculoestructuras.Adapter.ListAdapterOpc;
 import com.example.nico.calculoestructuras.Backend.EjercicioActual;
+import com.example.nico.calculoestructuras.Negocio.PorticoPlano2;
 import com.example.nico.calculoestructuras.R;
 import com.example.nico.calculoestructuras.xmlparser.XmlParser;
 
@@ -21,16 +21,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MatricesDeRigidezActivity extends AppCompatActivity {
+    private static final int MATRIZ_SFF = 1;
+    private static final int MATRIZ_SFR = 2;
+    private static final int MATRIZ_SRR = 3;
+    private static final int MATRIZ_SRF = 4;
+
     ArrayList<String> listaOpciones;
     ListView list;
     ListAdapterOpc adapter;
+    PorticoPlano2 porticoPlano;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matrices_de_rigidez);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        porticoPlano = new PorticoPlano2(this);
         list = (ListView) findViewById(R.id.listaopc);
         listaOpciones = new ArrayList<>(Arrays.asList(
                 "Matrices Elementales", "Matriz Global", "Matriz SFF", "Matriz SFR",
@@ -41,41 +47,39 @@ public class MatricesDeRigidezActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent;
+                Intent intent = new Intent();
                 switch (i) {
                     case 0:
                         intent = new Intent(MatricesDeRigidezActivity.this, MatricesElementalesActivity.class);
-                        startActivity(intent);
                         break;
                     case 1:
                         intent = new Intent(MatricesDeRigidezActivity.this, MatrizGlobalActivity.class);
-                        startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
-                        startActivity(intent);
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizGenericoActivity.class);
+                        intent.putExtra("matriz", MATRIZ_SFF);
                         break;
                     case 3:
-                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
-                        startActivity(intent);
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizGenericoActivity.class);
+                        intent.putExtra("matriz", MATRIZ_SFR);
                         break;
                     case 4:
-                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
-                        startActivity(intent);
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizGenericoActivity.class);
+                        intent.putExtra("matriz", MATRIZ_SRF);
                         break;
                     case 5:
-                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizSFFActivity.class);
-                        startActivity(intent);
+                        intent = new Intent(MatricesDeRigidezActivity.this, MatrizGenericoActivity.class);
+                        intent.putExtra("matriz", MATRIZ_SRR);
                         break;
                     case 6:
                         intent = new Intent(MatricesDeRigidezActivity.this, MatrizAFActivity.class);
-                        startActivity(intent);
                         break;
                     case 7:
                         intent = new Intent(MatricesDeRigidezActivity.this, MatrizAFActivity.class);
-                        startActivity(intent);
                         break;
                 }
+                intent.putExtra("portico", porticoPlano);
+                startActivity(intent);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

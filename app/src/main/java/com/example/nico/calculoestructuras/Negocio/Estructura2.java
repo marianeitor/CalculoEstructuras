@@ -4,44 +4,114 @@ import android.content.Context;
 
 import com.example.nico.calculoestructuras.DataBase.DataBaseHelper;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Vector;
 
 /**
  * Created by Nico on 9/11/2015.
  */
-public class Estructura2 {
+public class Estructura2 implements Serializable{
     private final int dof;
-    private final int cantBarras;
-    private final int cantNodos;
+    private int cantidadElementosRestringidos;
+    private int cantidadElementosLibres;
+    private final int cantidadBarras;
+    private final int cantidadNodos;
     private double[][] matrizGlobal;
+    private double[][] matrizGlobalOrdenada;
+    private double[][] matrizSFF;
+    private double[][] matrizSFR;
+    private double[][] matrizSRF;
+    private double[][] matrizSRR;
+    private boolean[] tablaRestricciones;
+    private ArrayList<String> matricesElementales;
     private int nk = 0;
     ArrayList<Barra> listaBarras;
-    ArrayList<Nudo> listaNudos;
-    ArrayList<Conectividad> listaConectividades;
-    ArrayList<Vinculo> listaVinculos;
-    ArrayList<CargaEnBarra> listaCargasEnBarras;
-    ArrayList<CargaEnNudo> listasCargasEnNudos;
+    private ArrayList<Nudo> listaNudos;
+    private ArrayList<Conectividad> listaConectividades;
+    private ArrayList<Vinculo> listaVinculos;
+    private ArrayList<CargaEnBarra> listaCargasEnBarras;
+    private ArrayList<CargaEnNudo> listasCargasEnNudos;
 
-    public Estructura2(int n, int e, int d, Context context) {
-        cantNodos=n;
-        cantBarras=e;
-        dof=d;
+    /**
+     * Constructor de Estructura2
+     * @param dof        dof
+     * @param context    Context
+     */
+    public Estructura2(int dof, Context context) {
+        cantidadElementosLibres = 0;
+        cantidadElementosRestringidos = 0;
         listaBarras = DataBaseHelper.getDatabaseInstance(context).getBarrasFromDB();
         listaNudos = DataBaseHelper.getDatabaseInstance(context).getNudosFromDB();
         listaConectividades = DataBaseHelper.getDatabaseInstance(context).getConecFromDB();
         listaVinculos = DataBaseHelper.getDatabaseInstance(context).getVinculoFromDB();
         listaCargasEnBarras = DataBaseHelper.getDatabaseInstance(context).getCargaEnBarraFromDB();
         listasCargasEnNudos = DataBaseHelper.getDatabaseInstance(context).getCargaEnNudoFromDB();
-        crearBarras();
-        matrizGlobal = new double[dof * cantNodos][dof * cantNodos];
+        cantidadNodos = listaNudos.size();
+        cantidadBarras = listaBarras.size();
+        this.dof = dof;
+        this.calcularBarras();
+        this.cargarMatricesElementales();
+        this.crearMatrizGlobal();
+        this.crearMatrizGlobalOrdenada();
+        this.crearMatricesRestantes();
     }
 
+    /**
+     * Cada getX() devuelve la matriz requerida.
+     */
     public double[][] getMatrizGlobal() {
         return matrizGlobal;
     }
 
-    public void crearBarras() {
+    public double[][] getMatrizSFF() {
+        return matrizSFF;
+    }
+
+    public double[][] getMatrizSFR() {
+        return matrizSFR;
+    }
+
+    public double[][] getMatrizSRF() {
+        return matrizSRF;
+    }
+
+    public double[][] getMatrizSRR() {
+        return matrizSRR;
+    }
+
+    /**
+     * Devuelve un string con los elementos de la matriz fuente.
+     * @param matriz Matriz fuente
+     * @return String
+     */
+    public String getMatrizToString(double[][] matriz){
+        String str="";
+        for (double[] aMatrizGlobal : matriz) {
+            str += " [ ";
+            for (int j = 0; j < aMatrizGlobal.length; j++) {
+                double d = aMatrizGlobal[j];
+                BigDecimal big = new BigDecimal(d);
+                big = big.setScale(2, RoundingMode.HALF_UP);
+                str += big;
+                if (j != aMatrizGlobal.length - 1) {
+                    str += " , ";
+                } else {
+                    str += " ] " + "\n";
+                }
+            }
+            str += "\n";
+        }
+        return str;
+    }
+
+    /**
+     * Toma cada barra y le construye la matriz elemental.
+     */
+    private void calcularBarras() {
         for (Barra barra:listaBarras) {
             Conectividad conectividad = getFromIdBarraConectividad(barra.getNumOrden());
             Nudo nudoInicial = getfromidNudo(conectividad.getNumNudoInicial());
@@ -55,11 +125,33 @@ public class Estructura2 {
     }
 
     /**
-     * Forma la matriz global a partir de las matrices elementales.
-     * @return double[][]
+     * Reune las matrices elementales de cada barra en una variable general
      */
-    public double[][] cargarMatrizGlobal(){
-        for (int k = 0; k < cantBarras; ++k) {
+    private void cargarMatricesElementales(){
+        if(listaBarras.size() != 0) {
+            matricesElementales = new ArrayList<>();
+            for (int i = 1; i <= listaBarras.size(); i++) {
+                matricesElementales.add(getfromidBarra(i).toString());
+            }
+        }
+    }
+
+    /**
+     * Obtiene las matrices elementales
+     * @return double[][] | null
+     */
+    public ArrayList<String> getMatricesElementales(){
+        if(matricesElementales != null){
+            return matricesElementales;}
+        return null;
+    }
+
+    /**
+     * Forma la matriz global a partir de las matrices elementales.
+     */
+    private void crearMatrizGlobal(){
+        matrizGlobal = new double[this.dof * cantidadNodos][this.dof * cantidadNodos];
+        for (int k = 0; k < cantidadBarras; ++k) {
             Conectividad con = getFromIdBarraConectividad(k+1);
             int nudoInicial = con.getNumNudoInicial();
             int nudoFinal = con.getNumNudoFinal();
@@ -86,15 +178,134 @@ public class Estructura2 {
             }
             copiarCuadrante(nudoFinal, nudoFinal, cuartoCuadrante);
         }
-        return matrizGlobal;
     }
 
+    /**
+     * Copia un cuadrante en su posición dentro de la matriz global.
+     * Cuadrante: la matriz elemental de cada barra puede dividirse en 4 cuadrantes, donde cada uno es una
+     * submatriz de 3x3.
+     * @param nudoFila    Id del nudo correspondiente a las filas del cuadrante.
+     * @param nudoColumna Id del nudo correspondiente a las columnas del cuadrante.
+     * @param cuadrante   Cuadrante propiamente dicho, array de elementos.
+     */
     private void copiarCuadrante(int nudoFila, int nudoColumna, double[][] cuadrante) {
         int filaInicial = (nudoFila - 1) * dof;
         int columnaInicial = (nudoColumna -1) * dof;
         for (int i = 0; i < dof; ++i) {
             for (int j = 0; j < dof; ++j) {
                 matrizGlobal[filaInicial + i][columnaInicial + j] += cuadrante[i][j];
+            }
+        }
+    }
+
+    /**
+     * A partir de la matrizGlobal carga la matrizGlobalOrdenada según las restricciones.
+     */
+    private void crearMatrizGlobalOrdenada(){
+        matrizGlobalOrdenada = new double[this.dof * cantidadNodos][this.dof * cantidadNodos];
+        this.crearTablaRestricciones();
+        this.ordenarFilas();
+        this.ordenarColumnas();
+    }
+
+    /**
+     * Crea una tabla con todos los ejes de cada nudo y sus restricciones.
+     */
+    private void crearTablaRestricciones(){
+        tablaRestricciones = new boolean[dof * cantidadNodos];
+        int posicion = 0;
+        for (Nudo nudo:listaNudos) {
+            Vinculo vinculo = getFromIdNudoVinculo(nudo.getnOrden());
+            tablaRestricciones[posicion] = !Double.isNaN(vinculo.getRestX());
+            tablaRestricciones[posicion + 1] = !Double.isNaN(vinculo.getRestY());
+            tablaRestricciones[posicion + 2] = !Double.isNaN(vinculo.getRestGiro());
+            posicion += dof;
+        }
+        for (boolean elemento:tablaRestricciones) {
+            if (elemento) {
+                cantidadElementosRestringidos ++;
+            } else {
+                cantidadElementosLibres ++;
+            }
+        }
+    }
+
+    /**
+     * Ordena las filas de la matriz global poniendo dentro de la matriz gobal ordenada aquellas
+     * que no están restringidas en las primeras posiciones y las restringidas al último.
+     */
+    private void ordenarFilas() {
+        int index = 0;
+        // Agrega todas las filas que no están restringidas primero
+        for (int i = 0 ; i < tablaRestricciones.length ; i++) {
+            if (!tablaRestricciones[i]) {
+                matrizGlobalOrdenada[index] = matrizGlobal[i];
+                index ++;
+            }
+        }
+        // Luego las que sí estan restringidas
+        for (int i = 0 ; i < tablaRestricciones.length ; i++) {
+            if (tablaRestricciones[i]) {
+                matrizGlobalOrdenada[index] = matrizGlobal[i];
+                index ++;
+            }
+        }
+    }
+
+    /**
+     * Ordena las columnas o elementos de cada fila poniendo aquellos que están libres primero
+     * y luego los que están restringidos. Para ello crea un vector y pone los elementos ordenados
+     * y después copia el contenido de ese vector ordenado en la fila desordenada.
+     */
+    private void ordenarColumnas() {
+        // Hace lo mismo que ordenar filas pero con los elementos de cada fila
+        for (int fila = 0; fila < matrizGlobalOrdenada.length; fila++) {
+            Vector<Double> filaOrdenada = new Vector<>();
+            // Agrega todos los elementos que no están restringidos primero
+            for (int i = 0 ; i < tablaRestricciones.length ; i++) {
+                if (!tablaRestricciones[i]) {
+                    filaOrdenada.add(matrizGlobalOrdenada[fila][i]);
+                }
+            }
+            // Luego los que sí estan restringidos
+            for (int i = 0 ; i < tablaRestricciones.length ; i++) {
+                if (tablaRestricciones[i]) {
+                    filaOrdenada.add(matrizGlobalOrdenada[fila][i]);
+                }
+            }
+            // Por ultimo copia en la fila los elementos del vector ordenado
+            for (int i = 0 ; i < filaOrdenada.size() ; i++) {
+                matrizGlobalOrdenada[fila][i] = filaOrdenada.get(i);
+            }
+        }
+    }
+
+    /**
+     * Crea las matrices SFF, SFR, SRF y SRR según la matriz global ordenada.
+     */
+    private void crearMatricesRestantes() {
+        matrizSFF = new double[cantidadElementosLibres][cantidadElementosLibres];
+        matrizSFR = new double[cantidadElementosLibres][cantidadElementosRestringidos];
+        matrizSRF = new double[cantidadElementosRestringidos][cantidadElementosLibres];
+        matrizSRR = new double[cantidadElementosRestringidos][cantidadElementosRestringidos];
+
+        // Según si el elemento está en la fila o columna restringida o libre, lo acomoda en la
+        // matriz correspondiente
+        for (int fila = 0; fila < matrizGlobalOrdenada.length; fila++) {
+            for (int columna = 0; columna < matrizGlobalOrdenada[fila].length; columna++) {
+                if (fila < cantidadElementosLibres) {
+                    if (columna < cantidadElementosLibres) {
+                        matrizSFF[fila][columna] = matrizGlobalOrdenada[fila][columna];
+                    } else {
+                        matrizSFR[fila][columna-cantidadElementosLibres] = matrizGlobalOrdenada[fila][columna];
+                    }
+                } else {
+                    if (columna < cantidadElementosLibres) {
+                        matrizSRF[fila-cantidadElementosLibres][columna] = matrizGlobalOrdenada[fila][columna];
+                    } else {
+                        matrizSRR[fila-cantidadElementosLibres][columna-cantidadElementosLibres] = matrizGlobalOrdenada[fila][columna];
+                    }
+                }
             }
         }
     }
@@ -131,11 +342,12 @@ public class Estructura2 {
      * @return Vinculo|null
      */
     public Vinculo getFromIdNudoVinculo(int id){
+        Vinculo vinculoEncontrado = null;
         for (Vinculo vinculo:listaVinculos) {
             if(vinculo.getNumNudo() == id)
-                return vinculo;
+                vinculoEncontrado = vinculo;
         }
-        return null;
+        return vinculoEncontrado;
     }
 
     /**
@@ -163,61 +375,6 @@ public class Estructura2 {
         }
         return null;
     }
-
-    public int[] makeKRestGlob(){
-        int[] restglob = new int[dof * cantNodos];
-        for (int i = 0; i < cantNodos; ++i) {
-            Vinculo vin= getFromIdNudoVinculo(i+1);
-                if (vin.getRestX()!=0) {
-                    restglob[dof * i ] = -1;
-                } else {
-                    restglob[dof * i ] = nk++;
-                }
-                if(vin.getRestY()!=0){
-                    restglob[dof * i + 1]=-1;
-                }else{
-                    restglob[dof * i + 1] = nk++;
-                }
-                if(vin.getRestGiro()!=0){
-                    restglob[dof * i + 2]=-1;
-                }else{
-                    restglob[dof * i + 2] = nk++;
-                }
-        }
-    return restglob;
-    }
-
-//    public double [][] makeSFF(){
-
-//        int[] restG= makeKRestGlob();
-//        double [][] kred = new double[nk][nk];
-//
-//        for (int i = 0; i < dof * cantNodos; ++i) {
-//            if (restG[i] != -1) {
-//                for (int j = 0; j < dof * cantNodos; ++j) {
-//                    if (restG[j] != -1) {
-//                        kred[restG[i]][restG[j]] = getMatrizGlobal()[i][j];
-//                    }
-//                }
-//            }
-//        }
-//        return kred;
-//    }
-//
-//    public double[] makeAF(){//No se como toma las fuerzas
-//        nk=0;
-//        int[] restG= makeKRestGlob();
-//        double [] pred = new double[nk];
-////        for (int i = 0; i < dof * cantNodos; ++i) {
-////            if (restG[i] != -1) {
-////                int idj = i / 3;
-////                int idf = i % 3;
-////                //pred[makeKRestGlob()[i]] = getfromidNudo(idj).getF()[idf];
-////                pred[restG[i]] = getFromIdNudoCarga(idj+1).getCargaEnX();
-////            }
-////        }
-//        return pred;
-//    }
 
     @Override
     public String toString() {

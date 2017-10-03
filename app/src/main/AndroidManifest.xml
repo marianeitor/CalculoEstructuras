@@ -32,7 +32,7 @@
                 android:value="com.example.nico.calculoestructuras.Activities.MainActivity" />
         </activity>
         <activity
-            android:name=".Activities.MatrizSFFActivity"
+            android:name=".Activities.MatrizGenericoActivity"
             android:label="@string/title_activity_matriz_sff"
             android:parentActivityName=".Activities.MatricesDeRigidezActivity"
             android:theme="@style/AppTheme.NoActionBar">

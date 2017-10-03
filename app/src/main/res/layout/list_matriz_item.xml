@@ -20,29 +20,12 @@
 
     <TextView
         android:layout_below="@id/titulo_barras"
-        android:id="@+id/elasticidad"
-        android:text="SM: "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:textSize="20dp"
-        android:layout_marginLeft="10dp"
-        />
-
-    <TextView
-        android:layout_below="@id/titulo_barras"
-        android:layout_toRightOf="@id/elasticidad"
         android:id="@+id/matrizElemental"
-        android:text="SM: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:textSize="10dp"
         android:layout_marginLeft="10dp"
         />
-
-
-
-
 
 </RelativeLayout>

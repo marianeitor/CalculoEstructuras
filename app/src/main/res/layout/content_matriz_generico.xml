@@ -7,28 +7,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_matriz_sff"
-    tools:context="com.example.nico.calculoestructuras.Activities.MatrizSFFActivity">
-    <TextView
-        android:layout_below="@id/titulo_barras"
-        android:id="@+id/elasticidad"
-        android:text="SFF: "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:textSize="20dp"
-        android:layout_marginLeft="10dp"
-        />
+    tools:showIn="@layout/activity_matriz_generico"
+    tools:context="com.example.nico.calculoestructuras.Activities.MatrizGenericoActivity">
 
     <TextView
-        android:layout_below="@id/titulo_barras"
-        android:layout_toRightOf="@id/elasticidad"
-        android:id="@+id/matrizElemental"
-        android:text="SFF: "
+        android:id="@+id/matriz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_marginLeft="10dp"
         />
 

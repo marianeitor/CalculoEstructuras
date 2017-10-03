@@ -79,10 +79,17 @@ public class Barra implements Serializable {
         this.inercia = inercia;
         this.numOrden = numOrden;
     }
+
+    /**
+     * Construye la matriz elemental de esta barra.
+     * @param longitud longitud
+     * @param g        g(?)
+     * @param h        h(?)
+     */
     public void construct (double longitud,double g, double h ){
-        this.longitud=longitud;
-        this.g1=g;
-        this.g2=h;
+        this.longitud = longitud;
+        this.g1 = g;
+        this.g2 = h;
         double s = elasticidad * area / longitud;
         double s1 = 12 * elasticidad * inercia / (longitud * longitud * longitud);
         double s2 = 6 * elasticidad * inercia / (longitud * longitud);

@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 /**
  * Created by Nico on 9/11/2015.
+ * @deprecated
  */
 public class GestorEstructura2 extends OptionsMenuTitleOnly implements Serializable {
 
@@ -40,17 +41,17 @@ public class GestorEstructura2 extends OptionsMenuTitleOnly implements Serializa
         //Genero objeto Portico Plano
         int cantBarras = listaBarras.size();
         int cantNudos = listaNudos.size();
-        porticoPlano = new PorticoPlano2(cantNudos,cantBarras, this);
+        porticoPlano = new PorticoPlano2(this);
 
-        this.cargarMatricesElementales();
+//        this.cargarMatricesElementales();
         this.resolucion();
 
 
 
     }
 
-    public void resolucion(){
-        sms= porticoPlano.cargarMatrizGlobal();
+    public void resolucion() {
+        sms = porticoPlano.getMatrizGlobal();
 //        alSFF= porticoPlano.makeSFF();
 //        alAF= porticoPlano.makeAF();
     }
@@ -111,27 +112,27 @@ public class GestorEstructura2 extends OptionsMenuTitleOnly implements Serializa
         return str;
     }
 
-    /**
-     * Reune las matrices elementales de cada barra en una variable general
-     */
-    public void cargarMatricesElementales(){
-        if(porticoPlano.listaBarras.size() != 0) {
-            matricesElementales = new ArrayList<>();
-            for (int i = 1; i <= listaBarras.size(); i++) {
-                matricesElementales.add(porticoPlano.getfromidBarra(i).toString());
-            }
-        }
-    }
+//    /**
+//     * Reune las matrices elementales de cada barra en una variable general
+//     */
+//    public void cargarMatricesElementales(){
+//        if(porticoPlano.listaBarras.size() != 0) {
+//            matricesElementales = new ArrayList<>();
+//            for (int i = 1; i <= listaBarras.size(); i++) {
+//                matricesElementales.add(porticoPlano.getfromidBarra(i).toString());
+//            }
+//        }
+//    }
 
-    /**
-     * Obtiene las matrices elementales
-     * @return double[][] | null
-     */
-    public ArrayList getMatricesElementales(){
-        if(matricesElementales !=null){
-            return matricesElementales;}
-        return null;
-    }
+//    /**
+//     * Obtiene las matrices elementales
+//     * @return double[][] | null
+//     */
+//    public ArrayList<String> getMatricesElementales(){
+//        if(matricesElementales !=null){
+//            return matricesElementales;}
+//        return null;
+//    }
 
     public ArrayList<Conectividad> ordenar(ArrayList<Conectividad> a){
         Iterator it = ((ArrayList) a).iterator();
