@@ -239,14 +239,14 @@ public class Estructura2 implements Serializable{
         // Agrega todas las filas que no están restringidas primero
         for (int i = 0 ; i < tablaRestricciones.length ; i++) {
             if (!tablaRestricciones[i]) {
-                matrizGlobalOrdenada[index] = matrizGlobal[i];
+                matrizGlobalOrdenada[index] = matrizGlobal[i].clone();
                 index ++;
             }
         }
         // Luego las que sí estan restringidas
         for (int i = 0 ; i < tablaRestricciones.length ; i++) {
             if (tablaRestricciones[i]) {
-                matrizGlobalOrdenada[index] = matrizGlobal[i];
+                matrizGlobalOrdenada[index] = matrizGlobal[i].clone();
                 index ++;
             }
         }
